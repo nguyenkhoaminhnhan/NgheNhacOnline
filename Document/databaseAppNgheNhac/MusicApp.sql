@@ -28,7 +28,6 @@ CREATE TABLE Song(
 	Album_ID bigint,
 	Singer_ID bigint,
 	Musician_ID bigint,
-	Category_ID bigint,
 	ImagePath nvarchar(256) NULL,
 	SourcePath nvarchar(256) NULL,
 	Year nvarchar(16) NULL,
