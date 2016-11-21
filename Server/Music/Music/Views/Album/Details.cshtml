@@ -1,0 +1,170 @@
+﻿@model Music.Models.Album
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Album</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateIssue)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateIssue)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Detail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Detail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ImagePath)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ImagePath)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomString1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomString1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomString2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomString2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomString3)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomString3)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomString4)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomString4)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomString5)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomString5)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomInt1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomInt1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomInt2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomInt2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomInt3)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomInt3)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomInt4)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomInt4)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomInt5)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomInt5)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomBool1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomBool1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomBool2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomBool2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomBool3)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomBool3)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomBool4)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomBool4)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomBool5)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomBool5)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,273 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MusicModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Album">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="DateIssue" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="Detail" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
+    <Property Name="ImagePath" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="CustomString1" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="CustomString2" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="CustomString3" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="CustomString4" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="CustomString5" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="CustomInt1" Type="Int32" />
+    <Property Name="CustomInt2" Type="Int32" />
+    <Property Name="CustomInt3" Type="Int32" />
+    <Property Name="CustomInt4" Type="Int32" />
+    <Property Name="CustomInt5" Type="Int32" />
+    <Property Name="CustomBool1" Type="Boolean" />
+    <Property Name="CustomBool2" Type="Boolean" />
+    <Property Name="CustomBool3" Type="Boolean" />
+    <Property Name="CustomBool4" Type="Boolean" />
+    <Property Name="CustomBool5" Type="Boolean" />
+    <NavigationProperty Name="Songs" Relationship="Self.FK_Song_Album" FromRole="Album" ToRole="Song" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="Detail" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="ImagePath" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="CustomString1" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="CustomString2" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="CustomString3" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="CustomString4" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="CustomString5" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="CustomInt1" Type="Int32" />
+    <Property Name="CustomInt2" Type="Int32" />
+    <Property Name="CustomInt3" Type="Int32" />
+    <Property Name="CustomInt4" Type="Int32" />
+    <Property Name="CustomInt5" Type="Int32" />
+    <Property Name="CustomBool1" Type="Boolean" />
+    <Property Name="CustomBool2" Type="Boolean" />
+    <Property Name="CustomBool3" Type="Boolean" />
+    <Property Name="CustomBool4" Type="Boolean" />
+    <Property Name="CustomBool5" Type="Boolean" />
+    <NavigationProperty Name="Song_Category" Relationship="Self.FK_category_SongCategory" FromRole="Category" ToRole="Song_Category" />
+  </EntityType>
+  <EntityType Name="Musician">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="Birthday" Type="DateTime" Precision="3" />
+    <Property Name="Nationality" Type="String" MaxLength="640" FixedLength="false" Unicode="true" />
+    <Property Name="Detail" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="ImagePath" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="CustomString1" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="CustomString2" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="CustomString3" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="CustomString4" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="CustomString5" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="CustomInt1" Type="Int32" />
+    <Property Name="CustomInt2" Type="Int32" />
+    <Property Name="CustomInt3" Type="Int32" />
+    <Property Name="CustomInt4" Type="Int32" />
+    <Property Name="CustomInt5" Type="Int32" />
+    <Property Name="CustomBool1" Type="Boolean" />
+    <Property Name="CustomBool2" Type="Boolean" />
+    <Property Name="CustomBool3" Type="Boolean" />
+    <Property Name="CustomBool4" Type="Boolean" />
+    <Property Name="CustomBool5" Type="Boolean" />
+    <NavigationProperty Name="Songs" Relationship="Self.FK_Song_Musician" FromRole="Musician" ToRole="Song" />
+  </EntityType>
+  <EntityType Name="Singer">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="Birthday" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="Nationality" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="Detail" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
+    <Property Name="ImagePath" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="CustomString1" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="CustomString2" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="CustomString3" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="CustomString4" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="CustomString5" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="CustomInt1" Type="Int32" />
+    <Property Name="CustomInt2" Type="Int32" />
+    <Property Name="CustomInt3" Type="Int32" />
+    <Property Name="CustomInt4" Type="Int32" />
+    <Property Name="CustomInt5" Type="Int32" />
+    <Property Name="CustomBool1" Type="Boolean" />
+    <Property Name="CustomBool2" Type="Boolean" />
+    <Property Name="CustomBool3" Type="Boolean" />
+    <Property Name="CustomBool4" Type="Boolean" />
+    <Property Name="CustomBool5" Type="Boolean" />
+    <NavigationProperty Name="Songs" Relationship="Self.FK_Song_Singer" FromRole="Singer" ToRole="Song" />
+  </EntityType>
+  <EntityType Name="Song">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="Album_ID" Type="Int64" />
+    <Property Name="Singer_ID" Type="Int64" />
+    <Property Name="Musician_ID" Type="Int64" />
+    <Property Name="ImagePath" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="SourcePath" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="Year" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+    <Property Name="Format" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="BitRate" Type="Int32" />
+    <Property Name="Tag" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="Size" Type="Int32" />
+    <Property Name="Length" Type="Int32" />
+    <Property Name="Rating" Type="Double" />
+    <Property Name="CustomString1" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="CustomString2" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="CustomString3" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="CustomString4" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="CustomString5" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="CustomInt1" Type="Int32" />
+    <Property Name="CustomInt2" Type="Int32" />
+    <Property Name="CustomInt3" Type="Int32" />
+    <Property Name="CustomInt4" Type="Int32" />
+    <Property Name="CustomInt5" Type="Int32" />
+    <Property Name="CustomBool1" Type="Boolean" />
+    <Property Name="CustomBool2" Type="Boolean" />
+    <Property Name="CustomBool3" Type="Boolean" />
+    <Property Name="CustomBool4" Type="Boolean" />
+    <Property Name="CustomBool5" Type="Boolean" />
+    <Property Name="LastListen" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="Album" Relationship="Self.FK_Song_Album" FromRole="Song" ToRole="Album" />
+    <NavigationProperty Name="Musician" Relationship="Self.FK_Song_Musician" FromRole="Song" ToRole="Musician" />
+    <NavigationProperty Name="Singer" Relationship="Self.FK_Song_Singer" FromRole="Song" ToRole="Singer" />
+    <NavigationProperty Name="Song_Category" Relationship="Self.FK_song_SongCategory" FromRole="Song" ToRole="Song_Category" />
+  </EntityType>
+  <EntityType Name="Song_Category">
+    <Key>
+      <PropertyRef Name="Song_ID" />
+      <PropertyRef Name="Category_ID" />
+    </Key>
+    <Property Name="Song_ID" Type="Int64" Nullable="false" />
+    <Property Name="Category_ID" Type="Int64" Nullable="false" />
+    <Property Name="Detail" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Category" Relationship="Self.FK_category_SongCategory" FromRole="Song_Category" ToRole="Category" />
+    <NavigationProperty Name="Song" Relationship="Self.FK_song_SongCategory" FromRole="Song_Category" ToRole="Song" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Name="Fullname" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <Property Name="Active" Type="Boolean" />
+    <Property Name="CustomString1" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="CustomString2" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="CustomString3" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="CustomString4" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="CustomString5" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="CustomInt1" Type="Int32" />
+    <Property Name="CustomInt2" Type="Int32" />
+    <Property Name="CustomInt3" Type="Int32" />
+    <Property Name="CustomInt4" Type="Int32" />
+    <Property Name="CustomInt5" Type="Int32" />
+    <Property Name="CustomBool1" Type="Boolean" />
+    <Property Name="CustomBool2" Type="Boolean" />
+    <Property Name="CustomBool3" Type="Boolean" />
+    <Property Name="CustomBool4" Type="Boolean" />
+    <Property Name="CustomBool5" Type="Boolean" />
+  </EntityType>
+  <Association Name="FK_Song_Album">
+    <End Role="Album" Type="Self.Album" Multiplicity="0..1" />
+    <End Role="Song" Type="Self.Song" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Album">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Song">
+        <PropertyRef Name="Album_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_category_SongCategory">
+    <End Role="Category" Type="Self.Category" Multiplicity="1" />
+    <End Role="Song_Category" Type="Self.Song_Category" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Song_Category">
+        <PropertyRef Name="Category_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Song_Musician">
+    <End Role="Musician" Type="Self.Musician" Multiplicity="0..1" />
+    <End Role="Song" Type="Self.Song" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Musician">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Song">
+        <PropertyRef Name="Musician_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Song_Singer">
+    <End Role="Singer" Type="Self.Singer" Multiplicity="0..1" />
+    <End Role="Song" Type="Self.Song" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Singer">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Song">
+        <PropertyRef Name="Singer_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_song_SongCategory">
+    <End Role="Song" Type="Self.Song" Multiplicity="1" />
+    <End Role="Song_Category" Type="Self.Song_Category" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Song">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Song_Category">
+        <PropertyRef Name="Song_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MusicEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Albums" EntityType="Self.Album" />
+    <EntitySet Name="Categories" EntityType="Self.Category" />
+    <EntitySet Name="Musicians" EntityType="Self.Musician" />
+    <EntitySet Name="Singers" EntityType="Self.Singer" />
+    <EntitySet Name="Songs" EntityType="Self.Song" />
+    <EntitySet Name="Song_Category" EntityType="Self.Song_Category" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <AssociationSet Name="FK_Song_Album" Association="Self.FK_Song_Album">
+      <End Role="Album" EntitySet="Albums" />
+      <End Role="Song" EntitySet="Songs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_category_SongCategory" Association="Self.FK_category_SongCategory">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="Song_Category" EntitySet="Song_Category" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Song_Musician" Association="Self.FK_Song_Musician">
+      <End Role="Musician" EntitySet="Musicians" />
+      <End Role="Song" EntitySet="Songs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Song_Singer" Association="Self.FK_Song_Singer">
+      <End Role="Singer" EntitySet="Singers" />
+      <End Role="Song" EntitySet="Songs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_song_SongCategory" Association="Self.FK_song_SongCategory">
+      <End Role="Song" EntitySet="Songs" />
+      <End Role="Song_Category" EntitySet="Song_Category" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

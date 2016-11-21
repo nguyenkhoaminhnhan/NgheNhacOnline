@@ -1,0 +1,138 @@
+﻿@model IEnumerable<Music.Models.User>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>User</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table table-bordered">
+    <tr>
+        <th style="width:49%">
+            User Infor
+        </th>
+        <th style="width:49%">
+            User Infor
+        </th>
+        <th style="width:2%">
+            Action
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <label>
+                    @Html.DisplayNameFor(model => model.Username):
+                </label>
+                @Html.DisplayFor(modelItem => item.Username)<br />
+
+                <label>
+                    @Html.DisplayNameFor(model => model.Password):
+                </label>
+                @Html.DisplayFor(modelItem => item.Password)<br />
+
+                <label>
+                    @Html.DisplayNameFor(model => model.Fullname):
+                </label>
+                @Html.DisplayFor(modelItem => item.Fullname)<br />
+
+                <label>
+                    @Html.DisplayNameFor(model => model.Email):
+                </label>
+                @Html.DisplayFor(modelItem => item.Email)<br />
+
+                <label>
+                    @Html.DisplayNameFor(model => model.Active):
+                </label>
+                @Html.DisplayFor(modelItem => item.Active)<br />
+            </td>
+            <td>
+                <label>
+                    @Html.DisplayNameFor(model => model.CustomString1):
+                </label>
+                @Html.DisplayFor(modelItem => item.CustomString1)<br />
+
+                <label>
+                    @Html.DisplayNameFor(model => model.CustomString2):
+                </label>
+                @Html.DisplayFor(modelItem => item.CustomString2)<br />
+
+                <label>
+                    @Html.DisplayNameFor(model => model.CustomString3):
+                </label>
+                @Html.DisplayFor(modelItem => item.CustomString3)<br />
+
+                <label>
+                    @Html.DisplayNameFor(model => model.CustomString4):
+                </label>
+                @Html.DisplayFor(modelItem => item.CustomString4)<br />
+
+                <label>
+                    @Html.DisplayNameFor(model => model.CustomString5):
+                </label>
+                @Html.DisplayFor(modelItem => item.CustomString5)<br />
+
+                <label>
+                    @Html.DisplayNameFor(model => model.CustomInt1):
+                </label>
+                @Html.DisplayFor(modelItem => item.CustomInt1)<br />
+
+                <label>
+                    @Html.DisplayNameFor(model => model.CustomInt2):
+                </label>
+                @Html.DisplayFor(modelItem => item.CustomInt2)<br />
+
+                <label>
+                    @Html.DisplayNameFor(model => model.CustomInt3):
+                </label>
+                @Html.DisplayFor(modelItem => item.CustomInt3)<br />
+
+                <label>
+                    @Html.DisplayNameFor(model => model.CustomInt4):
+                </label>
+                @Html.DisplayFor(modelItem => item.CustomInt4)<br />
+
+                <label>
+                    @Html.DisplayNameFor(model => model.CustomInt5):
+                </label>
+                @Html.DisplayFor(modelItem => item.CustomInt5)<br />
+
+                <label>
+                    @Html.DisplayNameFor(model => model.CustomBool1):
+                </label>
+                @Html.DisplayFor(modelItem => item.CustomBool1)<br />
+
+                <label>
+                    @Html.DisplayNameFor(model => model.CustomBool2):
+                </label>
+                @Html.DisplayFor(modelItem => item.CustomBool2)<br />
+
+                <label>
+                    @Html.DisplayNameFor(model => model.CustomBool3):
+                </label>
+                @Html.DisplayFor(modelItem => item.CustomBool3)<br />
+
+                <label>
+                    @Html.DisplayNameFor(model => model.CustomBool4):
+                </label>
+                @Html.DisplayFor(modelItem => item.CustomBool4)<br />
+
+                <label>
+                    @Html.DisplayNameFor(model => model.CustomBool5):
+                </label>
+                @Html.DisplayFor(modelItem => item.CustomBool5)<br />
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) 
+                @Html.ActionLink("Details", "Details", new { id = item.ID }) 
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+            </td>
+        </tr>
+    }
+
+</table>

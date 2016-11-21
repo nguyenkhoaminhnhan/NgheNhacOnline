@@ -1,0 +1,184 @@
+﻿@model Music.Models.Musician
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Musician</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Birthday)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Birthday)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nationality)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nationality)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Detail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Detail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ImagePath)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ImagePath)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomString1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomString1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomString2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomString2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomString3)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomString3)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomString4)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomString4)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomString5)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomString5)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomInt1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomInt1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomInt2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomInt2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomInt3)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomInt3)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomInt4)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomInt4)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomInt5)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomInt5)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomBool1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomBool1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomBool2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomBool2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomBool3)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomBool3)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomBool4)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomBool4)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomBool5)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomBool5)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

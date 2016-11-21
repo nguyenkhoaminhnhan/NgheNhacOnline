@@ -1,0 +1,263 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MusicModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Album">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="256" />
+    <Property Name="DateIssue" Type="nvarchar" MaxLength="256" />
+    <Property Name="Detail" Type="nvarchar" MaxLength="1024" />
+    <Property Name="ImagePath" Type="nvarchar" MaxLength="256" />
+    <Property Name="CustomString1" Type="nvarchar" MaxLength="256" />
+    <Property Name="CustomString2" Type="nvarchar" MaxLength="256" />
+    <Property Name="CustomString3" Type="nvarchar" MaxLength="256" />
+    <Property Name="CustomString4" Type="nvarchar" MaxLength="256" />
+    <Property Name="CustomString5" Type="nvarchar" MaxLength="256" />
+    <Property Name="CustomInt1" Type="int" />
+    <Property Name="CustomInt2" Type="int" />
+    <Property Name="CustomInt3" Type="int" />
+    <Property Name="CustomInt4" Type="int" />
+    <Property Name="CustomInt5" Type="int" />
+    <Property Name="CustomBool1" Type="bit" />
+    <Property Name="CustomBool2" Type="bit" />
+    <Property Name="CustomBool3" Type="bit" />
+    <Property Name="CustomBool4" Type="bit" />
+    <Property Name="CustomBool5" Type="bit" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="256" />
+    <Property Name="Detail" Type="nvarchar" MaxLength="1000" />
+    <Property Name="ImagePath" Type="nvarchar" MaxLength="256" />
+    <Property Name="CustomString1" Type="nvarchar" MaxLength="256" />
+    <Property Name="CustomString2" Type="nvarchar" MaxLength="256" />
+    <Property Name="CustomString3" Type="nvarchar" MaxLength="256" />
+    <Property Name="CustomString4" Type="nvarchar" MaxLength="256" />
+    <Property Name="CustomString5" Type="nvarchar" MaxLength="256" />
+    <Property Name="CustomInt1" Type="int" />
+    <Property Name="CustomInt2" Type="int" />
+    <Property Name="CustomInt3" Type="int" />
+    <Property Name="CustomInt4" Type="int" />
+    <Property Name="CustomInt5" Type="int" />
+    <Property Name="CustomBool1" Type="bit" />
+    <Property Name="CustomBool2" Type="bit" />
+    <Property Name="CustomBool3" Type="bit" />
+    <Property Name="CustomBool4" Type="bit" />
+    <Property Name="CustomBool5" Type="bit" />
+  </EntityType>
+  <EntityType Name="Musician">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="256" />
+    <Property Name="Birthday" Type="datetime" />
+    <Property Name="Nationality" Type="nvarchar" MaxLength="640" />
+    <Property Name="Detail" Type="nvarchar" MaxLength="1000" />
+    <Property Name="ImagePath" Type="nvarchar" MaxLength="256" />
+    <Property Name="CustomString1" Type="nvarchar" MaxLength="256" />
+    <Property Name="CustomString2" Type="nvarchar" MaxLength="256" />
+    <Property Name="CustomString3" Type="nvarchar" MaxLength="256" />
+    <Property Name="CustomString4" Type="nvarchar" MaxLength="256" />
+    <Property Name="CustomString5" Type="nvarchar" MaxLength="256" />
+    <Property Name="CustomInt1" Type="int" />
+    <Property Name="CustomInt2" Type="int" />
+    <Property Name="CustomInt3" Type="int" />
+    <Property Name="CustomInt4" Type="int" />
+    <Property Name="CustomInt5" Type="int" />
+    <Property Name="CustomBool1" Type="bit" />
+    <Property Name="CustomBool2" Type="bit" />
+    <Property Name="CustomBool3" Type="bit" />
+    <Property Name="CustomBool4" Type="bit" />
+    <Property Name="CustomBool5" Type="bit" />
+  </EntityType>
+  <EntityType Name="Singer">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="256" />
+    <Property Name="Birthday" Type="nvarchar" MaxLength="256" />
+    <Property Name="Nationality" Type="nvarchar" MaxLength="256" />
+    <Property Name="Detail" Type="nvarchar" MaxLength="1024" />
+    <Property Name="ImagePath" Type="nvarchar" MaxLength="256" />
+    <Property Name="CustomString1" Type="nvarchar" MaxLength="256" />
+    <Property Name="CustomString2" Type="nvarchar" MaxLength="256" />
+    <Property Name="CustomString3" Type="nvarchar" MaxLength="256" />
+    <Property Name="CustomString4" Type="nvarchar" MaxLength="256" />
+    <Property Name="CustomString5" Type="nvarchar" MaxLength="256" />
+    <Property Name="CustomInt1" Type="int" />
+    <Property Name="CustomInt2" Type="int" />
+    <Property Name="CustomInt3" Type="int" />
+    <Property Name="CustomInt4" Type="int" />
+    <Property Name="CustomInt5" Type="int" />
+    <Property Name="CustomBool1" Type="bit" />
+    <Property Name="CustomBool2" Type="bit" />
+    <Property Name="CustomBool3" Type="bit" />
+    <Property Name="CustomBool4" Type="bit" />
+    <Property Name="CustomBool5" Type="bit" />
+  </EntityType>
+  <EntityType Name="Song">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="256" />
+    <Property Name="Album_ID" Type="bigint" />
+    <Property Name="Singer_ID" Type="bigint" />
+    <Property Name="Musician_ID" Type="bigint" />
+    <Property Name="ImagePath" Type="nvarchar" MaxLength="256" />
+    <Property Name="SourcePath" Type="nvarchar" MaxLength="256" />
+    <Property Name="Year" Type="nvarchar" MaxLength="16" />
+    <Property Name="Format" Type="varchar" MaxLength="10" />
+    <Property Name="BitRate" Type="int" />
+    <Property Name="Tag" Type="nvarchar" MaxLength="256" />
+    <Property Name="Size" Type="int" />
+    <Property Name="Length" Type="int" />
+    <Property Name="Rating" Type="float" />
+    <Property Name="CustomString1" Type="nvarchar" MaxLength="256" />
+    <Property Name="CustomString2" Type="nvarchar" MaxLength="256" />
+    <Property Name="CustomString3" Type="nvarchar" MaxLength="256" />
+    <Property Name="CustomString4" Type="nvarchar" MaxLength="256" />
+    <Property Name="CustomString5" Type="nvarchar" MaxLength="256" />
+    <Property Name="CustomInt1" Type="int" />
+    <Property Name="CustomInt2" Type="int" />
+    <Property Name="CustomInt3" Type="int" />
+    <Property Name="CustomInt4" Type="int" />
+    <Property Name="CustomInt5" Type="int" />
+    <Property Name="CustomBool1" Type="bit" />
+    <Property Name="CustomBool2" Type="bit" />
+    <Property Name="CustomBool3" Type="bit" />
+    <Property Name="CustomBool4" Type="bit" />
+    <Property Name="CustomBool5" Type="bit" />
+    <Property Name="LastListen" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Song_Category">
+    <Key>
+      <PropertyRef Name="Song_ID" />
+      <PropertyRef Name="Category_ID" />
+    </Key>
+    <Property Name="Song_ID" Type="bigint" Nullable="false" />
+    <Property Name="Category_ID" Type="bigint" Nullable="false" />
+    <Property Name="Detail" Type="nvarchar" MaxLength="256" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Username" Type="varchar" MaxLength="16" />
+    <Property Name="Password" Type="varchar" MaxLength="16" />
+    <Property Name="Fullname" Type="nvarchar" MaxLength="256" />
+    <Property Name="Email" Type="varchar" MaxLength="32" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="CustomString1" Type="nvarchar" MaxLength="256" />
+    <Property Name="CustomString2" Type="nvarchar" MaxLength="256" />
+    <Property Name="CustomString3" Type="nvarchar" MaxLength="256" />
+    <Property Name="CustomString4" Type="nvarchar" MaxLength="256" />
+    <Property Name="CustomString5" Type="nvarchar" MaxLength="256" />
+    <Property Name="CustomInt1" Type="int" />
+    <Property Name="CustomInt2" Type="int" />
+    <Property Name="CustomInt3" Type="int" />
+    <Property Name="CustomInt4" Type="int" />
+    <Property Name="CustomInt5" Type="int" />
+    <Property Name="CustomBool1" Type="bit" />
+    <Property Name="CustomBool2" Type="bit" />
+    <Property Name="CustomBool3" Type="bit" />
+    <Property Name="CustomBool4" Type="bit" />
+    <Property Name="CustomBool5" Type="bit" />
+  </EntityType>
+  <Association Name="FK_category_SongCategory">
+    <End Role="Category" Type="Self.Category" Multiplicity="1" />
+    <End Role="Song_Category" Type="Self.Song_Category" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Song_Category">
+        <PropertyRef Name="Category_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Song_Album">
+    <End Role="Album" Type="Self.Album" Multiplicity="0..1" />
+    <End Role="Song" Type="Self.Song" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Album">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Song">
+        <PropertyRef Name="Album_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Song_Musician">
+    <End Role="Musician" Type="Self.Musician" Multiplicity="0..1" />
+    <End Role="Song" Type="Self.Song" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Musician">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Song">
+        <PropertyRef Name="Musician_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Song_Singer">
+    <End Role="Singer" Type="Self.Singer" Multiplicity="0..1" />
+    <End Role="Song" Type="Self.Song" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Singer">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Song">
+        <PropertyRef Name="Singer_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_song_SongCategory">
+    <End Role="Song" Type="Self.Song" Multiplicity="1" />
+    <End Role="Song_Category" Type="Self.Song_Category" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Song">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Song_Category">
+        <PropertyRef Name="Song_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MusicModelStoreContainer">
+    <EntitySet Name="Album" EntityType="Self.Album" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Musician" EntityType="Self.Musician" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Singer" EntityType="Self.Singer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Song" EntityType="Self.Song" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Song_Category" EntityType="Self.Song_Category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_category_SongCategory" Association="Self.FK_category_SongCategory">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="Song_Category" EntitySet="Song_Category" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Song_Album" Association="Self.FK_Song_Album">
+      <End Role="Album" EntitySet="Album" />
+      <End Role="Song" EntitySet="Song" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Song_Musician" Association="Self.FK_Song_Musician">
+      <End Role="Musician" EntitySet="Musician" />
+      <End Role="Song" EntitySet="Song" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Song_Singer" Association="Self.FK_Song_Singer">
+      <End Role="Singer" EntitySet="Singer" />
+      <End Role="Song" EntitySet="Song" />
+    </AssociationSet>
+    <AssociationSet Name="FK_song_SongCategory" Association="Self.FK_song_SongCategory">
+      <End Role="Song" EntitySet="Song" />
+      <End Role="Song_Category" EntitySet="Song_Category" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

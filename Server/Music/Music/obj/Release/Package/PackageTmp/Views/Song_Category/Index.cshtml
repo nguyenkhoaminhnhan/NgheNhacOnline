@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Music.Models.Song_Category>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Song - Category</h2>
+<br />
+<br />
+@using (Html.BeginForm("Search", "Song_Category"))
+{
+    <div class="row" style="margin-bottom: 20px;">
+        <input class="form-control col-md-10" type="text" id="song_name" name="song_name" placeholder="Search for song..." />
+        <input class="form-control col-md-10" type="text" id="cat_name" name="cat_name" style="margin-left:10px" placeholder="Search for category..." />
+        <input class="btn btn-default" type="submit" id="Search" value="Search" style="margin-left:10px" />
+    </div>
+}
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<div class="row">
+    <table class="table table-bordered">
+        <tr>
+
+            <th>
+                Song
+            </th>
+            <th>
+                Category
+            </th>
+            <th>
+                Detail
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Song.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Detail)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { song_id = item.Song_ID, cat_id = item.Category_ID }) |
+                    @Html.ActionLink("Details", "Details", new { song_id = item.Song_ID, cat_id = item.Category_ID }) |
+                    @Html.ActionLink("Delete", "Delete", new { song_id = item.Song_ID, cat_id = item.Category_ID })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

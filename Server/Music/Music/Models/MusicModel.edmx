@@ -1,0 +1,749 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MusicModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Album">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" />
+          <Property Name="DateIssue" Type="nvarchar" MaxLength="256" />
+          <Property Name="Detail" Type="nvarchar" MaxLength="1024" />
+          <Property Name="ImagePath" Type="nvarchar" MaxLength="256" />
+          <Property Name="CustomString1" Type="nvarchar" MaxLength="256" />
+          <Property Name="CustomString2" Type="nvarchar" MaxLength="256" />
+          <Property Name="CustomString3" Type="nvarchar" MaxLength="256" />
+          <Property Name="CustomString4" Type="nvarchar" MaxLength="256" />
+          <Property Name="CustomString5" Type="nvarchar" MaxLength="256" />
+          <Property Name="CustomInt1" Type="int" />
+          <Property Name="CustomInt2" Type="int" />
+          <Property Name="CustomInt3" Type="int" />
+          <Property Name="CustomInt4" Type="int" />
+          <Property Name="CustomInt5" Type="int" />
+          <Property Name="CustomBool1" Type="bit" />
+          <Property Name="CustomBool2" Type="bit" />
+          <Property Name="CustomBool3" Type="bit" />
+          <Property Name="CustomBool4" Type="bit" />
+          <Property Name="CustomBool5" Type="bit" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" />
+          <Property Name="Detail" Type="nvarchar" MaxLength="1000" />
+          <Property Name="ImagePath" Type="nvarchar" MaxLength="256" />
+          <Property Name="CustomString1" Type="nvarchar" MaxLength="256" />
+          <Property Name="CustomString2" Type="nvarchar" MaxLength="256" />
+          <Property Name="CustomString3" Type="nvarchar" MaxLength="256" />
+          <Property Name="CustomString4" Type="nvarchar" MaxLength="256" />
+          <Property Name="CustomString5" Type="nvarchar" MaxLength="256" />
+          <Property Name="CustomInt1" Type="int" />
+          <Property Name="CustomInt2" Type="int" />
+          <Property Name="CustomInt3" Type="int" />
+          <Property Name="CustomInt4" Type="int" />
+          <Property Name="CustomInt5" Type="int" />
+          <Property Name="CustomBool1" Type="bit" />
+          <Property Name="CustomBool2" Type="bit" />
+          <Property Name="CustomBool3" Type="bit" />
+          <Property Name="CustomBool4" Type="bit" />
+          <Property Name="CustomBool5" Type="bit" />
+        </EntityType>
+        <EntityType Name="Musician">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" />
+          <Property Name="Birthday" Type="datetime" />
+          <Property Name="Nationality" Type="nvarchar" MaxLength="640" />
+          <Property Name="Detail" Type="nvarchar" MaxLength="1000" />
+          <Property Name="ImagePath" Type="nvarchar" MaxLength="256" />
+          <Property Name="CustomString1" Type="nvarchar" MaxLength="256" />
+          <Property Name="CustomString2" Type="nvarchar" MaxLength="256" />
+          <Property Name="CustomString3" Type="nvarchar" MaxLength="256" />
+          <Property Name="CustomString4" Type="nvarchar" MaxLength="256" />
+          <Property Name="CustomString5" Type="nvarchar" MaxLength="256" />
+          <Property Name="CustomInt1" Type="int" />
+          <Property Name="CustomInt2" Type="int" />
+          <Property Name="CustomInt3" Type="int" />
+          <Property Name="CustomInt4" Type="int" />
+          <Property Name="CustomInt5" Type="int" />
+          <Property Name="CustomBool1" Type="bit" />
+          <Property Name="CustomBool2" Type="bit" />
+          <Property Name="CustomBool3" Type="bit" />
+          <Property Name="CustomBool4" Type="bit" />
+          <Property Name="CustomBool5" Type="bit" />
+        </EntityType>
+        <EntityType Name="Singer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" />
+          <Property Name="Birthday" Type="nvarchar" MaxLength="256" />
+          <Property Name="Nationality" Type="nvarchar" MaxLength="256" />
+          <Property Name="Detail" Type="nvarchar" MaxLength="1024" />
+          <Property Name="ImagePath" Type="nvarchar" MaxLength="256" />
+          <Property Name="CustomString1" Type="nvarchar" MaxLength="256" />
+          <Property Name="CustomString2" Type="nvarchar" MaxLength="256" />
+          <Property Name="CustomString3" Type="nvarchar" MaxLength="256" />
+          <Property Name="CustomString4" Type="nvarchar" MaxLength="256" />
+          <Property Name="CustomString5" Type="nvarchar" MaxLength="256" />
+          <Property Name="CustomInt1" Type="int" />
+          <Property Name="CustomInt2" Type="int" />
+          <Property Name="CustomInt3" Type="int" />
+          <Property Name="CustomInt4" Type="int" />
+          <Property Name="CustomInt5" Type="int" />
+          <Property Name="CustomBool1" Type="bit" />
+          <Property Name="CustomBool2" Type="bit" />
+          <Property Name="CustomBool3" Type="bit" />
+          <Property Name="CustomBool4" Type="bit" />
+          <Property Name="CustomBool5" Type="bit" />
+        </EntityType>
+        <EntityType Name="Song">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" />
+          <Property Name="Album_ID" Type="bigint" />
+          <Property Name="Singer_ID" Type="bigint" />
+          <Property Name="Musician_ID" Type="bigint" />
+          <Property Name="ImagePath" Type="nvarchar" MaxLength="256" />
+          <Property Name="SourcePath" Type="nvarchar" MaxLength="256" />
+          <Property Name="Year" Type="nvarchar" MaxLength="16" />
+          <Property Name="Format" Type="varchar" MaxLength="10" />
+          <Property Name="BitRate" Type="int" />
+          <Property Name="Tag" Type="nvarchar" MaxLength="256" />
+          <Property Name="Size" Type="int" />
+          <Property Name="Length" Type="int" />
+          <Property Name="Rating" Type="float" />
+          <Property Name="CustomString1" Type="nvarchar" MaxLength="256" />
+          <Property Name="CustomString2" Type="nvarchar" MaxLength="256" />
+          <Property Name="CustomString3" Type="nvarchar" MaxLength="256" />
+          <Property Name="CustomString4" Type="nvarchar" MaxLength="256" />
+          <Property Name="CustomString5" Type="nvarchar" MaxLength="256" />
+          <Property Name="CustomInt1" Type="int" />
+          <Property Name="CustomInt2" Type="int" />
+          <Property Name="CustomInt3" Type="int" />
+          <Property Name="CustomInt4" Type="int" />
+          <Property Name="CustomInt5" Type="int" />
+          <Property Name="CustomBool1" Type="bit" />
+          <Property Name="CustomBool2" Type="bit" />
+          <Property Name="CustomBool3" Type="bit" />
+          <Property Name="CustomBool4" Type="bit" />
+          <Property Name="CustomBool5" Type="bit" />
+          <Property Name="LastListen" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Song_Category">
+          <Key>
+            <PropertyRef Name="Song_ID" />
+            <PropertyRef Name="Category_ID" />
+          </Key>
+          <Property Name="Song_ID" Type="bigint" Nullable="false" />
+          <Property Name="Category_ID" Type="bigint" Nullable="false" />
+          <Property Name="Detail" Type="nvarchar" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="16" />
+          <Property Name="Password" Type="varchar" MaxLength="16" />
+          <Property Name="Fullname" Type="nvarchar" MaxLength="256" />
+          <Property Name="Email" Type="varchar" MaxLength="32" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="CustomString1" Type="nvarchar" MaxLength="256" />
+          <Property Name="CustomString2" Type="nvarchar" MaxLength="256" />
+          <Property Name="CustomString3" Type="nvarchar" MaxLength="256" />
+          <Property Name="CustomString4" Type="nvarchar" MaxLength="256" />
+          <Property Name="CustomString5" Type="nvarchar" MaxLength="256" />
+          <Property Name="CustomInt1" Type="int" />
+          <Property Name="CustomInt2" Type="int" />
+          <Property Name="CustomInt3" Type="int" />
+          <Property Name="CustomInt4" Type="int" />
+          <Property Name="CustomInt5" Type="int" />
+          <Property Name="CustomBool1" Type="bit" />
+          <Property Name="CustomBool2" Type="bit" />
+          <Property Name="CustomBool3" Type="bit" />
+          <Property Name="CustomBool4" Type="bit" />
+          <Property Name="CustomBool5" Type="bit" />
+        </EntityType>
+        <Association Name="FK_category_SongCategory">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="Song_Category" Type="Self.Song_Category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Song_Category">
+              <PropertyRef Name="Category_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Song_Album">
+          <End Role="Album" Type="Self.Album" Multiplicity="0..1" />
+          <End Role="Song" Type="Self.Song" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Album">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Song">
+              <PropertyRef Name="Album_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Song_Musician">
+          <End Role="Musician" Type="Self.Musician" Multiplicity="0..1" />
+          <End Role="Song" Type="Self.Song" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Musician">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Song">
+              <PropertyRef Name="Musician_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Song_Singer">
+          <End Role="Singer" Type="Self.Singer" Multiplicity="0..1" />
+          <End Role="Song" Type="Self.Song" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Singer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Song">
+              <PropertyRef Name="Singer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_song_SongCategory">
+          <End Role="Song" Type="Self.Song" Multiplicity="1" />
+          <End Role="Song_Category" Type="Self.Song_Category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Song">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Song_Category">
+              <PropertyRef Name="Song_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MusicModelStoreContainer">
+          <EntitySet Name="Album" EntityType="Self.Album" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Musician" EntityType="Self.Musician" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Singer" EntityType="Self.Singer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Song" EntityType="Self.Song" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Song_Category" EntityType="Self.Song_Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_category_SongCategory" Association="Self.FK_category_SongCategory">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Song_Category" EntitySet="Song_Category" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Song_Album" Association="Self.FK_Song_Album">
+            <End Role="Album" EntitySet="Album" />
+            <End Role="Song" EntitySet="Song" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Song_Musician" Association="Self.FK_Song_Musician">
+            <End Role="Musician" EntitySet="Musician" />
+            <End Role="Song" EntitySet="Song" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Song_Singer" Association="Self.FK_Song_Singer">
+            <End Role="Singer" EntitySet="Singer" />
+            <End Role="Song" EntitySet="Song" />
+          </AssociationSet>
+          <AssociationSet Name="FK_song_SongCategory" Association="Self.FK_song_SongCategory">
+            <End Role="Song" EntitySet="Song" />
+            <End Role="Song_Category" EntitySet="Song_Category" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MusicModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Album">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="DateIssue" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Detail" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <Property Name="ImagePath" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="CustomString1" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="CustomString2" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="CustomString3" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="CustomString4" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="CustomString5" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="CustomInt1" Type="Int32" />
+          <Property Name="CustomInt2" Type="Int32" />
+          <Property Name="CustomInt3" Type="Int32" />
+          <Property Name="CustomInt4" Type="Int32" />
+          <Property Name="CustomInt5" Type="Int32" />
+          <Property Name="CustomBool1" Type="Boolean" />
+          <Property Name="CustomBool2" Type="Boolean" />
+          <Property Name="CustomBool3" Type="Boolean" />
+          <Property Name="CustomBool4" Type="Boolean" />
+          <Property Name="CustomBool5" Type="Boolean" />
+          <NavigationProperty Name="Songs" Relationship="Self.FK_Song_Album" FromRole="Album" ToRole="Song" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Detail" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="ImagePath" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="CustomString1" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="CustomString2" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="CustomString3" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="CustomString4" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="CustomString5" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="CustomInt1" Type="Int32" />
+          <Property Name="CustomInt2" Type="Int32" />
+          <Property Name="CustomInt3" Type="Int32" />
+          <Property Name="CustomInt4" Type="Int32" />
+          <Property Name="CustomInt5" Type="Int32" />
+          <Property Name="CustomBool1" Type="Boolean" />
+          <Property Name="CustomBool2" Type="Boolean" />
+          <Property Name="CustomBool3" Type="Boolean" />
+          <Property Name="CustomBool4" Type="Boolean" />
+          <Property Name="CustomBool5" Type="Boolean" />
+          <NavigationProperty Name="Song_Category" Relationship="Self.FK_category_SongCategory" FromRole="Category" ToRole="Song_Category" />
+        </EntityType>
+        <EntityType Name="Musician">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Birthday" Type="DateTime" Precision="3" />
+          <Property Name="Nationality" Type="String" MaxLength="640" FixedLength="false" Unicode="true" />
+          <Property Name="Detail" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="ImagePath" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="CustomString1" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="CustomString2" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="CustomString3" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="CustomString4" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="CustomString5" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="CustomInt1" Type="Int32" />
+          <Property Name="CustomInt2" Type="Int32" />
+          <Property Name="CustomInt3" Type="Int32" />
+          <Property Name="CustomInt4" Type="Int32" />
+          <Property Name="CustomInt5" Type="Int32" />
+          <Property Name="CustomBool1" Type="Boolean" />
+          <Property Name="CustomBool2" Type="Boolean" />
+          <Property Name="CustomBool3" Type="Boolean" />
+          <Property Name="CustomBool4" Type="Boolean" />
+          <Property Name="CustomBool5" Type="Boolean" />
+          <NavigationProperty Name="Songs" Relationship="Self.FK_Song_Musician" FromRole="Musician" ToRole="Song" />
+        </EntityType>
+        <EntityType Name="Singer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Birthday" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Nationality" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Detail" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <Property Name="ImagePath" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="CustomString1" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="CustomString2" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="CustomString3" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="CustomString4" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="CustomString5" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="CustomInt1" Type="Int32" />
+          <Property Name="CustomInt2" Type="Int32" />
+          <Property Name="CustomInt3" Type="Int32" />
+          <Property Name="CustomInt4" Type="Int32" />
+          <Property Name="CustomInt5" Type="Int32" />
+          <Property Name="CustomBool1" Type="Boolean" />
+          <Property Name="CustomBool2" Type="Boolean" />
+          <Property Name="CustomBool3" Type="Boolean" />
+          <Property Name="CustomBool4" Type="Boolean" />
+          <Property Name="CustomBool5" Type="Boolean" />
+          <NavigationProperty Name="Songs" Relationship="Self.FK_Song_Singer" FromRole="Singer" ToRole="Song" />
+        </EntityType>
+        <EntityType Name="Song">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Album_ID" Type="Int64" />
+          <Property Name="Singer_ID" Type="Int64" />
+          <Property Name="Musician_ID" Type="Int64" />
+          <Property Name="ImagePath" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="SourcePath" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Year" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="Format" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="BitRate" Type="Int32" />
+          <Property Name="Tag" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Size" Type="Int32" />
+          <Property Name="Length" Type="Int32" />
+          <Property Name="Rating" Type="Double" />
+          <Property Name="CustomString1" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="CustomString2" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="CustomString3" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="CustomString4" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="CustomString5" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="CustomInt1" Type="Int32" />
+          <Property Name="CustomInt2" Type="Int32" />
+          <Property Name="CustomInt3" Type="Int32" />
+          <Property Name="CustomInt4" Type="Int32" />
+          <Property Name="CustomInt5" Type="Int32" />
+          <Property Name="CustomBool1" Type="Boolean" />
+          <Property Name="CustomBool2" Type="Boolean" />
+          <Property Name="CustomBool3" Type="Boolean" />
+          <Property Name="CustomBool4" Type="Boolean" />
+          <Property Name="CustomBool5" Type="Boolean" />
+          <Property Name="LastListen" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Album" Relationship="Self.FK_Song_Album" FromRole="Song" ToRole="Album" />
+          <NavigationProperty Name="Musician" Relationship="Self.FK_Song_Musician" FromRole="Song" ToRole="Musician" />
+          <NavigationProperty Name="Singer" Relationship="Self.FK_Song_Singer" FromRole="Song" ToRole="Singer" />
+          <NavigationProperty Name="Song_Category" Relationship="Self.FK_song_SongCategory" FromRole="Song" ToRole="Song_Category" />
+        </EntityType>
+        <EntityType Name="Song_Category">
+          <Key>
+            <PropertyRef Name="Song_ID" />
+            <PropertyRef Name="Category_ID" />
+          </Key>
+          <Property Name="Song_ID" Type="Int64" Nullable="false" />
+          <Property Name="Category_ID" Type="Int64" Nullable="false" />
+          <Property Name="Detail" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Category" Relationship="Self.FK_category_SongCategory" FromRole="Song_Category" ToRole="Category" />
+          <NavigationProperty Name="Song" Relationship="Self.FK_song_SongCategory" FromRole="Song_Category" ToRole="Song" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="Fullname" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="CustomString1" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="CustomString2" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="CustomString3" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="CustomString4" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="CustomString5" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="CustomInt1" Type="Int32" />
+          <Property Name="CustomInt2" Type="Int32" />
+          <Property Name="CustomInt3" Type="Int32" />
+          <Property Name="CustomInt4" Type="Int32" />
+          <Property Name="CustomInt5" Type="Int32" />
+          <Property Name="CustomBool1" Type="Boolean" />
+          <Property Name="CustomBool2" Type="Boolean" />
+          <Property Name="CustomBool3" Type="Boolean" />
+          <Property Name="CustomBool4" Type="Boolean" />
+          <Property Name="CustomBool5" Type="Boolean" />
+        </EntityType>
+        <Association Name="FK_Song_Album">
+          <End Role="Album" Type="Self.Album" Multiplicity="0..1" />
+          <End Role="Song" Type="Self.Song" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Album">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Song">
+              <PropertyRef Name="Album_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_category_SongCategory">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="Song_Category" Type="Self.Song_Category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Song_Category">
+              <PropertyRef Name="Category_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Song_Musician">
+          <End Role="Musician" Type="Self.Musician" Multiplicity="0..1" />
+          <End Role="Song" Type="Self.Song" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Musician">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Song">
+              <PropertyRef Name="Musician_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Song_Singer">
+          <End Role="Singer" Type="Self.Singer" Multiplicity="0..1" />
+          <End Role="Song" Type="Self.Song" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Singer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Song">
+              <PropertyRef Name="Singer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_song_SongCategory">
+          <End Role="Song" Type="Self.Song" Multiplicity="1" />
+          <End Role="Song_Category" Type="Self.Song_Category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Song">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Song_Category">
+              <PropertyRef Name="Song_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MusicEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Albums" EntityType="Self.Album" />
+          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="Musicians" EntityType="Self.Musician" />
+          <EntitySet Name="Singers" EntityType="Self.Singer" />
+          <EntitySet Name="Songs" EntityType="Self.Song" />
+          <EntitySet Name="Song_Category" EntityType="Self.Song_Category" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK_Song_Album" Association="Self.FK_Song_Album">
+            <End Role="Album" EntitySet="Albums" />
+            <End Role="Song" EntitySet="Songs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_category_SongCategory" Association="Self.FK_category_SongCategory">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Song_Category" EntitySet="Song_Category" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Song_Musician" Association="Self.FK_Song_Musician">
+            <End Role="Musician" EntitySet="Musicians" />
+            <End Role="Song" EntitySet="Songs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Song_Singer" Association="Self.FK_Song_Singer">
+            <End Role="Singer" EntitySet="Singers" />
+            <End Role="Song" EntitySet="Songs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_song_SongCategory" Association="Self.FK_song_SongCategory">
+            <End Role="Song" EntitySet="Songs" />
+            <End Role="Song_Category" EntitySet="Song_Category" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MusicModelStoreContainer" CdmEntityContainer="MusicEntities">
+          <EntitySetMapping Name="Albums">
+            <EntityTypeMapping TypeName="MusicModel.Album">
+              <MappingFragment StoreEntitySet="Album">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DateIssue" ColumnName="DateIssue" />
+                <ScalarProperty Name="Detail" ColumnName="Detail" />
+                <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+                <ScalarProperty Name="CustomString1" ColumnName="CustomString1" />
+                <ScalarProperty Name="CustomString2" ColumnName="CustomString2" />
+                <ScalarProperty Name="CustomString3" ColumnName="CustomString3" />
+                <ScalarProperty Name="CustomString4" ColumnName="CustomString4" />
+                <ScalarProperty Name="CustomString5" ColumnName="CustomString5" />
+                <ScalarProperty Name="CustomInt1" ColumnName="CustomInt1" />
+                <ScalarProperty Name="CustomInt2" ColumnName="CustomInt2" />
+                <ScalarProperty Name="CustomInt3" ColumnName="CustomInt3" />
+                <ScalarProperty Name="CustomInt4" ColumnName="CustomInt4" />
+                <ScalarProperty Name="CustomInt5" ColumnName="CustomInt5" />
+                <ScalarProperty Name="CustomBool1" ColumnName="CustomBool1" />
+                <ScalarProperty Name="CustomBool2" ColumnName="CustomBool2" />
+                <ScalarProperty Name="CustomBool3" ColumnName="CustomBool3" />
+                <ScalarProperty Name="CustomBool4" ColumnName="CustomBool4" />
+                <ScalarProperty Name="CustomBool5" ColumnName="CustomBool5" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="MusicModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Detail" ColumnName="Detail" />
+                <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+                <ScalarProperty Name="CustomString1" ColumnName="CustomString1" />
+                <ScalarProperty Name="CustomString2" ColumnName="CustomString2" />
+                <ScalarProperty Name="CustomString3" ColumnName="CustomString3" />
+                <ScalarProperty Name="CustomString4" ColumnName="CustomString4" />
+                <ScalarProperty Name="CustomString5" ColumnName="CustomString5" />
+                <ScalarProperty Name="CustomInt1" ColumnName="CustomInt1" />
+                <ScalarProperty Name="CustomInt2" ColumnName="CustomInt2" />
+                <ScalarProperty Name="CustomInt3" ColumnName="CustomInt3" />
+                <ScalarProperty Name="CustomInt4" ColumnName="CustomInt4" />
+                <ScalarProperty Name="CustomInt5" ColumnName="CustomInt5" />
+                <ScalarProperty Name="CustomBool1" ColumnName="CustomBool1" />
+                <ScalarProperty Name="CustomBool2" ColumnName="CustomBool2" />
+                <ScalarProperty Name="CustomBool3" ColumnName="CustomBool3" />
+                <ScalarProperty Name="CustomBool4" ColumnName="CustomBool4" />
+                <ScalarProperty Name="CustomBool5" ColumnName="CustomBool5" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Musicians">
+            <EntityTypeMapping TypeName="MusicModel.Musician">
+              <MappingFragment StoreEntitySet="Musician">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+                <ScalarProperty Name="Nationality" ColumnName="Nationality" />
+                <ScalarProperty Name="Detail" ColumnName="Detail" />
+                <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+                <ScalarProperty Name="CustomString1" ColumnName="CustomString1" />
+                <ScalarProperty Name="CustomString2" ColumnName="CustomString2" />
+                <ScalarProperty Name="CustomString3" ColumnName="CustomString3" />
+                <ScalarProperty Name="CustomString4" ColumnName="CustomString4" />
+                <ScalarProperty Name="CustomString5" ColumnName="CustomString5" />
+                <ScalarProperty Name="CustomInt1" ColumnName="CustomInt1" />
+                <ScalarProperty Name="CustomInt2" ColumnName="CustomInt2" />
+                <ScalarProperty Name="CustomInt3" ColumnName="CustomInt3" />
+                <ScalarProperty Name="CustomInt4" ColumnName="CustomInt4" />
+                <ScalarProperty Name="CustomInt5" ColumnName="CustomInt5" />
+                <ScalarProperty Name="CustomBool1" ColumnName="CustomBool1" />
+                <ScalarProperty Name="CustomBool2" ColumnName="CustomBool2" />
+                <ScalarProperty Name="CustomBool3" ColumnName="CustomBool3" />
+                <ScalarProperty Name="CustomBool4" ColumnName="CustomBool4" />
+                <ScalarProperty Name="CustomBool5" ColumnName="CustomBool5" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Singers">
+            <EntityTypeMapping TypeName="MusicModel.Singer">
+              <MappingFragment StoreEntitySet="Singer">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+                <ScalarProperty Name="Nationality" ColumnName="Nationality" />
+                <ScalarProperty Name="Detail" ColumnName="Detail" />
+                <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+                <ScalarProperty Name="CustomString1" ColumnName="CustomString1" />
+                <ScalarProperty Name="CustomString2" ColumnName="CustomString2" />
+                <ScalarProperty Name="CustomString3" ColumnName="CustomString3" />
+                <ScalarProperty Name="CustomString4" ColumnName="CustomString4" />
+                <ScalarProperty Name="CustomString5" ColumnName="CustomString5" />
+                <ScalarProperty Name="CustomInt1" ColumnName="CustomInt1" />
+                <ScalarProperty Name="CustomInt2" ColumnName="CustomInt2" />
+                <ScalarProperty Name="CustomInt3" ColumnName="CustomInt3" />
+                <ScalarProperty Name="CustomInt4" ColumnName="CustomInt4" />
+                <ScalarProperty Name="CustomInt5" ColumnName="CustomInt5" />
+                <ScalarProperty Name="CustomBool1" ColumnName="CustomBool1" />
+                <ScalarProperty Name="CustomBool2" ColumnName="CustomBool2" />
+                <ScalarProperty Name="CustomBool3" ColumnName="CustomBool3" />
+                <ScalarProperty Name="CustomBool4" ColumnName="CustomBool4" />
+                <ScalarProperty Name="CustomBool5" ColumnName="CustomBool5" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Songs">
+            <EntityTypeMapping TypeName="MusicModel.Song">
+              <MappingFragment StoreEntitySet="Song">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Album_ID" ColumnName="Album_ID" />
+                <ScalarProperty Name="Singer_ID" ColumnName="Singer_ID" />
+                <ScalarProperty Name="Musician_ID" ColumnName="Musician_ID" />
+                <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+                <ScalarProperty Name="SourcePath" ColumnName="SourcePath" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Format" ColumnName="Format" />
+                <ScalarProperty Name="BitRate" ColumnName="BitRate" />
+                <ScalarProperty Name="Tag" ColumnName="Tag" />
+                <ScalarProperty Name="Size" ColumnName="Size" />
+                <ScalarProperty Name="Length" ColumnName="Length" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+                <ScalarProperty Name="CustomString1" ColumnName="CustomString1" />
+                <ScalarProperty Name="CustomString2" ColumnName="CustomString2" />
+                <ScalarProperty Name="CustomString3" ColumnName="CustomString3" />
+                <ScalarProperty Name="CustomString4" ColumnName="CustomString4" />
+                <ScalarProperty Name="CustomString5" ColumnName="CustomString5" />
+                <ScalarProperty Name="CustomInt1" ColumnName="CustomInt1" />
+                <ScalarProperty Name="CustomInt2" ColumnName="CustomInt2" />
+                <ScalarProperty Name="CustomInt3" ColumnName="CustomInt3" />
+                <ScalarProperty Name="CustomInt4" ColumnName="CustomInt4" />
+                <ScalarProperty Name="CustomInt5" ColumnName="CustomInt5" />
+                <ScalarProperty Name="CustomBool1" ColumnName="CustomBool1" />
+                <ScalarProperty Name="CustomBool2" ColumnName="CustomBool2" />
+                <ScalarProperty Name="CustomBool3" ColumnName="CustomBool3" />
+                <ScalarProperty Name="CustomBool4" ColumnName="CustomBool4" />
+                <ScalarProperty Name="CustomBool5" ColumnName="CustomBool5" />
+                <ScalarProperty Name="LastListen" ColumnName="LastListen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Song_Category">
+            <EntityTypeMapping TypeName="MusicModel.Song_Category">
+              <MappingFragment StoreEntitySet="Song_Category">
+                <ScalarProperty Name="Song_ID" ColumnName="Song_ID" />
+                <ScalarProperty Name="Category_ID" ColumnName="Category_ID" />
+                <ScalarProperty Name="Detail" ColumnName="Detail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="MusicModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Fullname" ColumnName="Fullname" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="CustomString1" ColumnName="CustomString1" />
+                <ScalarProperty Name="CustomString2" ColumnName="CustomString2" />
+                <ScalarProperty Name="CustomString3" ColumnName="CustomString3" />
+                <ScalarProperty Name="CustomString4" ColumnName="CustomString4" />
+                <ScalarProperty Name="CustomString5" ColumnName="CustomString5" />
+                <ScalarProperty Name="CustomInt1" ColumnName="CustomInt1" />
+                <ScalarProperty Name="CustomInt2" ColumnName="CustomInt2" />
+                <ScalarProperty Name="CustomInt3" ColumnName="CustomInt3" />
+                <ScalarProperty Name="CustomInt4" ColumnName="CustomInt4" />
+                <ScalarProperty Name="CustomInt5" ColumnName="CustomInt5" />
+                <ScalarProperty Name="CustomBool1" ColumnName="CustomBool1" />
+                <ScalarProperty Name="CustomBool2" ColumnName="CustomBool2" />
+                <ScalarProperty Name="CustomBool3" ColumnName="CustomBool3" />
+                <ScalarProperty Name="CustomBool4" ColumnName="CustomBool4" />
+                <ScalarProperty Name="CustomBool5" ColumnName="CustomBool5" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

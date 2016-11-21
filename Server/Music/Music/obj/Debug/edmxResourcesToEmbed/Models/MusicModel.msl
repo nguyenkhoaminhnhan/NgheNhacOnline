@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MusicModelStoreContainer" CdmEntityContainer="MusicEntities">
+    <EntitySetMapping Name="Albums">
+      <EntityTypeMapping TypeName="MusicModel.Album">
+        <MappingFragment StoreEntitySet="Album">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="DateIssue" ColumnName="DateIssue" />
+          <ScalarProperty Name="Detail" ColumnName="Detail" />
+          <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+          <ScalarProperty Name="CustomString1" ColumnName="CustomString1" />
+          <ScalarProperty Name="CustomString2" ColumnName="CustomString2" />
+          <ScalarProperty Name="CustomString3" ColumnName="CustomString3" />
+          <ScalarProperty Name="CustomString4" ColumnName="CustomString4" />
+          <ScalarProperty Name="CustomString5" ColumnName="CustomString5" />
+          <ScalarProperty Name="CustomInt1" ColumnName="CustomInt1" />
+          <ScalarProperty Name="CustomInt2" ColumnName="CustomInt2" />
+          <ScalarProperty Name="CustomInt3" ColumnName="CustomInt3" />
+          <ScalarProperty Name="CustomInt4" ColumnName="CustomInt4" />
+          <ScalarProperty Name="CustomInt5" ColumnName="CustomInt5" />
+          <ScalarProperty Name="CustomBool1" ColumnName="CustomBool1" />
+          <ScalarProperty Name="CustomBool2" ColumnName="CustomBool2" />
+          <ScalarProperty Name="CustomBool3" ColumnName="CustomBool3" />
+          <ScalarProperty Name="CustomBool4" ColumnName="CustomBool4" />
+          <ScalarProperty Name="CustomBool5" ColumnName="CustomBool5" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Categories">
+      <EntityTypeMapping TypeName="MusicModel.Category">
+        <MappingFragment StoreEntitySet="Category">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Detail" ColumnName="Detail" />
+          <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+          <ScalarProperty Name="CustomString1" ColumnName="CustomString1" />
+          <ScalarProperty Name="CustomString2" ColumnName="CustomString2" />
+          <ScalarProperty Name="CustomString3" ColumnName="CustomString3" />
+          <ScalarProperty Name="CustomString4" ColumnName="CustomString4" />
+          <ScalarProperty Name="CustomString5" ColumnName="CustomString5" />
+          <ScalarProperty Name="CustomInt1" ColumnName="CustomInt1" />
+          <ScalarProperty Name="CustomInt2" ColumnName="CustomInt2" />
+          <ScalarProperty Name="CustomInt3" ColumnName="CustomInt3" />
+          <ScalarProperty Name="CustomInt4" ColumnName="CustomInt4" />
+          <ScalarProperty Name="CustomInt5" ColumnName="CustomInt5" />
+          <ScalarProperty Name="CustomBool1" ColumnName="CustomBool1" />
+          <ScalarProperty Name="CustomBool2" ColumnName="CustomBool2" />
+          <ScalarProperty Name="CustomBool3" ColumnName="CustomBool3" />
+          <ScalarProperty Name="CustomBool4" ColumnName="CustomBool4" />
+          <ScalarProperty Name="CustomBool5" ColumnName="CustomBool5" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Musicians">
+      <EntityTypeMapping TypeName="MusicModel.Musician">
+        <MappingFragment StoreEntitySet="Musician">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+          <ScalarProperty Name="Nationality" ColumnName="Nationality" />
+          <ScalarProperty Name="Detail" ColumnName="Detail" />
+          <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+          <ScalarProperty Name="CustomString1" ColumnName="CustomString1" />
+          <ScalarProperty Name="CustomString2" ColumnName="CustomString2" />
+          <ScalarProperty Name="CustomString3" ColumnName="CustomString3" />
+          <ScalarProperty Name="CustomString4" ColumnName="CustomString4" />
+          <ScalarProperty Name="CustomString5" ColumnName="CustomString5" />
+          <ScalarProperty Name="CustomInt1" ColumnName="CustomInt1" />
+          <ScalarProperty Name="CustomInt2" ColumnName="CustomInt2" />
+          <ScalarProperty Name="CustomInt3" ColumnName="CustomInt3" />
+          <ScalarProperty Name="CustomInt4" ColumnName="CustomInt4" />
+          <ScalarProperty Name="CustomInt5" ColumnName="CustomInt5" />
+          <ScalarProperty Name="CustomBool1" ColumnName="CustomBool1" />
+          <ScalarProperty Name="CustomBool2" ColumnName="CustomBool2" />
+          <ScalarProperty Name="CustomBool3" ColumnName="CustomBool3" />
+          <ScalarProperty Name="CustomBool4" ColumnName="CustomBool4" />
+          <ScalarProperty Name="CustomBool5" ColumnName="CustomBool5" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Singers">
+      <EntityTypeMapping TypeName="MusicModel.Singer">
+        <MappingFragment StoreEntitySet="Singer">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+          <ScalarProperty Name="Nationality" ColumnName="Nationality" />
+          <ScalarProperty Name="Detail" ColumnName="Detail" />
+          <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+          <ScalarProperty Name="CustomString1" ColumnName="CustomString1" />
+          <ScalarProperty Name="CustomString2" ColumnName="CustomString2" />
+          <ScalarProperty Name="CustomString3" ColumnName="CustomString3" />
+          <ScalarProperty Name="CustomString4" ColumnName="CustomString4" />
+          <ScalarProperty Name="CustomString5" ColumnName="CustomString5" />
+          <ScalarProperty Name="CustomInt1" ColumnName="CustomInt1" />
+          <ScalarProperty Name="CustomInt2" ColumnName="CustomInt2" />
+          <ScalarProperty Name="CustomInt3" ColumnName="CustomInt3" />
+          <ScalarProperty Name="CustomInt4" ColumnName="CustomInt4" />
+          <ScalarProperty Name="CustomInt5" ColumnName="CustomInt5" />
+          <ScalarProperty Name="CustomBool1" ColumnName="CustomBool1" />
+          <ScalarProperty Name="CustomBool2" ColumnName="CustomBool2" />
+          <ScalarProperty Name="CustomBool3" ColumnName="CustomBool3" />
+          <ScalarProperty Name="CustomBool4" ColumnName="CustomBool4" />
+          <ScalarProperty Name="CustomBool5" ColumnName="CustomBool5" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Songs">
+      <EntityTypeMapping TypeName="MusicModel.Song">
+        <MappingFragment StoreEntitySet="Song">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Album_ID" ColumnName="Album_ID" />
+          <ScalarProperty Name="Singer_ID" ColumnName="Singer_ID" />
+          <ScalarProperty Name="Musician_ID" ColumnName="Musician_ID" />
+          <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+          <ScalarProperty Name="SourcePath" ColumnName="SourcePath" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="Format" ColumnName="Format" />
+          <ScalarProperty Name="BitRate" ColumnName="BitRate" />
+          <ScalarProperty Name="Tag" ColumnName="Tag" />
+          <ScalarProperty Name="Size" ColumnName="Size" />
+          <ScalarProperty Name="Length" ColumnName="Length" />
+          <ScalarProperty Name="Rating" ColumnName="Rating" />
+          <ScalarProperty Name="CustomString1" ColumnName="CustomString1" />
+          <ScalarProperty Name="CustomString2" ColumnName="CustomString2" />
+          <ScalarProperty Name="CustomString3" ColumnName="CustomString3" />
+          <ScalarProperty Name="CustomString4" ColumnName="CustomString4" />
+          <ScalarProperty Name="CustomString5" ColumnName="CustomString5" />
+          <ScalarProperty Name="CustomInt1" ColumnName="CustomInt1" />
+          <ScalarProperty Name="CustomInt2" ColumnName="CustomInt2" />
+          <ScalarProperty Name="CustomInt3" ColumnName="CustomInt3" />
+          <ScalarProperty Name="CustomInt4" ColumnName="CustomInt4" />
+          <ScalarProperty Name="CustomInt5" ColumnName="CustomInt5" />
+          <ScalarProperty Name="CustomBool1" ColumnName="CustomBool1" />
+          <ScalarProperty Name="CustomBool2" ColumnName="CustomBool2" />
+          <ScalarProperty Name="CustomBool3" ColumnName="CustomBool3" />
+          <ScalarProperty Name="CustomBool4" ColumnName="CustomBool4" />
+          <ScalarProperty Name="CustomBool5" ColumnName="CustomBool5" />
+          <ScalarProperty Name="LastListen" ColumnName="LastListen" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Song_Category">
+      <EntityTypeMapping TypeName="MusicModel.Song_Category">
+        <MappingFragment StoreEntitySet="Song_Category">
+          <ScalarProperty Name="Song_ID" ColumnName="Song_ID" />
+          <ScalarProperty Name="Category_ID" ColumnName="Category_ID" />
+          <ScalarProperty Name="Detail" ColumnName="Detail" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="MusicModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Fullname" ColumnName="Fullname" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="CustomString1" ColumnName="CustomString1" />
+          <ScalarProperty Name="CustomString2" ColumnName="CustomString2" />
+          <ScalarProperty Name="CustomString3" ColumnName="CustomString3" />
+          <ScalarProperty Name="CustomString4" ColumnName="CustomString4" />
+          <ScalarProperty Name="CustomString5" ColumnName="CustomString5" />
+          <ScalarProperty Name="CustomInt1" ColumnName="CustomInt1" />
+          <ScalarProperty Name="CustomInt2" ColumnName="CustomInt2" />
+          <ScalarProperty Name="CustomInt3" ColumnName="CustomInt3" />
+          <ScalarProperty Name="CustomInt4" ColumnName="CustomInt4" />
+          <ScalarProperty Name="CustomInt5" ColumnName="CustomInt5" />
+          <ScalarProperty Name="CustomBool1" ColumnName="CustomBool1" />
+          <ScalarProperty Name="CustomBool2" ColumnName="CustomBool2" />
+          <ScalarProperty Name="CustomBool3" ColumnName="CustomBool3" />
+          <ScalarProperty Name="CustomBool4" ColumnName="CustomBool4" />
+          <ScalarProperty Name="CustomBool5" ColumnName="CustomBool5" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
