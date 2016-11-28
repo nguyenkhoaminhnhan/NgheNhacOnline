@@ -4,6 +4,7 @@ package com.example.minhnhan.music.Model.Async.Data;
 import com.example.minhnhan.music.Model.HomePage;
 import com.example.minhnhan.music.Model.Song;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,7 +14,7 @@ import java.util.List;
 public class DataManager {
     private static DataManager instance;
 
-    private List<Song> songDetail;
+    private ArrayList<Song> songDetail;
 
     private HomePage homePage;
 
@@ -28,7 +29,7 @@ public class DataManager {
 
     /* ------------------------------------------- */
 
-    public void setSongDetail(List<Song> nSong) {
+    public void setSongDetail(ArrayList<Song> nSong) {
         songDetail = nSong;
     }
 

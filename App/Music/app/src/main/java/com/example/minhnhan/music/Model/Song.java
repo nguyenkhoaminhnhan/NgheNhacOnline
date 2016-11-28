@@ -21,15 +21,15 @@ public class Song {
 
 
     private long id;
-    private String name;
+    public String name;
     private String imagePath;
-    private String album;
-    private String singer;
-    private String year;
-    private String format;
-    private int bitRate;
-    private String tag;
-    private float rating;
+    public String album;
+    public String singer;
+    public String year;
+    public String format;
+    public int bitRate;
+    public String tag;
+    public float rating;
 
     public Song(JSONObject object) {
         try {
