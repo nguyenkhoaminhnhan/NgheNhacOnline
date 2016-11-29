@@ -5,13 +5,11 @@
     android:id="@+id/content_home"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#f2f2f2"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.minhnhan.music.Activity.HomeActivity"
-    tools:showIn="@layout/app_bar_home"
-    android:background="#f2f2f2"
-    android:layout_marginLeft="5dp"
-    android:layout_marginRight="5dp">
+    tools:showIn="@layout/app_bar_home">
 
     <ScrollView
         android:id="@+id/home_srv"
@@ -28,21 +26,21 @@
             <android.support.v4.view.ViewPager
                 android:id="@+id/show_case"
                 android:layout_width="match_parent"
-                android:layout_height="120dp">
+                android:layout_height="150dp">
 
             </android.support.v4.view.ViewPager>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
                 android:layout_marginBottom="10dp"
+                android:orientation="vertical"
                 android:paddingLeft="5dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Hot Week"
+                    android:text="Hot Song Week"
                     android:textColor="#000000"
                     android:textSize="16dp"
                     android:textStyle="bold" />
@@ -83,6 +81,14 @@
 
                     </LinearLayout>
                 </HorizontalScrollView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Popular Song"
+                    android:textColor="#000000"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

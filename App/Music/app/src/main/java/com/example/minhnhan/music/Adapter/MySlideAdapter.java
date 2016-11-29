@@ -28,7 +28,7 @@ public class MySlideAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         item = data.get(position);
-        return new ScreenSlidePageFragment(position, item.getImagePath());
+        return new ScreenSlidePageFragment(position, item);
     }
 
     @Override
