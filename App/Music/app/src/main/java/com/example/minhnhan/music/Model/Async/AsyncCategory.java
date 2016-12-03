@@ -1,25 +1,24 @@
 package com.example.minhnhan.music.Model.Async;
 
 /**
- * Created by MinhNhan on 27/04/2016.
- * post request to server to get AtmDetail Json
+ * Created by Minh Nhan on 11/29/2016.
  */
 
 import android.os.AsyncTask;
 
 import com.example.minhnhan.music.Model.Async.Data.DataManager;
 import com.example.minhnhan.music.Model.Async.Data.DataServices;
-import com.example.minhnhan.music.Model.Page.HomePage;
+import com.example.minhnhan.music.Model.Page.CategoryPage;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 
-public class AsyncHomePage extends AsyncTask<String, String, String> {
+public class AsyncCategory extends AsyncTask<String, String, String> {
     private AsyncListener listener;
 
-    public AsyncHomePage(AsyncListener listener) {
+    public AsyncCategory(AsyncListener listener) {
         this.listener = listener;
     }
 
@@ -38,7 +37,7 @@ public class AsyncHomePage extends AsyncTask<String, String, String> {
         super.onPostExecute(result);
         try {
             JSONObject object = new JSONObject(result);
-            DataManager.getInstance().setHomeDetail(new HomePage(object));
+            DataManager.getInstance().setCategoryPage(new CategoryPage(object));
         } catch (JSONException e) {
             e.printStackTrace();
         }

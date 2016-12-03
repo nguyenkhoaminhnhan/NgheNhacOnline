@@ -1,7 +1,8 @@
 package com.example.minhnhan.music.Model.Async.Data;
 
 
-import com.example.minhnhan.music.Model.HomePage;
+import com.example.minhnhan.music.Model.Page.CategoryPage;
+import com.example.minhnhan.music.Model.Page.HomePage;
 import com.example.minhnhan.music.Model.Song;
 
 import java.util.ArrayList;
@@ -17,6 +18,8 @@ public class DataManager {
     private ArrayList<Song> songDetail;
 
     private HomePage homePage;
+    private CategoryPage categoryPage;
+
 
     public static DataManager getInstance() {
         if (instance == null)
@@ -45,5 +48,13 @@ public class DataManager {
 
     public HomePage getHomeDetail() {
         return homePage;
+    }
+
+    public CategoryPage getCategoryPage() {
+        return categoryPage;
+    }
+
+    public void setCategoryPage(CategoryPage categoryPage) {
+        this.categoryPage = categoryPage;
     }
 }

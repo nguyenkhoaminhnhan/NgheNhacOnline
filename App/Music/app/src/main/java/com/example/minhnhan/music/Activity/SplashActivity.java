@@ -10,7 +10,7 @@ import android.os.Bundle;
 import com.example.minhnhan.music.Model.Async.AsyncHomePage;
 import com.example.minhnhan.music.Model.Async.AsyncListener;
 import com.example.minhnhan.music.Model.Async.Data.DataManager;
-import com.example.minhnhan.music.Model.HomePage;
+import com.example.minhnhan.music.Model.Page.HomePage;
 import com.example.minhnhan.music.R;
 import com.example.minhnhan.music.Utils.Utils;
 

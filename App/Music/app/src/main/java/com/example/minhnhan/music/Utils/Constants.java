@@ -8,6 +8,7 @@ public class Constants {
     // url
     public static final String DOMAIN = "http://nghenhac.apphb.com/";
     public static final String GET_SHOW_CASE = DOMAIN + "song/getshowcase";
+    public static final String GET_CATEGORY = DOMAIN + "category/getcategory";
 
     // params
     public static final String Song_URL = "songUrl";

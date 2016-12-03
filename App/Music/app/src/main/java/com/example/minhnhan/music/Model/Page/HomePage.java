@@ -1,4 +1,6 @@
-package com.example.minhnhan.music.Model;
+package com.example.minhnhan.music.Model.Page;
+
+import com.example.minhnhan.music.Model.Song;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

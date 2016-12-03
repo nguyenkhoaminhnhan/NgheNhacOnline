@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -27,6 +28,9 @@ import static com.example.minhnhan.music.Utils.Utils.AddSongListLinearL;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private FragmentManager fragmentManager = getSupportFragmentManager();
+    private int idPage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,36 +57,11 @@ public class HomeActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        /*-------------------Get params for LinearLayout---------------------------*/
-        DisplayMetrics metrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        HomeFragment homeFragment = new HomeFragment();
 
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(4 * metrics.widthPixels / 10,
-                LinearLayout.LayoutParams.MATCH_PARENT);
-
-
-        /*-------------------Show Case---------------------------*/
-        MySlideAdapter showCase = new MySlideAdapter(getSupportFragmentManager(),
-                DataManager.getInstance().getHomeDetail().getShowCase());
-        ViewPager showCasePager = (ViewPager) findViewById(R.id.show_case);
-        showCasePager.setAdapter(showCase);
-        /*-------------------Hot Song Week---------------------------*/
-        LinearLayout hotSongWeekView = (LinearLayout) findViewById(R.id.hot_song_week);
-        HotSongAdapter hotSongWeek = new HotSongAdapter(this,
-                DataManager.getInstance().getHomeDetail().getHotSongWeek());
-        AddHotSongLinearL(hotSongWeekView, hotSongWeek, params);
-        /*-------------------Hot Song Month---------------------------*/
-        LinearLayout hotSongMonthView = (LinearLayout) findViewById(R.id.hot_song_month);
-        HotSongAdapter hotSongMonth = new HotSongAdapter(this,
-                DataManager.getInstance().getHomeDetail().getHotSongMonth());
-        AddHotSongLinearL(hotSongMonthView, hotSongMonth, params);
-        /*-------------------Song List---------------------------*/
-        LinearLayout hotSongView = (LinearLayout) findViewById(R.id.ll_home);
-        SongListAdapter hotSong = new SongListAdapter(this,
-                DataManager.getInstance().getHomeDetail().getHotSong());
-        AddSongListLinearL(hotSongView, hotSong);
-
-
+        fragmentManager.beginTransaction()
+                .replace(R.id.content_home, homeFragment)
+                .commit();
     }
 
     @Override
@@ -122,21 +101,32 @@ public class HomeActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        if (idPage == id) {
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+            return true;
+        }
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.nav_home) {
+            HomeFragment homeFragment = new HomeFragment();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.content_home, homeFragment)
+                    .commit();
+        } else if (id == R.id.nav_category) {
+            CategoryFragment categoryFragment = new CategoryFragment();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.content_home, categoryFragment)
+                    .commit();
+        } else if (id == R.id.nav_singer) {
 
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_top100) {
 
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
 
         }
-
+        idPage = id;
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
