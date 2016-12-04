@@ -114,19 +114,7 @@ namespace Music.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
-        //Get Singer Json
-        public ActionResult GetSinger(long? ID)
-        {
-            var entities = db.Singers;
-            if (ID != null)
-            {
-                var result = entities.Where(x => x.ID == ID).Select(x => new { x.ID, x.Name, x.Birthday, x.Nationality, x.Detail, x.ImagePath });
-                return Json(result, JsonRequestBehavior.AllowGet);
-            }
-            var allResult = entities.Select(x => new { x.ID, x.Name, x.Birthday, x.Nationality, x.Detail, x.ImagePath });
-            return Json(allResult, JsonRequestBehavior.AllowGet);
-        }
+                
 
         //Search Singer Action        
         public ActionResult Search(string singer)
@@ -138,6 +126,45 @@ namespace Music.Controllers
                 matches = matches.Where(x => x.Name.ToLower().Contains(singer.ToLower()));
             }
             return View("Index", matches);
+        }
+        public ActionResult getSinger()
+        {
+
+            IQueryable<Singer> entities = db.Singers;
+            var VietNam = entities.Where(x => x.CustomInt1 == 1).OrderBy(x => x.ID).Take(10).Select(x => new { x.ID, x.Name, x.ImagePath });
+            var AuMy = entities.Where(x => x.CustomInt1 == 2).OrderBy(x => x.ID).Take(10).Select(x => new { x.ID, x.Name, x.ImagePath });
+            var ChauA = entities.Where(x => x.CustomInt1 == 3).OrderBy(x => x.ID).Take(10).Select(x => new { x.ID, x.Name, x.ImagePath });
+            var HoaTau = entities.Where(x => x.CustomInt1 == 4).OrderBy(x => x.ID).Take(10).Select(x => new { x.ID, x.Name, x.ImagePath });
+            return Json(new { VietNam, AuMy, ChauA, HoaTau }, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult getSingerVN(int page) 
+        {
+
+            IQueryable<Singer> entities = db.Singers;
+            var VietNam = entities.Where(x=> x.CustomInt1 ==1).OrderBy(x =>x.ID).Skip(10*page).Take(10).Select(x => new { x.ID, x.Name, x.ImagePath});
+            return Json(new { VietNam }, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult getSingerAuMy(int page)
+        {
+
+            IQueryable<Singer> entities = db.Singers;
+            var AuMy = entities.Where(x => x.CustomInt1 == 2).OrderBy(x => x.ID).Skip(10 * page).Take(10).Select(x => new { x.ID, x.Name, x.ImagePath });
+            return Json(new { AuMy }, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult getSingerChauA(int page)
+        {
+
+            IQueryable<Singer> entities = db.Singers;
+            var ChauA = entities.Where(x => x.CustomInt1 == 3).OrderBy(x => x.ID).Skip(10 * page).Take(10).Select(x => new { x.ID, x.Name, x.ImagePath });
+            return Json(new { ChauA }, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult getSingerHoaTau(int page)
+        {
+
+            IQueryable<Singer> entities = db.Singers;
+            var HoaTau = entities.Where(x => x.CustomInt1 == 4).OrderBy(x => x.ID).Skip(10 * page).Take(10).Select(x => new { x.ID, x.Name, x.ImagePath });
+            return Json(new { HoaTau }, JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)

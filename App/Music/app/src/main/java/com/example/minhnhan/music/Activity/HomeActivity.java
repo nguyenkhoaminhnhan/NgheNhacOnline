@@ -30,6 +30,8 @@ public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private FragmentManager fragmentManager = getSupportFragmentManager();
+    private HomeFragment homeFragment;
+    private CategoryFragment categoryFragment;
     private int idPage;
 
     @Override
@@ -38,15 +40,6 @@ public class HomeActivity extends AppCompatActivity
         setContentView(R.layout.activity_home);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -57,7 +50,7 @@ public class HomeActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        HomeFragment homeFragment = new HomeFragment();
+        homeFragment = new HomeFragment();
 
         fragmentManager.beginTransaction()
                 .replace(R.id.content_home, homeFragment)
@@ -107,25 +100,33 @@ public class HomeActivity extends AppCompatActivity
             return true;
         }
 
-        if (id == R.id.nav_home) {
-            HomeFragment homeFragment = new HomeFragment();
-            fragmentManager.beginTransaction()
-                    .replace(R.id.content_home, homeFragment)
-                    .commit();
-        } else if (id == R.id.nav_category) {
-            CategoryFragment categoryFragment = new CategoryFragment();
-            fragmentManager.beginTransaction()
-                    .replace(R.id.content_home, categoryFragment)
-                    .commit();
-        } else if (id == R.id.nav_singer) {
-
-        } else if (id == R.id.nav_top100) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        switch (id) {
+            case R.id.nav_home:
+                if (homeFragment == null) {
+                    homeFragment = new HomeFragment();
+                }
+                fragmentManager.beginTransaction()
+                        .replace(R.id.content_home, homeFragment)
+                        .commit();
+                break;
+            case R.id.nav_category:
+                if (categoryFragment == null) {
+                    categoryFragment = new CategoryFragment();
+                }
+                fragmentManager.beginTransaction()
+                        .replace(R.id.content_home, categoryFragment)
+                        .commit();
+                break;
+            case R.id.nav_singer:
+                break;
+            case R.id.nav_top100:
+                break;
+            case R.id.nav_share:
+                break;
+            case R.id.nav_send:
+                break;
         }
+
         idPage = id;
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

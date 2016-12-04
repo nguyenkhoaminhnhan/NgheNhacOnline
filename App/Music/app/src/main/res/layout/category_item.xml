@@ -9,6 +9,7 @@
 
     <ImageView
         android:id="@+id/category_image"
+        android:scaleType="fitXY"
         android:layout_width="110dp"
         android:layout_height="110dp" />
 

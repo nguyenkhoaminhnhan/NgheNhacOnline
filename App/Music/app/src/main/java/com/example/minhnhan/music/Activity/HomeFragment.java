@@ -15,6 +15,7 @@ import com.example.minhnhan.music.Adapter.MySlideAdapter;
 import com.example.minhnhan.music.Adapter.SongListAdapter;
 import com.example.minhnhan.music.Model.Async.Data.DataManager;
 import com.example.minhnhan.music.R;
+import com.example.minhnhan.music.Utils.DepthPageTransformer;
 
 import static com.example.minhnhan.music.Utils.Utils.AddHotSongLinearL;
 import static com.example.minhnhan.music.Utils.Utils.AddSongListLinearL;
@@ -47,6 +48,7 @@ public class HomeFragment extends Fragment {
         MySlideAdapter showCase = new MySlideAdapter(manager,
                 DataManager.getInstance().getHomeDetail().getShowCase());
         ViewPager showCasePager = (ViewPager) rootView.findViewById(R.id.show_case);
+        showCasePager.setPageTransformer(true, new DepthPageTransformer());
         showCasePager.setAdapter(showCase);
         /*-------------------Hot Song Week---------------------------*/
         LinearLayout hotSongWeekView = (LinearLayout) rootView.findViewById(R.id.hot_song_week);

@@ -139,6 +139,15 @@ namespace Music.Controllers
             }
             return View("Index", matches);
         }
+        public ActionResult GetCategory()
+        {
+            var entities = db.Categories;
+            var VietNam = entities.Where(x => x.Detail.Contains("Việt Nam")).Select(x => new { x.ID, x.Name, x.ImagePath});
+            var AuMy = entities.Where(x => x.Detail.Contains("Âu Mỹ")).Select(x => new { x.ID, x.Name, x.ImagePath });
+            var ChauA = entities.Where(x => x.Detail.Contains("Châu Á")).Select(x => new { x.ID, x.Name, x.ImagePath });
+            var KhongLoi = entities.Where(x => x.Detail.Contains("Không Lời")).Select(x => new { x.ID, x.Name, x.ImagePath });
+            return Json(new {VietNam, AuMy, ChauA, KhongLoi }, JsonRequestBehavior.AllowGet);
+        }
 
         protected override void Dispose(bool disposing)
         {
