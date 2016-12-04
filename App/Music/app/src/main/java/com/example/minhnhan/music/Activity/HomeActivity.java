@@ -32,6 +32,7 @@ public class HomeActivity extends AppCompatActivity
     private FragmentManager fragmentManager = getSupportFragmentManager();
     private HomeFragment homeFragment;
     private CategoryFragment categoryFragment;
+    private SingerFragment singerFragment;
     private int idPage;
 
     @Override
@@ -55,6 +56,7 @@ public class HomeActivity extends AppCompatActivity
         fragmentManager.beginTransaction()
                 .replace(R.id.content_home, homeFragment)
                 .commit();
+        this.setTitle("Trang Chủ");
     }
 
     @Override
@@ -108,6 +110,7 @@ public class HomeActivity extends AppCompatActivity
                 fragmentManager.beginTransaction()
                         .replace(R.id.content_home, homeFragment)
                         .commit();
+                this.setTitle("Trang Chủ");
                 break;
             case R.id.nav_category:
                 if (categoryFragment == null) {
@@ -116,10 +119,18 @@ public class HomeActivity extends AppCompatActivity
                 fragmentManager.beginTransaction()
                         .replace(R.id.content_home, categoryFragment)
                         .commit();
+                this.setTitle("Thể Loại");
                 break;
             case R.id.nav_singer:
+                if (singerFragment == null) {
+                    singerFragment = new SingerFragment();
+                }
+                fragmentManager.beginTransaction()
+                        .replace(R.id.content_home, singerFragment)
+                        .commit();
+                this.setTitle("Ca Sĩ");
                 break;
-            case R.id.nav_top100:
+            case R.id.nav_album:
                 break;
             case R.id.nav_share:
                 break;
