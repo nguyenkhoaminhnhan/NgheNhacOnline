@@ -22,7 +22,7 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 public class ScreenSlidePageFragment extends Fragment {
     public static final String ARG_PAGE = "page";
 
-    public int pageID ;
+    public int pageID;
     public Song data;
 
 
@@ -37,10 +37,11 @@ public class ScreenSlidePageFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.swip_layout, container,
                 false);
-        ImageView imageView = (ImageView) rootView.findViewById(R.id.image_view);
-        TextView textView = (TextView)rootView.findViewById(R.id.slide_song_name);
-
-        textView.setText(data.name);
+        ImageView songImage = (ImageView) rootView.findViewById(R.id.image_view);
+        TextView songName = (TextView) rootView.findViewById(R.id.slide_song_name);
+        songName.setText(data.name);
+        TextView singerName = (TextView) rootView.findViewById(R.id.slide_singer_name);
+        singerName.setText(data.singer);
 
         DisplayImageOptions options = new DisplayImageOptions.Builder()
                 .showImageOnLoading(R.drawable.ic_stub)
@@ -51,7 +52,7 @@ public class ScreenSlidePageFragment extends Fragment {
 
         ImageLoader imageLoader = ImageLoader.getInstance();
         imageLoader.init(ImageLoaderConfiguration.createDefault(this.getContext()));
-        imageLoader.displayImage(data.getImagePath(), imageView, options, null);
+        imageLoader.displayImage(data.getImagePath(), songImage, options, null);
         return rootView;
     }
 }
