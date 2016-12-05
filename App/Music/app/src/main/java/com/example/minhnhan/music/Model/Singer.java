@@ -9,11 +9,15 @@ import org.json.JSONObject;
 public class Singer {
     public final String ID = "ID";
     public final String NAME = "Name";
+    public final String BIRTHDAY = "Birthday";
+    public final String NATION = "Nationality";
     public final String IMAGE_PATH = "ImagePath";
     public final String DETAIL = "Detail";
 
     private long id;
     public String name;
+    public String birthday;
+    public String nation;
     private String imagePath;
     public String detail;
 
@@ -23,6 +27,10 @@ public class Singer {
                 id = Long.parseLong(object.getString(ID));
             if (object.has(NAME))
                 name = object.getString(NAME);
+            if (object.has(BIRTHDAY))
+                birthday = object.getString(BIRTHDAY);
+            if (object.has(NATION))
+                nation = object.getString(NATION);
             if (object.has(NAME))
                 name = object.getString(NAME);
             if (object.has(IMAGE_PATH))

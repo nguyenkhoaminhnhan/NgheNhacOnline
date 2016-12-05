@@ -1,6 +1,7 @@
 package com.example.minhnhan.music.Model.Async.Data;
 
 
+import com.example.minhnhan.music.Model.Page.AlbumPage;
 import com.example.minhnhan.music.Model.Page.CategoryPage;
 import com.example.minhnhan.music.Model.Page.HomePage;
 import com.example.minhnhan.music.Model.Page.SingerPage;
@@ -21,7 +22,7 @@ public class DataManager {
     private HomePage homePage;
     private CategoryPage categoryPage;
     private SingerPage singerPage;
-
+    private AlbumPage albumPage;
 
     public static DataManager getInstance() {
         if (instance == null)
@@ -66,5 +67,13 @@ public class DataManager {
 
     public void setSingerPage(SingerPage singerPage) {
         this.singerPage = singerPage;
+    }
+
+    public AlbumPage getAlbumPage() {
+        return albumPage;
+    }
+
+    public void setAlbumPage(AlbumPage albumPage) {
+        this.albumPage = albumPage;
     }
 }

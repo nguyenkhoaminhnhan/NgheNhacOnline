@@ -30,9 +30,7 @@ public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private FragmentManager fragmentManager = getSupportFragmentManager();
-    private HomeFragment homeFragment;
-    private CategoryFragment categoryFragment;
-    private SingerFragment singerFragment;
+    HomeFragment homeFragment;
     private int idPage;
 
     @Override
@@ -104,33 +102,32 @@ public class HomeActivity extends AppCompatActivity
 
         switch (id) {
             case R.id.nav_home:
-                if (homeFragment == null) {
-                    homeFragment = new HomeFragment();
-                }
+                homeFragment = new HomeFragment();
                 fragmentManager.beginTransaction()
                         .replace(R.id.content_home, homeFragment)
                         .commit();
                 this.setTitle("Trang Chủ");
                 break;
             case R.id.nav_category:
-                if (categoryFragment == null) {
-                    categoryFragment = new CategoryFragment();
-                }
+                CategoryFragment categoryFragment = new CategoryFragment();
                 fragmentManager.beginTransaction()
                         .replace(R.id.content_home, categoryFragment)
                         .commit();
                 this.setTitle("Thể Loại");
                 break;
             case R.id.nav_singer:
-                if (singerFragment == null) {
-                    singerFragment = new SingerFragment();
-                }
+                SingerFragment singerFragment = new SingerFragment();
                 fragmentManager.beginTransaction()
                         .replace(R.id.content_home, singerFragment)
                         .commit();
                 this.setTitle("Ca Sĩ");
                 break;
             case R.id.nav_album:
+                AlbumFragment albumFragment = new AlbumFragment();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.content_home, albumFragment)
+                        .commit();
+                this.setTitle("Album");
                 break;
             case R.id.nav_share:
                 break;
