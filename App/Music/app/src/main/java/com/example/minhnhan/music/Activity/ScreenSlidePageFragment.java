@@ -1,5 +1,6 @@
 package com.example.minhnhan.music.Activity;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -9,11 +10,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.minhnhan.music.Model.Async.AsyncListener;
+import com.example.minhnhan.music.Model.Async.AsyncPlaySongPage;
 import com.example.minhnhan.music.Model.Song;
 import com.example.minhnhan.music.R;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+
+import static com.example.minhnhan.music.Utils.Constants.GET_TO_PLAY;
 
 /**
  * Created by Minh Nhan on 11/23/2016.
@@ -22,14 +27,14 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 public class ScreenSlidePageFragment extends Fragment {
     public static final String ARG_PAGE = "page";
 
-    public int pageID;
+    public long songID;
     public Song data;
 
 
-    public ScreenSlidePageFragment(int position, Song data) {
+    public ScreenSlidePageFragment(long songID, Song data) {
         this.data = data;
 
-        pageID = position;
+        this.songID = songID;
     }
 
     @Override
@@ -53,6 +58,21 @@ public class ScreenSlidePageFragment extends Fragment {
         ImageLoader imageLoader = ImageLoader.getInstance();
         imageLoader.init(ImageLoaderConfiguration.createDefault(this.getContext()));
         imageLoader.displayImage(data.getImagePath(), songImage, options, null);
+
+        rootView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AsyncPlaySongPage asyncPlaySongPage = new AsyncPlaySongPage(new AsyncListener() {
+                    @Override
+                    public void onAsyncComplete() {
+                        Intent i = new Intent(getActivity(), FullScreenPlayActivity.class);
+                        startActivity(i);
+                    }
+                });
+                String link = GET_TO_PLAY + songID;
+                asyncPlaySongPage.execute(link);
+            }
+        });
         return rootView;
     }
 }

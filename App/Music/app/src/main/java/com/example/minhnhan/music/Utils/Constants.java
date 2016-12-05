@@ -11,6 +11,7 @@ public class Constants {
     public static final String GET_CATEGORY = DOMAIN + "category/getcategory";
     public static final String GET_SINGER = DOMAIN + "singer/getsinger";
     public static final String GET_ALBUM = DOMAIN + "album/getalbum";
+    public static final String GET_TO_PLAY = DOMAIN + "song/gettoplay?id=";
 
     // params
     public static final String Song_URL = "songUrl";

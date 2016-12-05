@@ -23,6 +23,7 @@ public class DataManager {
     private CategoryPage categoryPage;
     private SingerPage singerPage;
     private AlbumPage albumPage;
+    private Song playSong;
 
     public static DataManager getInstance() {
         if (instance == null)
@@ -75,5 +76,13 @@ public class DataManager {
 
     public void setAlbumPage(AlbumPage albumPage) {
         this.albumPage = albumPage;
+    }
+
+    public Song getPlaySong() {
+        return playSong;
+    }
+
+    public void setPlaySong(Song playSong) {
+        this.playSong = playSong;
     }
 }
