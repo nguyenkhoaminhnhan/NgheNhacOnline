@@ -11,12 +11,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.minhnhan.music.Model.Async.AsyncListener;
-import com.example.minhnhan.music.Model.Async.AsyncPlaySongPage;
+import com.example.minhnhan.music.Model.Async.AsyncPlaySong;
+import com.example.minhnhan.music.Model.Async.Data.DataManager;
 import com.example.minhnhan.music.Model.Song;
 import com.example.minhnhan.music.R;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+
+import java.util.ArrayList;
 
 import static com.example.minhnhan.music.Utils.Constants.GET_TO_PLAY;
 
@@ -62,15 +65,10 @@ public class ScreenSlidePageFragment extends Fragment {
         rootView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AsyncPlaySongPage asyncPlaySongPage = new AsyncPlaySongPage(new AsyncListener() {
-                    @Override
-                    public void onAsyncComplete() {
-                        Intent i = new Intent(getActivity(), FullScreenPlayActivity.class);
-                        startActivity(i);
-                    }
-                });
-                String link = GET_TO_PLAY + songID;
-                asyncPlaySongPage.execute(link);
+
+                DataManager.getInstance().setPlayList(data);
+                Intent i = new Intent(getActivity(),FullScreenPlayActivity.class);
+                startActivity(i);
             }
         });
         return rootView;

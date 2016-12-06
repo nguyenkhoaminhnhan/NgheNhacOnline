@@ -17,11 +17,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
-public class AsyncPlaySongPage extends AsyncTask<String, String, String> {
+public class AsyncPlaySong extends AsyncTask<String, String, String> {
     private AsyncListener listener;
 
-    public AsyncPlaySongPage(AsyncListener listener) {
+    public AsyncPlaySong(AsyncListener listener) {
         this.listener = listener;
     }
 
@@ -39,8 +41,8 @@ public class AsyncPlaySongPage extends AsyncTask<String, String, String> {
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
         try {
-            JSONArray object = new JSONArray(result);
-            DataManager.getInstance().setPlaySong(new Song(object.getJSONObject(0)));
+            JSONArray objectList = new JSONArray(result);
+            DataManager.getInstance().setPlayList(new Song(objectList.getJSONObject(0)));
         } catch (JSONException e) {
             e.printStackTrace();
         }

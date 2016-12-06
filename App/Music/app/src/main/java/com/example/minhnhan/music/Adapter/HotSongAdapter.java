@@ -1,6 +1,7 @@
 package com.example.minhnhan.music.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.minhnhan.music.Activity.FullScreenPlayActivity;
+import com.example.minhnhan.music.Model.Async.Data.DataManager;
 import com.example.minhnhan.music.Model.Song;
 import com.example.minhnhan.music.R;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -57,7 +60,7 @@ public class HotSongAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
         if (convertView == null) {
             convertView = mInflater.inflate(R.layout.hot_song_item, parent, false);
@@ -76,6 +79,14 @@ public class HotSongAdapter extends BaseAdapter {
         ImageLoader imageLoader = ImageLoader.getInstance();
         imageLoader.init(ImageLoaderConfiguration.createDefault(context));
         imageLoader.displayImage(item.getImagePath(), holder.image, options, null);
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DataManager.getInstance().setPlayList(data.get(position));
+                Intent i = new Intent(context,FullScreenPlayActivity.class);
+                context.startActivity(i);
+            }
+        });
         return convertView;
     }
 

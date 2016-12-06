@@ -55,6 +55,7 @@ public class HomeFragment extends Fragment {
         HotSongAdapter hotSongWeek = new HotSongAdapter(getActivity(),
                 DataManager.getInstance().getHomeDetail().getHotSongWeek());
         AddHotSongLinearL(hotSongWeekView, hotSongWeek, params);
+
         /*-------------------Hot Song Month---------------------------*/
         LinearLayout hotSongMonthView = (LinearLayout) rootView.findViewById(R.id.hot_song_month);
         HotSongAdapter hotSongMonth = new HotSongAdapter(getActivity(),
