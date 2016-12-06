@@ -7,23 +7,20 @@ package com.example.minhnhan.music.Model.Async;
 
 import android.os.AsyncTask;
 
-import com.example.minhnhan.music.Model.Async.Data.DataManager;
 import com.example.minhnhan.music.Model.Async.Data.DataServices;
-import com.example.minhnhan.music.Model.Page.SingerPage;
+import com.example.minhnhan.music.Model.Async.Data.MediaManager;
 import com.example.minhnhan.music.Model.Song;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class AsyncPlaySong extends AsyncTask<String, String, String> {
+public class AsyncAlbumSong extends AsyncTask<String, String, String> {
     private AsyncListener listener;
 
-    public AsyncPlaySong(AsyncListener listener) {
+    public AsyncAlbumSong(AsyncListener listener) {
         this.listener = listener;
     }
 
@@ -42,7 +39,11 @@ public class AsyncPlaySong extends AsyncTask<String, String, String> {
         super.onPostExecute(result);
         try {
             JSONArray objectList = new JSONArray(result);
-            DataManager.getInstance().setPlayList(new Song(objectList.getJSONObject(0)));
+            ArrayList<Song> albumSongs = new ArrayList<>();
+            for (int i = 0; i < objectList.length(); i++) {
+                albumSongs.add(new Song(objectList.getJSONObject(i)));
+            }
+            MediaManager.getInstance().setPlayList(albumSongs);
         } catch (JSONException e) {
             e.printStackTrace();
         }

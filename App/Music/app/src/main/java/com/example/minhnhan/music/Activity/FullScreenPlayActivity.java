@@ -7,16 +7,13 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import com.example.minhnhan.music.Model.Async.AsyncListener;
-import com.example.minhnhan.music.Model.Async.AsyncPlaySong;
 import com.example.minhnhan.music.Model.Async.Data.DataManager;
+import com.example.minhnhan.music.Model.Async.Data.MediaManager;
 import com.example.minhnhan.music.Model.Song;
 import com.example.minhnhan.music.R;
-import com.example.minhnhan.music.Utils.Utils;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -26,13 +23,10 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
-import static com.example.minhnhan.music.Utils.Constants.GET_TO_PLAY;
-
 public class FullScreenPlayActivity extends AppCompatActivity {
 
     private int currentPlayID = 0;
 
-    private ProgressBar playLoading;
     private ArrayList<Song> data;
     private Song playingSong;
     private TextView songName;
@@ -67,20 +61,48 @@ public class FullScreenPlayActivity extends AppCompatActivity {
         realTime = (TextView) findViewById(R.id.real_time);
         endTime = (TextView) findViewById(R.id.end_time);
         seekBar = (SeekBar) findViewById(R.id.seekBar1);
-        playLoading = (ProgressBar) findViewById(R.id.play_loading);
+
+        options = new DisplayImageOptions.Builder()
+                .showImageOnLoading(R.drawable.ic_stub)
+                .showImageForEmptyUri(R.drawable.ic_empty)
+                .showImageOnFail(R.drawable.default_image).cacheInMemory(true)
+                .cacheOnDisk(true).considerExifParams(true)
+                .bitmapConfig(Bitmap.Config.RGB_565).build();
         /*---------------------set playing song--------------------------------------*/
-        data = DataManager.getInstance().getPlayList();
-        AsyncPlaySong asyncPlaySong = new AsyncPlaySong(new AsyncListener() {
+        data = MediaManager.getInstance().getPlayList();
+        playingSong = data.get(currentPlayID);
+        MediaManager.getInstance().setPlayingSong(playingSong);
+        newMediaPlayer();
+
+        nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onAsyncComplete() {
-                playingSong = data.get(currentPlayID);
-                newMediaPlayer();
-                playLoading.setVisibility(View.GONE);
+            public void onClick(View v) {
+                currentPlayID++;
+                if (currentPlayID >= data.size())
+                    currentPlayID--;
+                else {
+                    playingSong = data.get(currentPlayID);
+                    MediaManager.getInstance().setPlayingSong(playingSong);
+                    newMediaPlayer();
+                }
+                MediaManager.getInstance().setCurrentPlayID(currentPlayID);
             }
         });
-        asyncPlaySong.execute(GET_TO_PLAY + data.get(currentPlayID).getId());
-
-
+        preButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                data = MediaManager.getInstance().getPlayList();
+                currentPlayID--;
+                if (currentPlayID < 0)
+                    currentPlayID++;
+                else {
+                    playingSong = data.get(currentPlayID);
+                    MediaManager.getInstance().setPlayingSong(playingSong);
+                    newMediaPlayer();
+                }
+                MediaManager.getInstance().setCurrentPlayID(currentPlayID);
+            }
+        });
     }
 
     private void SeekBarProgressUpdater() {
@@ -100,7 +122,8 @@ public class FullScreenPlayActivity extends AppCompatActivity {
     private void killMediaPlayer() {
         if (mPlayer != null) {
             try {
-                mPlayer.release();
+                //mPlayer.release();
+                mPlayer.reset();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -114,22 +137,14 @@ public class FullScreenPlayActivity extends AppCompatActivity {
 
         songImage = (ImageView) findViewById(R.id.play_background_image);
 
-        options = new DisplayImageOptions.Builder()
-                .showImageOnLoading(R.drawable.ic_stub)
-                .showImageForEmptyUri(R.drawable.ic_empty)
-                .showImageOnFail(R.drawable.default_image).cacheInMemory(true)
-                .cacheOnDisk(true).considerExifParams(true)
-                .bitmapConfig(Bitmap.Config.RGB_565).build();
-
         ImageLoader imageLoader = ImageLoader.getInstance();
         imageLoader.init(ImageLoaderConfiguration.createDefault(this));
         imageLoader.displayImage(playingSong.getImagePath(), songImage, options, null);
 
+        mPlayer = MediaManager.getInstance().getmPlayer();
         killMediaPlayer();
-        mPlayer = new MediaPlayer();
         try {
             mPlayer.setDataSource(playingSong.getSourcePath());
-
             mPlayer.prepare();
         } catch (IOException e) {
             e.printStackTrace();

@@ -1,6 +1,7 @@
 package com.example.minhnhan.music.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,9 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.minhnhan.music.Activity.FullScreenPlayActivity;
+import com.example.minhnhan.music.Activity.HomeActivity;
+import com.example.minhnhan.music.Model.Async.Data.MediaManager;
 import com.example.minhnhan.music.Model.Song;
 import com.example.minhnhan.music.R;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -25,11 +29,11 @@ public class SongListAdapter extends BaseAdapter {
     public ArrayList<Song> data;
     private LayoutInflater mInflater;
     private DisplayImageOptions options;
-    private Context context;
+    private HomeActivity activity;
     private Song item;
 
-    public SongListAdapter(Context context, ArrayList<Song> data) {
-        mInflater = (LayoutInflater) context
+    public SongListAdapter(HomeActivity activity, ArrayList<Song> data) {
+        mInflater = (LayoutInflater) activity
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.data = data;
         options = new DisplayImageOptions.Builder()
@@ -38,7 +42,7 @@ public class SongListAdapter extends BaseAdapter {
                 .showImageOnFail(R.drawable.default_image).cacheInMemory(true)
                 .cacheOnDisk(true).considerExifParams(true)
                 .bitmapConfig(Bitmap.Config.RGB_565).build();
-        this.context = context;
+        this.activity = activity;
     }
 
     @Override
@@ -57,7 +61,7 @@ public class SongListAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
         if (convertView == null) {
             convertView = mInflater.inflate(R.layout.song_row, parent, false);
@@ -74,8 +78,17 @@ public class SongListAdapter extends BaseAdapter {
         holder.name.setText(item.name);
         holder.singer.setText(item.singer);
         ImageLoader imageLoader = ImageLoader.getInstance();
-        imageLoader.init(ImageLoaderConfiguration.createDefault(context));
+        imageLoader.init(ImageLoaderConfiguration.createDefault(activity));
         imageLoader.displayImage(item.getImagePath(), holder.image, options, null);
+
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MediaManager.getInstance().setOnSongToPlay(data.get(position));
+                Intent i = new Intent(activity, FullScreenPlayActivity.class);
+                activity.startActivityForResult(i, 11);
+            }
+        });
         return convertView;
     }
 

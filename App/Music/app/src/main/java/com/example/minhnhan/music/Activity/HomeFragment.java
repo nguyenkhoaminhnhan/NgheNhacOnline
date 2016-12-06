@@ -52,18 +52,18 @@ public class HomeFragment extends Fragment {
         showCasePager.setAdapter(showCase);
         /*-------------------Hot Song Week---------------------------*/
         LinearLayout hotSongWeekView = (LinearLayout) rootView.findViewById(R.id.hot_song_week);
-        HotSongAdapter hotSongWeek = new HotSongAdapter(getActivity(),
+        HotSongAdapter hotSongWeek = new HotSongAdapter((HomeActivity) getActivity(),
                 DataManager.getInstance().getHomeDetail().getHotSongWeek());
         AddHotSongLinearL(hotSongWeekView, hotSongWeek, params);
 
         /*-------------------Hot Song Month---------------------------*/
         LinearLayout hotSongMonthView = (LinearLayout) rootView.findViewById(R.id.hot_song_month);
-        HotSongAdapter hotSongMonth = new HotSongAdapter(getActivity(),
+        HotSongAdapter hotSongMonth = new HotSongAdapter((HomeActivity) getActivity(),
                 DataManager.getInstance().getHomeDetail().getHotSongMonth());
         AddHotSongLinearL(hotSongMonthView, hotSongMonth, params);
         /*-------------------Song List---------------------------*/
         LinearLayout hotSongView = (LinearLayout) rootView.findViewById(R.id.popular_container);
-        SongListAdapter hotSong = new SongListAdapter(getActivity(),
+        SongListAdapter hotSong = new SongListAdapter((HomeActivity)getActivity(),
                 DataManager.getInstance().getHomeDetail().getHotSong());
         AddSongListLinearL(hotSongView, hotSong);
         return rootView;

@@ -70,16 +70,16 @@ public class AlbumFragment extends Fragment {
         RecyclerView.LayoutManager khongLoiLayoutManager = new GridLayoutManager(getContext(), 3);
         khongLoiView.setLayoutManager(khongLoiLayoutManager);
 
-        AlbumApdater vietNamAdapter = new AlbumApdater(getContext(), data.getVietNam());
+        AlbumApdater vietNamAdapter = new AlbumApdater((HomeActivity) getActivity(), data.getVietNam());
         vietNamView.setAdapter(vietNamAdapter);
 
-        AlbumApdater auMyAdapter = new AlbumApdater(getContext(), data.getAuMy());
+        AlbumApdater auMyAdapter = new AlbumApdater((HomeActivity) getActivity(), data.getAuMy());
         auMyView.setAdapter(auMyAdapter);
 
-        AlbumApdater ChauAAdapter = new AlbumApdater(getContext(), data.getChauA());
+        AlbumApdater ChauAAdapter = new AlbumApdater((HomeActivity) getActivity(), data.getChauA());
         chauAView.setAdapter(ChauAAdapter);
 
-        AlbumApdater khongLoiAdapter = new AlbumApdater(getContext(), data.getKhongLoi());
+        AlbumApdater khongLoiAdapter = new AlbumApdater((HomeActivity) getActivity(), data.getKhongLoi());
         khongLoiView.setAdapter(khongLoiAdapter);
         return rootView;
     }

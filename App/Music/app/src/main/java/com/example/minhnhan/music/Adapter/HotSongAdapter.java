@@ -11,7 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.minhnhan.music.Activity.FullScreenPlayActivity;
-import com.example.minhnhan.music.Model.Async.Data.DataManager;
+import com.example.minhnhan.music.Activity.HomeActivity;
+import com.example.minhnhan.music.Model.Async.Data.MediaManager;
 import com.example.minhnhan.music.Model.Song;
 import com.example.minhnhan.music.R;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -28,11 +29,11 @@ public class HotSongAdapter extends BaseAdapter {
     public ArrayList<Song> data;
     private LayoutInflater mInflater;
     private DisplayImageOptions options;
-    private Context context;
+    private HomeActivity activity;
     private Song item;
 
-    public HotSongAdapter(Context context, ArrayList<Song> data) {
-        mInflater = (LayoutInflater) context
+    public HotSongAdapter(HomeActivity activity, ArrayList<Song> data) {
+        mInflater = (LayoutInflater) activity
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.data = data;
         options = new DisplayImageOptions.Builder()
@@ -41,7 +42,7 @@ public class HotSongAdapter extends BaseAdapter {
                 .showImageOnFail(R.drawable.default_image).cacheInMemory(true)
                 .cacheOnDisk(true).considerExifParams(true)
                 .bitmapConfig(Bitmap.Config.RGB_565).build();
-        this.context = context;
+        this.activity = activity;
     }
 
     @Override
@@ -77,14 +78,14 @@ public class HotSongAdapter extends BaseAdapter {
         holder.name.setText(item.name);
         holder.singer.setText(item.singer);
         ImageLoader imageLoader = ImageLoader.getInstance();
-        imageLoader.init(ImageLoaderConfiguration.createDefault(context));
+        imageLoader.init(ImageLoaderConfiguration.createDefault(activity));
         imageLoader.displayImage(item.getImagePath(), holder.image, options, null);
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DataManager.getInstance().setPlayList(data.get(position));
-                Intent i = new Intent(context,FullScreenPlayActivity.class);
-                context.startActivity(i);
+                MediaManager.getInstance().setOnSongToPlay(data.get(position));
+                Intent i = new Intent(activity, FullScreenPlayActivity.class);
+                activity.startActivityForResult(i, 11);
             }
         });
         return convertView;

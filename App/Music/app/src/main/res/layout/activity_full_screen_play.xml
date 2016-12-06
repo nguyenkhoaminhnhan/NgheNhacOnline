@@ -26,7 +26,6 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="155dp"
-            android:text="Song Name"
             android:textColor="#fff"
             android:textSize="25dp"
             android:gravity="center"
@@ -39,7 +38,6 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true"
             android:layout_marginBottom="125dp"
-            android:text="Ca sĩ"
             android:textColor="#fff"
             android:gravity="center"
             android:textSize="18dp" />
@@ -67,8 +65,8 @@
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="16dp"
                 android:gravity="center_vertical"
+                android:text="00:00"
                 android:maxLines="1"
-                android:text="start"
                 android:textColor="@android:color/white" />
 
             <SeekBar
@@ -91,7 +89,7 @@
                 android:layout_marginEnd="16dp"
                 android:gravity="center_vertical"
                 android:maxLines="1"
-                android:text="end"
+                android:text="00:00"
                 android:textColor="@android:color/white" />
 
         </RelativeLayout>
@@ -126,12 +124,4 @@
                 android:src="@drawable/ic_skip_next_white_48dp" />
         </LinearLayout>
     </LinearLayout>
-    <ProgressBar
-        android:id="@+id/play_loading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="200dp"
-        android:indeterminate="true" />
 </RelativeLayout>

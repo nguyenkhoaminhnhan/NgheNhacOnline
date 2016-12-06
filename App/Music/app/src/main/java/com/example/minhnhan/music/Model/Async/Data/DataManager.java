@@ -24,8 +24,6 @@ public class DataManager {
     private CategoryPage categoryPage;
     private SingerPage singerPage;
     private AlbumPage albumPage;
-    private Song playingSong;
-    private ArrayList<Song> playList = new ArrayList<>();
 
     public static DataManager getInstance() {
         if (instance == null)
@@ -80,26 +78,4 @@ public class DataManager {
         this.albumPage = albumPage;
     }
 
-
-    public ArrayList<Song> getPlayList() {
-        return playList;
-    }
-
-    public void setPlayList(ArrayList<Song> playList) {
-        this.playList.clear();
-        this.playList = playList;
-    }
-
-    public void setPlayList(Song song) {
-        this.playList.clear();
-        playList.add(song);
-    }
-
-    public Song getPlayingSong() {
-        return playingSong;
-    }
-
-    public void setPlayingSong(Song playingSong) {
-        this.playingSong = playingSong;
-    }
 }

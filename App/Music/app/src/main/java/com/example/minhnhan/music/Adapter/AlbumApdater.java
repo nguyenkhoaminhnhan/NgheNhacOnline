@@ -1,6 +1,5 @@
 package com.example.minhnhan.music.Adapter;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.minhnhan.music.Activity.HomeActivity;
 import com.example.minhnhan.music.Model.Album;
 import com.example.minhnhan.music.R;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -24,12 +24,12 @@ import java.util.ArrayList;
 public class AlbumApdater extends RecyclerView.Adapter<AlbumApdater.ViewHolder> {
 
     private ArrayList<Album> data;
-    private Context context;
     private DisplayImageOptions options;
+    private HomeActivity activity;
 
-    public AlbumApdater(Context context, ArrayList<Album> data) {
+    public AlbumApdater(HomeActivity activity, ArrayList<Album> data) {
         this.data = data;
-        this.context = context;
+        this.activity = activity;
         options = new DisplayImageOptions.Builder()
                 .showImageOnLoading(R.drawable.ic_stub)
                 .showImageForEmptyUri(R.drawable.ic_empty)
@@ -51,8 +51,9 @@ public class AlbumApdater extends RecyclerView.Adapter<AlbumApdater.ViewHolder> 
         Album item = data.get(position);
         holder.AlbumName.setText(item.name);
         ImageLoader imageLoader = ImageLoader.getInstance();
-        imageLoader.init(ImageLoaderConfiguration.createDefault(context));
+        imageLoader.init(ImageLoaderConfiguration.createDefault(activity));
         imageLoader.displayImage(item.getImagePath(), holder.AlbumImage, options, null);
+
     }
 
     @Override
@@ -60,14 +61,21 @@ public class AlbumApdater extends RecyclerView.Adapter<AlbumApdater.ViewHolder> 
         return data == null ? 0 : data.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView AlbumName;
         public ImageView AlbumImage;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            AlbumImage = (ImageView)itemView.findViewById(R.id.album_image);
-            AlbumName = (TextView)itemView.findViewById(R.id.album_name);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    activity.playAlbum(data.get(position).id);
+                }
+            });
+            AlbumImage = (ImageView) itemView.findViewById(R.id.album_image);
+            AlbumName = (TextView) itemView.findViewById(R.id.album_name);
         }
     }
 }

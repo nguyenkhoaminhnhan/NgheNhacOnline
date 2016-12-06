@@ -1,15 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/content_home"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f2f2f2"
-    android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.minhnhan.music.Activity.HomeActivity"
     tools:showIn="@layout/app_bar_home">
 
+    <FrameLayout
+        android:id="@+id/content_home"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#f2f2f2"></FrameLayout>
 
-</LinearLayout>
+    <LinearLayout
+        android:id="@+id/pl_frame"
+        android:layout_width="match_parent"
+        android:layout_height="63dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_gravity="bottom"
+        android:background="#ffffff"
+        android:orientation="horizontal"
+        android:padding="5dp"
+        android:visibility="visible"
+        android:weightSum="1">
+
+        <ImageView
+            android:id="@+id/pl_image"
+            android:layout_width="55dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/default_image"
+            android:scaleType="centerCrop"
+            android:layout_weight="0.05" />
+
+        <LinearLayout
+            android:layout_width="105dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.84"
+            android:orientation="vertical"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:paddingLeft="10dp">
+
+            <TextView
+                android:id="@+id/pl_song_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="5.11"
+                android:textSize="17dp"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:textColor="#171d2e" />
+
+            <TextView
+                android:id="@+id/pl_singer_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="5.11"
+                android:ellipsize="end"
+                android:singleLine="true" />
+        </LinearLayout>
+
+
+        <ImageView
+            android:id="@+id/pl_prev"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:background="?selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_skip_previous_48dp_black" />
+
+        <ImageView
+            android:id="@+id/pl_play_pause"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:background="?selectableItemBackgroundBorderless"
+            android:src="@drawable/uamp_ic_play_arrow_48dp_black" />
+
+        <ImageView
+            android:id="@+id/pl_next"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:background="?selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_skip_next__48dp_black" />
+    </LinearLayout>
+</FrameLayout>
