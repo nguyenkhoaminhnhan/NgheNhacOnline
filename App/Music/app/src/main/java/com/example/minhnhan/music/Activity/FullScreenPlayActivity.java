@@ -10,25 +10,17 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import com.example.minhnhan.music.Model.Async.Data.DataManager;
 import com.example.minhnhan.music.Model.Async.Data.MediaManager;
-import com.example.minhnhan.music.Model.Song;
 import com.example.minhnhan.music.R;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
-import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 
 public class FullScreenPlayActivity extends AppCompatActivity {
 
-    private int currentPlayID = 0;
-
-    private ArrayList<Song> data;
-    private Song playingSong;
     private TextView songName;
     private TextView singerName;
     private TextView realTime;
@@ -68,39 +60,28 @@ public class FullScreenPlayActivity extends AppCompatActivity {
                 .showImageOnFail(R.drawable.default_image).cacheInMemory(true)
                 .cacheOnDisk(true).considerExifParams(true)
                 .bitmapConfig(Bitmap.Config.RGB_565).build();
+
         /*---------------------set playing song--------------------------------------*/
-        data = MediaManager.getInstance().getPlayList();
-        playingSong = data.get(currentPlayID);
-        MediaManager.getInstance().setPlayingSong(playingSong);
+
+        mPlayer = MediaManager.getInstance().getmPlayer();
+
+        MediaManager.getInstance().resetCurrent();
+        MediaManager.getInstance().play();
         newMediaPlayer();
+
 
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                currentPlayID++;
-                if (currentPlayID >= data.size())
-                    currentPlayID--;
-                else {
-                    playingSong = data.get(currentPlayID);
-                    MediaManager.getInstance().setPlayingSong(playingSong);
-                    newMediaPlayer();
-                }
-                MediaManager.getInstance().setCurrentPlayID(currentPlayID);
+                MediaManager.getInstance().next();
+                newMediaPlayer();
             }
         });
         preButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                data = MediaManager.getInstance().getPlayList();
-                currentPlayID--;
-                if (currentPlayID < 0)
-                    currentPlayID++;
-                else {
-                    playingSong = data.get(currentPlayID);
-                    MediaManager.getInstance().setPlayingSong(playingSong);
-                    newMediaPlayer();
-                }
-                MediaManager.getInstance().setCurrentPlayID(currentPlayID);
+                MediaManager.getInstance().prev();
+                newMediaPlayer();
             }
         });
     }
@@ -119,49 +100,44 @@ public class FullScreenPlayActivity extends AppCompatActivity {
         }
     }
 
-    private void killMediaPlayer() {
-        if (mPlayer != null) {
-            try {
-                //mPlayer.release();
-                mPlayer.reset();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
     private void newMediaPlayer() {
-
-        songName.setText(playingSong.name);
-        singerName.setText(playingSong.singer);
+        playButton.setImageResource(R.drawable.uamp_ic_pause_white_48dp);
+        songName.setText(MediaManager.getInstance().getPlayingSong().name);
+        singerName.setText(MediaManager.getInstance().getPlayingSong().singer);
 
         songImage = (ImageView) findViewById(R.id.play_background_image);
 
         ImageLoader imageLoader = ImageLoader.getInstance();
         imageLoader.init(ImageLoaderConfiguration.createDefault(this));
-        imageLoader.displayImage(playingSong.getImagePath(), songImage, options, null);
+        imageLoader.displayImage(MediaManager.getInstance().getPlayingSong().getImagePath(),
+                songImage, options, null);
 
-        mPlayer = MediaManager.getInstance().getmPlayer();
-        killMediaPlayer();
-        try {
-            mPlayer.setDataSource(playingSong.getSourcePath());
-            mPlayer.prepare();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         mediaFileLength = mPlayer.getDuration();
         seekBar.setMax(mediaFileLength);
         formatter = new SimpleDateFormat("mm:ss");
         endTime.setText(formatter.format(mediaFileLength));
+        SeekBarProgressUpdater();
 
         /*------------------Update play complete---------------------------------------*/
         mPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mp) {
-                playButton.setImageResource(R.drawable.uamp_ic_play_arrow_white_48dp);
-                seekBar.setProgress(0);
-                currentTime = 0;
-                realTime.setText(formatter.format(currentTime));
+                int currentPlayID = MediaManager.getInstance().getCurrentPlayID();
+                if (currentPlayID == MediaManager.getInstance().getDataSize() - 1) {
+                    playButton.setImageResource(R.drawable.uamp_ic_play_arrow_white_48dp);
+                    seekBar.setProgress(0);
+                    currentTime = 0;
+                    realTime.setText(formatter.format(currentTime));
+                    MediaManager.getInstance().resetCurrent();
+
+                } else {
+                    seekBar.setProgress(0);
+                    currentTime = 0;
+                    realTime.setText(formatter.format(currentTime));
+                    MediaManager.getInstance().next();
+                    newMediaPlayer();
+                }
+
             }
         });
 
@@ -176,7 +152,6 @@ public class FullScreenPlayActivity extends AppCompatActivity {
                     mPlayer.start();
                     playButton.setImageResource(R.drawable.uamp_ic_pause_white_48dp);
                 }
-                SeekBarProgressUpdater();
             }
         });
 
@@ -200,6 +175,5 @@ public class FullScreenPlayActivity extends AppCompatActivity {
 
             }
         });
-        playButton.performClick();
     }
 }

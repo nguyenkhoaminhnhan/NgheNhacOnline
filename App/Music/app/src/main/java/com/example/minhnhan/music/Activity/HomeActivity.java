@@ -48,11 +48,14 @@ public class HomeActivity extends AppCompatActivity
     private ImageView nextButton;
     private LinearLayout plFrame;
     private DisplayImageOptions options;
+    private ImageLoader imageLoader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        imageLoader = ImageLoader.getInstance();
+        imageLoader.init(ImageLoaderConfiguration.createDefault(this));
         songImage = (ImageView) findViewById(R.id.pl_image);
         plName = (TextView) findViewById(R.id.pl_song_name);
         plSinger = (TextView) findViewById(R.id.pl_singer_name);
@@ -82,6 +85,28 @@ public class HomeActivity extends AppCompatActivity
             }
         });
 
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MediaManager.getInstance().next();
+                imageLoader.displayImage(MediaManager.getInstance().getPlayingSong().getImagePath(),
+                        songImage, options, null);
+                plName.setText(MediaManager.getInstance().getPlayingSong().name);
+                plSinger.setText(MediaManager.getInstance().getPlayingSong().singer);
+
+            }
+        });
+        preButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MediaManager.getInstance().prev();
+                imageLoader.displayImage(MediaManager.getInstance().getPlayingSong().getImagePath(),
+                        songImage, options, null);
+                plName.setText(MediaManager.getInstance().getPlayingSong().name);
+                plSinger.setText(MediaManager.getInstance().getPlayingSong().singer);
+
+            }
+        });
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -195,8 +220,6 @@ public class HomeActivity extends AppCompatActivity
             MediaPlayer mPlayer = MediaManager.getInstance().getmPlayer();
 
             plFrame.setVisibility(View.VISIBLE);
-            ImageLoader imageLoader = ImageLoader.getInstance();
-            imageLoader.init(ImageLoaderConfiguration.createDefault(this));
             imageLoader.displayImage(MediaManager.getInstance().getPlayingSong().getImagePath(),
                     songImage, options, null);
             plName.setText(MediaManager.getInstance().getPlayingSong().name);

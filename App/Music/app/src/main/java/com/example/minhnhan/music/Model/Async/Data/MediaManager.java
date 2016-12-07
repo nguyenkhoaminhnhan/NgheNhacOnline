@@ -5,6 +5,7 @@ import android.media.MediaPlayer;
 
 import com.example.minhnhan.music.Model.Song;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 public class MediaManager {
     private static MediaManager instance;
     private MediaPlayer mPlayer;
-    private int currentPlayID;
+    private int currentPlayID = 0;
     private Song playingSong;
     private ArrayList<Song> playList = new ArrayList<>();
 
@@ -58,12 +59,68 @@ public class MediaManager {
         return playList;
     }
 
+    public int getDataSize(){return playList == null ? 0 : playList.size(); }
     public void setPlayList(ArrayList<Song> playList) {
         this.playList = playList;
+        currentPlayID = 0;
+        playingSong = playList.get(0);
+    }
+    public void playAgain() {
+        currentPlayID = 0;
+        playingSong = playList.get(0);
+        play();
+    }
+    public void resetCurrent(){
+        currentPlayID = 0;
+        playingSong = playList.get(0);
     }
 
     public void setOnSongToPlay(Song data) {
         playList.clear();
         playList.add(data);
+        currentPlayID = 0;
+        playingSong = playList.get(0);
+    }
+
+    public void prev() {
+        if (currentPlayID > 0) {
+            currentPlayID--;
+            playingSong = playList.get(currentPlayID);
+            play();
+        }
+    }
+
+    public void next() {
+        if (currentPlayID < playList.size() - 1) {
+            currentPlayID++;
+            playingSong = playList.get(currentPlayID);
+            play();
+            mPlayer.start();
+        }
+    }
+
+    public void pause() {
+        if (!mPlayer.isPlaying())
+            mPlayer.start();
+        else if (mPlayer.isPlaying())
+            mPlayer.pause();
+    }
+
+    public void play() {
+        if (mPlayer != null) {
+            try {
+                //mPlayer.release();
+                mPlayer.reset();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        try {
+            mPlayer.setDataSource(playingSong.getSourcePath());
+            mPlayer.prepare();
+            mPlayer.start();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
