@@ -129,7 +129,7 @@ namespace Music.Controllers
         }
 
         //Get Song Json
-        public ActionResult GetSong(long? ID)
+        public ActionResult GetToPlay(long? ID)
         {
             var entities = db.Songs;
             if (ID != null)
@@ -137,8 +137,7 @@ namespace Music.Controllers
                 var result = entities.Where(x => x.ID == ID).Select(x => new { x.ID, x.Name, x.ImagePath, x.SourcePath, Album = x.Album.Name, Musician = x.Musician.Name, Singer = x.Singer.Name, x.Year, x.Format, x.BitRate, x.Tag, x.Rating });
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
-            var allResult = entities.Select(x => new { x.ID, x.Name, x.ImagePath, x.SourcePath, Album = x.Album.Name, Musician = x.Musician.Name, Singer=x.Singer.Name, x.Year, x.Format, x.BitRate, x.Tag, x.Rating });
-            return Json(allResult, JsonRequestBehavior.AllowGet);
+            return Json(new { }, JsonRequestBehavior.AllowGet);
         }
 
         //
@@ -169,16 +168,22 @@ namespace Music.Controllers
         public ActionResult GetShowCase()
         {
             IQueryable<Song> entities = db.Songs;
-            var showCase = entities.OrderByDescending(x => x.ID).Take(5).Select(x => new { x.ID, x.Name, x.ImagePath, Album = x.Album.Name, Singer = x.Singer.Name, x.Year, x.Format, x.BitRate, x.Tag, x.Rating });
+            var showCase = entities.OrderByDescending(x => x.ID).Take(5).Select(x => new { x.ID, x.Name, x.ImagePath, Album = x.Album.Name, Singer = x.Singer.Name, x.SourcePath });
 
-            var hotSong = entities.OrderByDescending(x => x.Rating).Take(15).Select(x => new { x.ID, x.Name, x.ImagePath, Album = x.Album.Name, Singer = x.Singer.Name, x.Year, x.Format, x.BitRate, x.Tag, x.Rating });
+            var hotSong = entities.OrderByDescending(x => x.Rating).Take(15).Select(x => new { x.ID, x.Name, x.ImagePath, Album = x.Album.Name, Singer = x.Singer.Name, x.SourcePath });
 
-            var hotSongWeek = entities.OrderByDescending(x => x.CustomInt1).Take(10).Select(x => new { x.ID, x.Name, x.ImagePath, Album = x.Album.Name, Singer = x.Singer.Name, x.Year, x.Format, x.BitRate, x.Tag, x.Rating });
+            var hotSongWeek = entities.OrderByDescending(x => x.CustomInt1).Take(10).Select(x => new { x.ID, x.Name, x.ImagePath, Album = x.Album.Name, Singer = x.Singer.Name, x.SourcePath });
 
-            var hotSongMonth = entities.OrderByDescending(x => x.CustomInt2).Take(10).Select(x => new { x.ID, x.Name, x.ImagePath, Album = x.Album.Name, Singer = x.Singer.Name, x.Year, x.Format, x.BitRate, x.Tag, x.Rating });
+            var hotSongMonth = entities.OrderByDescending(x => x.CustomInt2).Take(10).Select(x => new { x.ID, x.Name, x.ImagePath, Album = x.Album.Name, Singer = x.Singer.Name, x.SourcePath });
 
             return Json(new { showCase, hotSong = hotSong, hotSongWeek, hotSongMonth }, JsonRequestBehavior.AllowGet);
 
+        }
+        public ActionResult GetSongByAlbum(long albumID)
+        {
+            var entities = db.Songs;
+            var result = entities.Where(x => x.Album_ID == albumID).Select(x => new { x.ID, x.Name, x.ImagePath, Album = x.Album.Name, Singer = x.Singer.Name, x.SourcePath});
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         //Search Song Action        

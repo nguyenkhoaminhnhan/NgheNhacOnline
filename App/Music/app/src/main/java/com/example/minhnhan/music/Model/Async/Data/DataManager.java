@@ -24,6 +24,7 @@ public class DataManager {
     private CategoryPage categoryPage;
     private SingerPage singerPage;
     private AlbumPage albumPage;
+    private ArrayList moreCat;
 
     public static DataManager getInstance() {
         if (instance == null)
@@ -78,4 +79,11 @@ public class DataManager {
         this.albumPage = albumPage;
     }
 
+    public ArrayList getMoreCat() {
+        return moreCat;
+    }
+
+    public void setMoreCat(ArrayList moreCat) {
+        this.moreCat = moreCat;
+    }
 }

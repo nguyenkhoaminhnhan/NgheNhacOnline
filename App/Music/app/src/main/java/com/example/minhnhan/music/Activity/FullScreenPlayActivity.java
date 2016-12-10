@@ -4,14 +4,20 @@ import android.graphics.Bitmap;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.example.minhnhan.music.Adapter.MyPlayListSlideAdapter;
+import com.example.minhnhan.music.Adapter.MySlideAdapter;
+import com.example.minhnhan.music.Model.Async.Data.DataManager;
 import com.example.minhnhan.music.Model.Async.Data.MediaManager;
 import com.example.minhnhan.music.R;
+import com.example.minhnhan.music.Utils.DepthPageTransformer;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -25,16 +31,14 @@ public class FullScreenPlayActivity extends AppCompatActivity {
     private TextView singerName;
     private TextView realTime;
     private TextView endTime;
-    private ImageView songImage;
     ImageView preButton;
     ImageView playButton;
     ImageView nextButton;
     SeekBar seekBar;
+    MyPlayListSlideAdapter playlist;
     private int currentTime;
     private int mediaFileLength;
     private DateFormat formatter;
-
-    private DisplayImageOptions options;
 
     private final Handler handler = new Handler();
 
@@ -54,14 +58,17 @@ public class FullScreenPlayActivity extends AppCompatActivity {
         endTime = (TextView) findViewById(R.id.end_time);
         seekBar = (SeekBar) findViewById(R.id.seekBar1);
 
-        options = new DisplayImageOptions.Builder()
-                .showImageOnLoading(R.drawable.ic_stub)
-                .showImageForEmptyUri(R.drawable.ic_empty)
-                .showImageOnFail(R.drawable.default_image).cacheInMemory(true)
-                .cacheOnDisk(true).considerExifParams(true)
-                .bitmapConfig(Bitmap.Config.RGB_565).build();
+        /*---------------------set adapter------------------------------------*/
+        FragmentManager manager = getSupportFragmentManager();
+        final MyPlayListSlideAdapter playlist = new MyPlayListSlideAdapter(manager,
+                MediaManager.getInstance().getPlayList(),
+                MediaManager.getInstance().getPlayingSong());
+        /*---------------------set pager--------------------------------------*/
+        ViewPager bodyPlay = (ViewPager) findViewById(R.id.body_play);
+        bodyPlay.setPageTransformer(true, new DepthPageTransformer());
 
-        /*---------------------set playing song--------------------------------------*/
+
+        bodyPlay.setAdapter(playlist);
 
         mPlayer = MediaManager.getInstance().getmPlayer();
 
@@ -75,6 +82,7 @@ public class FullScreenPlayActivity extends AppCompatActivity {
             public void onClick(View v) {
                 MediaManager.getInstance().next();
                 newMediaPlayer();
+                playlist.update();
             }
         });
         preButton.setOnClickListener(new View.OnClickListener() {
@@ -82,6 +90,7 @@ public class FullScreenPlayActivity extends AppCompatActivity {
             public void onClick(View v) {
                 MediaManager.getInstance().prev();
                 newMediaPlayer();
+                playlist.update();
             }
         });
     }
@@ -104,14 +113,6 @@ public class FullScreenPlayActivity extends AppCompatActivity {
         playButton.setImageResource(R.drawable.uamp_ic_pause_white_48dp);
         songName.setText(MediaManager.getInstance().getPlayingSong().name);
         singerName.setText(MediaManager.getInstance().getPlayingSong().singer);
-
-        songImage = (ImageView) findViewById(R.id.play_background_image);
-
-        ImageLoader imageLoader = ImageLoader.getInstance();
-        imageLoader.init(ImageLoaderConfiguration.createDefault(this));
-        imageLoader.displayImage(MediaManager.getInstance().getPlayingSong().getImagePath(),
-                songImage, options, null);
-
         mediaFileLength = mPlayer.getDuration();
         seekBar.setMax(mediaFileLength);
         formatter = new SimpleDateFormat("mm:ss");

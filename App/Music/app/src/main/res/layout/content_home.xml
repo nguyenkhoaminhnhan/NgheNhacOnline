@@ -11,8 +11,8 @@
     <FrameLayout
         android:id="@+id/content_home"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#f2f2f2"></FrameLayout>
+        android:layout_height="match_parent">
+    </FrameLayout>
 
     <LinearLayout
         android:id="@+id/pl_frame"
@@ -21,38 +21,38 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:layout_gravity="bottom"
-        android:background="#ffffff"
+        android:background="@drawable/playback_bgr"
         android:orientation="horizontal"
         android:padding="5dp"
-        android:visibility="visible"
+        android:visibility="invisible"
         android:weightSum="1">
 
         <ImageView
             android:id="@+id/pl_image"
             android:layout_width="55dp"
             android:layout_height="match_parent"
+            android:layout_weight="0.05"
             android:background="@drawable/default_image"
-            android:scaleType="centerCrop"
-            android:layout_weight="0.05" />
+            android:scaleType="fitXY" />
 
         <LinearLayout
             android:layout_width="105dp"
             android:layout_height="match_parent"
             android:layout_weight="0.84"
             android:orientation="vertical"
-            android:paddingTop="8dp"
             android:paddingBottom="8dp"
-            android:paddingLeft="10dp">
+            android:paddingLeft="10dp"
+            android:paddingTop="8dp">
 
             <TextView
                 android:id="@+id/pl_song_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="5.11"
-                android:textSize="17dp"
                 android:ellipsize="end"
                 android:singleLine="true"
-                android:textColor="#171d2e" />
+                android:textColor="#171d2e"
+                android:textSize="17dp" />
 
             <TextView
                 android:id="@+id/pl_singer_name"
