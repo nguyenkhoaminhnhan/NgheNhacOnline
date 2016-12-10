@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/album_content"
     android:orientation="vertical">
 
     <ScrollView
@@ -42,6 +43,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="15dp"
+                    android:id="@+id/more_album_viet"
                     android:clickable="true"
                     android:textStyle="bold"
                     android:text="Thêm >>"/>
@@ -82,6 +84,7 @@
                     android:layout_marginRight="15dp"
                     android:textStyle="bold"
                     android:clickable="true"
+                    android:id="@+id/more_album_au_my"
                     android:text="Thêm >>"/>
             </RelativeLayout>
 
@@ -120,6 +123,7 @@
                     android:layout_marginRight="15dp"
                     android:clickable="true"
                     android:textStyle="bold"
+                    android:id="@+id/more_album_chau_a"
                     android:text="Thêm >>"/>
             </RelativeLayout>
 
@@ -158,6 +162,7 @@
                     android:layout_marginRight="15dp"
                     android:clickable="true"
                     android:textStyle="bold"
+                    android:id="@+id/more_album_khong_loi"
                     android:text="Thêm >>"/>
             </RelativeLayout>
 

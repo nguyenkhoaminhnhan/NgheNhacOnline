@@ -2,11 +2,13 @@ package com.example.minhnhan.music.Activity;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.minhnhan.music.Adapter.AlbumApdater;
 import com.example.minhnhan.music.Model.Async.AsyncAlbumPage;
@@ -23,9 +25,9 @@ import static com.example.minhnhan.music.Utils.Constants.GET_ALBUM;
 
 public class AlbumFragment extends Fragment {
 
+    private FragmentManager fragmentManager;
 
     public AlbumFragment() {
-
     }
 
     @Override
@@ -34,9 +36,12 @@ public class AlbumFragment extends Fragment {
         final View rootView = inflater.inflate(R.layout.album_fragment, container,
                 false);
 
+        final TextView moreViet = (TextView) rootView.findViewById(R.id.more_album_viet);
+
         AsyncAlbumPage asyncSingerPage = new AsyncAlbumPage(new AsyncListener() {
             @Override
             public void onAsyncComplete() {
+
                 AlbumPage data = DataManager.getInstance().getAlbumPage();
 
                 RecyclerView vietNamView = (RecyclerView) rootView.findViewById(R.id.album_viet_nam);
@@ -70,6 +75,18 @@ public class AlbumFragment extends Fragment {
 
                 AlbumApdater khongLoiAdapter = new AlbumApdater((HomeActivity) getActivity(), data.getKhongLoi());
                 khongLoiView.setAdapter(khongLoiAdapter);
+
+                fragmentManager = getActivity().getSupportFragmentManager();
+                moreViet.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        MoreAlbumFragment moreAlbumFragment = new MoreAlbumFragment("Việt Nam");
+                        fragmentManager.beginTransaction()
+                                .replace(R.id.album_content, moreAlbumFragment)
+                                .commit();
+                        getActivity().setTitle("Album Việt Nam");
+                    }
+                });
             }
         });
         asyncSingerPage.execute(GET_ALBUM);

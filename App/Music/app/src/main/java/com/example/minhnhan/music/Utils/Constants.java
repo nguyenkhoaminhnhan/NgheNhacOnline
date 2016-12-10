@@ -13,7 +13,7 @@ public class Constants {
     public static final String GET_ALBUM = DOMAIN + "album/getalbum";
     public static final String GET_TO_PLAY = DOMAIN + "song/gettoplay?id=";
     public static final String GET_SONG_BY_ALBUM_ID = DOMAIN + "song/GetSongByAlbum?albumID=";
-    public static final String SEARCH_ALBUM = DOMAIN + "searchAlbum?cat=";
+    public static final String SEARCH_ALBUM = DOMAIN + "Album/searchAlbum?cat=%s&page=%d";
 
     // params
     public static final String Song_URL = "songUrl";

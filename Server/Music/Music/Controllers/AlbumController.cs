@@ -127,7 +127,7 @@ namespace Music.Controllers
         }
         public ActionResult searchAlbum(string cat, int page)
         {
-
+            cat = cat.Replace("%20", " ");
             IQueryable<Album> entities = db.Albums;
             var result = entities.Where(x => x.CustomString1.ToLower().Contains(cat.ToLower())).OrderBy(x => x.ID).Skip(9 * page).Take(9).Select(x => new { x.ID, x.Name, x.ImagePath, x.Detail });
             return Json(result, JsonRequestBehavior.AllowGet);

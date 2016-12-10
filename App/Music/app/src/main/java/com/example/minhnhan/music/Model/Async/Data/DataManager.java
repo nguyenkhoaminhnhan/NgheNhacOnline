@@ -1,6 +1,7 @@
 package com.example.minhnhan.music.Model.Async.Data;
 
 
+import com.example.minhnhan.music.Model.Album;
 import com.example.minhnhan.music.Model.Page.AlbumPage;
 import com.example.minhnhan.music.Model.Page.CategoryPage;
 import com.example.minhnhan.music.Model.Page.HomePage;
@@ -24,7 +25,7 @@ public class DataManager {
     private CategoryPage categoryPage;
     private SingerPage singerPage;
     private AlbumPage albumPage;
-    private ArrayList moreCat;
+    private ArrayList<Album> moreAlbum;
 
     public static DataManager getInstance() {
         if (instance == null)
@@ -79,11 +80,11 @@ public class DataManager {
         this.albumPage = albumPage;
     }
 
-    public ArrayList getMoreCat() {
-        return moreCat;
+    public ArrayList<Album> getMoreAlbum() {
+        return moreAlbum;
     }
 
-    public void setMoreCat(ArrayList moreCat) {
-        this.moreCat = moreCat;
+    public void setMoreAlbum(ArrayList<Album> moreAlbum) {
+        this.moreAlbum = moreAlbum;
     }
 }
