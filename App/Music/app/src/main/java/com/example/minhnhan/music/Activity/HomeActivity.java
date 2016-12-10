@@ -195,7 +195,7 @@ public class HomeActivity extends AppCompatActivity
                 this.setTitle("Ca Sĩ");
                 break;
             case R.id.nav_album:
-                AlbumFragment albumFragment = new AlbumFragment();
+                AlbumFragment albumFragment = new AlbumFragment(fragmentManager);
                 fragmentManager.beginTransaction()
                         .replace(R.id.content_home, albumFragment)
                         .commit();

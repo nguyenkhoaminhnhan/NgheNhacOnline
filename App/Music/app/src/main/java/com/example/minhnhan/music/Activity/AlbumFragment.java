@@ -27,7 +27,8 @@ public class AlbumFragment extends Fragment {
 
     private FragmentManager fragmentManager;
 
-    public AlbumFragment() {
+    public AlbumFragment(FragmentManager fragmentManager) {
+        this.fragmentManager = fragmentManager;
     }
 
     @Override
@@ -76,15 +77,13 @@ public class AlbumFragment extends Fragment {
                 AlbumApdater khongLoiAdapter = new AlbumApdater((HomeActivity) getActivity(), data.getKhongLoi());
                 khongLoiView.setAdapter(khongLoiAdapter);
 
-                fragmentManager = getActivity().getSupportFragmentManager();
                 moreViet.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         MoreAlbumFragment moreAlbumFragment = new MoreAlbumFragment("Việt Nam");
                         fragmentManager.beginTransaction()
-                                .replace(R.id.album_content, moreAlbumFragment)
+                                .replace(R.id.content_home, moreAlbumFragment)
                                 .commit();
-                        getActivity().setTitle("Album Việt Nam");
                     }
                 });
             }

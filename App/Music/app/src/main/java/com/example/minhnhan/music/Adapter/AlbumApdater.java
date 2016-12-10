@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.minhnhan.music.Activity.HomeActivity;
 import com.example.minhnhan.music.Model.Album;
+import com.example.minhnhan.music.Model.Category;
 import com.example.minhnhan.music.R;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -77,5 +78,18 @@ public class AlbumApdater extends RecyclerView.Adapter<AlbumApdater.ViewHolder> 
             AlbumImage = (ImageView) itemView.findViewById(R.id.album_image);
             AlbumName = (TextView) itemView.findViewById(R.id.album_name);
         }
+    }
+
+    public void setdata(ArrayList<Album> temp) {
+        data = temp;
+        notifyDataSetChanged();
+    }
+    public void addMore(ArrayList<Album> data) {
+        if (this.data == null)
+            this.data = data;
+        else
+            this.data.addAll(data);
+        // yeu cau adapter refresh lai view
+        notifyDataSetChanged();
     }
 }
