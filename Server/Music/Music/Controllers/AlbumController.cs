@@ -119,23 +119,23 @@ namespace Music.Controllers
         public ActionResult GetAlbum()
         {
             var entities = db.Albums;
-            var VietNam = entities.Where(x => x.CustomInt1 == 1).Take(9).Select(x => new { x.ID, x.Name, x.ImagePath, x.Detail });
-            var AuMy = entities.Where(x => x.CustomInt1 == 2).Take(9).Select(x => new { x.ID, x.Name, x.ImagePath, x.Detail });
-            var ChauA = entities.Where(x => x.CustomInt1 == 3).Take(9).Select(x => new { x.ID, x.Name, x.ImagePath, x.Detail });
-            var KhongLoi = entities.Where(x => x.CustomInt1 == 4).Take(9).Select(x => new { x.ID, x.Name, x.ImagePath, x.Detail });
+            var VietNam = entities.Where(x => x.CustomInt1 == 1).Take(9).Select(x => new { x.ID, x.Name, x.ImagePath, x.Detail, Singer = x.CustomString2 });
+            var AuMy = entities.Where(x => x.CustomInt1 == 2).Take(9).Select(x => new { x.ID, x.Name, x.ImagePath, x.Detail, Singer = x.CustomString2 });
+            var ChauA = entities.Where(x => x.CustomInt1 == 3).Take(9).Select(x => new { x.ID, x.Name, x.ImagePath, x.Detail, Singer = x.CustomString2 });
+            var KhongLoi = entities.Where(x => x.CustomInt1 == 4).Take(9).Select(x => new { x.ID, x.Name, x.ImagePath, x.Detail, Singer = x.CustomString2 });
             return Json(new { VietNam, AuMy, ChauA, KhongLoi }, JsonRequestBehavior.AllowGet);
         }
         public ActionResult searchAlbum(string cat, int page)
         {
             IQueryable<Album> entities = db.Albums;
-            var result = entities.Where(x => x.CustomString1.ToLower().Contains(cat.ToLower())).OrderBy(x => x.ID).Skip(12 * page).Take(12).Select(x => new { x.ID, x.Name, x.ImagePath, x.Detail });
+            var result = entities.Where(x => x.CustomString1.ToLower().Contains(cat.ToLower())).OrderBy(x => x.ID).Skip(12 * page).Take(12).Select(x => new { x.ID, x.Name, x.ImagePath, x.Detail, Singer = x.CustomString2 });
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult getMoreAlbum(int type, int page)
         {
             IQueryable<Album> entities = db.Albums;
-            var result = entities.Where(x => type == x.CustomInt1).OrderBy(x => x.ID).Skip(12 * page).Take(12).Select(x => new { x.ID, x.Name, x.ImagePath, x.Detail });
+            var result = entities.Where(x => type == x.CustomInt1).OrderBy(x => x.ID).Skip(12 * page).Take(12).Select(x => new { x.ID, x.Name, x.ImagePath, x.Detail, Singer = x.CustomString2 });
             return Json(result, JsonRequestBehavior.AllowGet);
         }
         //Search Ablum Action
