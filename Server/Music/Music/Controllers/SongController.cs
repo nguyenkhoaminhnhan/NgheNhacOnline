@@ -7,13 +7,13 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Music.Models;
+using System.Globalization;
 
 namespace Music.Controllers
 {
     public class SongController : Controller
     {
         private MusicEntities db = new MusicEntities();
-
         // GET: Song
         public ActionResult Index()
         {
@@ -129,7 +129,7 @@ namespace Music.Controllers
         }
 
         //Get Song Json
-        public ActionResult GetToPlay(long? ID)
+        public ActionResult GetSong(long? ID)
         {
             var entities = db.Songs;
             if (ID != null)
@@ -137,12 +137,82 @@ namespace Music.Controllers
                 var result = entities.Where(x => x.ID == ID).Select(x => new { x.ID, x.Name, x.ImagePath, x.SourcePath, Album = x.Album.Name, Musician = x.Musician.Name, Singer = x.Singer.Name, x.Year, x.Format, x.BitRate, x.Tag, x.Rating });
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
-            return Json(new { }, JsonRequestBehavior.AllowGet);
+            var allResult = entities.Select(x => new { x.ID, x.Name, x.ImagePath, x.SourcePath, Album = x.Album.Name, Musician = x.Musician.Name, Singer = x.Singer.Name, x.Year, x.Format, x.BitRate, x.Tag, x.Rating });
+            return Json(allResult, JsonRequestBehavior.AllowGet);
+        }
+
+        //UpdateLuotNghe
+        public void UpdateLuotNghe(long? ID)
+        {
+            var entities = db.Songs;
+            if (ID != null)
+            {
+                int last_week, current_week, last_month, current_month;
+                Song song = db.Songs.Find(ID);
+
+                DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
+                DateTime lastListen = new DateTime(song.LastListen);
+                DateTime now = DateTime.Now;
+                Calendar cal = dfi.Calendar;
+
+                last_week = cal.GetWeekOfYear(lastListen, dfi.CalendarWeekRule, dfi.FirstDayOfWeek);
+                current_week = cal.GetWeekOfYear(now, dfi.CalendarWeekRule, dfi.FirstDayOfWeek);
+                last_month = lastListen.Month;
+                current_month = now.Month;
+                
+                //Inc luotnghe week
+                if (last_week == current_week)
+                {
+                    if (song.CustomInt1 == null)
+                    {
+                        song.CustomInt1 = 1;
+                    }
+                    else
+                    {
+                        song.CustomInt1 = song.CustomInt1 + 1;
+                    }
+                }
+                else
+                {
+                    song.CustomInt1 = 1;
+                }
+
+                //Inc luotnghe month
+                if (lastListen.Year == now.Year && last_month == current_month)
+                {
+                    if (song.CustomInt2 == null)
+                    {
+                        song.CustomInt2 = 1;
+                    }
+                    else
+                    {
+                        song.CustomInt2 = song.CustomInt2 + 1;
+                    }
+                }
+                else
+                {
+                    song.CustomInt2 = 1;
+                }
+                //Inc luotnghe
+                if (song.CustomInt3 == null)
+                {
+                    song.CustomInt3 = 1;
+                }
+                else
+                {
+                    song.CustomInt3 = song.CustomInt3 + 1;
+                }
+
+                //Inc lastlisten
+                song.LastListen = now.Ticks;
+                db.Entry(song).State = EntityState.Modified;
+                db.SaveChanges();
+            }
         }
 
         //
         public ActionResult GetSongList(long? id, string name, string album, int? page, int? size)
-        {            
+        {
             IQueryable<Song> matches = db.Songs;
             if (id != null)
             {
@@ -168,22 +238,16 @@ namespace Music.Controllers
         public ActionResult GetShowCase()
         {
             IQueryable<Song> entities = db.Songs;
-            var showCase = entities.OrderByDescending(x => x.ID).Take(5).Select(x => new { x.ID, x.Name, x.ImagePath, Album = x.Album.Name, Singer = x.Singer.Name, x.SourcePath });
+            var showCase = entities.OrderByDescending(x => x.ID).Take(5).Select(x => new { x.ID, x.Name, x.ImagePath, Album = x.Album.Name, Singer = x.Singer.Name, x.Year, x.Format, x.BitRate, x.Tag, x.Rating });
 
-            var hotSong = entities.OrderByDescending(x => x.Rating).Take(15).Select(x => new { x.ID, x.Name, x.ImagePath, Album = x.Album.Name, Singer = x.Singer.Name, x.SourcePath });
+            var hotSong = entities.OrderByDescending(x => x.CustomInt3).Take(15).Select(x => new { x.ID, x.Name, x.ImagePath, Album = x.Album.Name, Singer = x.Singer.Name, x.Year, x.Format, x.BitRate, x.Tag, x.Rating });
 
-            var hotSongWeek = entities.OrderByDescending(x => x.CustomInt1).Take(10).Select(x => new { x.ID, x.Name, x.ImagePath, Album = x.Album.Name, Singer = x.Singer.Name, x.SourcePath });
+            var hotSongWeek = entities.OrderByDescending(x => x.CustomInt1).Take(10).Select(x => new { x.ID, x.Name, x.ImagePath, Album = x.Album.Name, Singer = x.Singer.Name, x.Year, x.Format, x.BitRate, x.Tag, x.Rating });
 
-            var hotSongMonth = entities.OrderByDescending(x => x.CustomInt2).Take(10).Select(x => new { x.ID, x.Name, x.ImagePath, Album = x.Album.Name, Singer = x.Singer.Name, x.SourcePath });
+            var hotSongMonth = entities.OrderByDescending(x => x.CustomInt2).Take(10).Select(x => new { x.ID, x.Name, x.ImagePath, Album = x.Album.Name, Singer = x.Singer.Name, x.Year, x.Format, x.BitRate, x.Tag, x.Rating });
 
             return Json(new { showCase, hotSong = hotSong, hotSongWeek, hotSongMonth }, JsonRequestBehavior.AllowGet);
 
-        }
-        public ActionResult GetSongByAlbum(long albumID)
-        {
-            var entities = db.Songs;
-            var result = entities.Where(x => x.Album_ID == albumID).Select(x => new { x.ID, x.Name, x.ImagePath, Album = x.Album.Name, Singer = x.Singer.Name, x.SourcePath});
-            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         //Search Song Action        
