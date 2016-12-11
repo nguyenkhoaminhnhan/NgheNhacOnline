@@ -25,15 +25,15 @@ import java.util.ArrayList;
  * Created by Minh Nhan on 11/27/2016.
  */
 
-public class SongListAdapter extends BaseAdapter {
+public class PopularSongAdapter extends BaseAdapter {
     public ArrayList<Song> data;
     private LayoutInflater mInflater;
     private DisplayImageOptions options;
-    private Context context;
+    private HomeActivity activity;
     private Song item;
 
-    public SongListAdapter(Context context, ArrayList<Song> data) {
-        mInflater = (LayoutInflater) context
+    public PopularSongAdapter(HomeActivity activity, ArrayList<Song> data) {
+        mInflater = (LayoutInflater) activity
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.data = data;
         options = new DisplayImageOptions.Builder()
@@ -42,7 +42,7 @@ public class SongListAdapter extends BaseAdapter {
                 .showImageOnFail(R.drawable.default_image).cacheInMemory(true)
                 .cacheOnDisk(true).considerExifParams(true)
                 .bitmapConfig(Bitmap.Config.RGB_565).build();
-        this.context = context;
+        this.activity = activity;
     }
 
     @Override
@@ -78,12 +78,15 @@ public class SongListAdapter extends BaseAdapter {
         holder.name.setText(item.name);
         holder.singer.setText(item.singer);
         ImageLoader imageLoader = ImageLoader.getInstance();
-        imageLoader.init(ImageLoaderConfiguration.createDefault(context));
+        imageLoader.init(ImageLoaderConfiguration.createDefault(activity));
         imageLoader.displayImage(item.getImagePath(), holder.image, options, null);
 
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                MediaManager.getInstance().setOnSongToPlay(data.get(position));
+                Intent i = new Intent(activity, FullScreenPlayActivity.class);
+                activity.startActivityForResult(i, 11);
             }
         });
         return convertView;

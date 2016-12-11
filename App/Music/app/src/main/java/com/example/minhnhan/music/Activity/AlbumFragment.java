@@ -1,5 +1,6 @@
 package com.example.minhnhan.music.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -38,6 +39,9 @@ public class AlbumFragment extends Fragment {
                 false);
 
         final TextView moreViet = (TextView) rootView.findViewById(R.id.more_album_viet);
+        final TextView moreAuMy = (TextView) rootView.findViewById(R.id.more_album_au_my);
+        final TextView moreChauA = (TextView) rootView.findViewById(R.id.more_album_chau_a);
+        final TextView moreKhongLoi = (TextView) rootView.findViewById(R.id.more_album_khong_loi);
 
         AsyncAlbumPage asyncSingerPage = new AsyncAlbumPage(new AsyncListener() {
             @Override
@@ -80,10 +84,41 @@ public class AlbumFragment extends Fragment {
                 moreViet.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        MoreAlbumFragment moreAlbumFragment = new MoreAlbumFragment("Việt Nam");
-                        fragmentManager.beginTransaction()
-                                .replace(R.id.content_home, moreAlbumFragment)
-                                .commit();
+                        Intent i = new Intent(getActivity(), MoreAlbumActivity.class);
+                        Bundle b = new Bundle();
+                        b.putInt("key", 1);
+                        i.putExtras(b);
+                        startActivity(i);
+                    }
+                });
+                moreAuMy.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent i = new Intent(getActivity(), MoreAlbumActivity.class);
+                        Bundle b = new Bundle();
+                        b.putInt("key", 2);
+                        i.putExtras(b);
+                        startActivity(i);
+                    }
+                });
+                moreChauA.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent i = new Intent(getActivity(), MoreAlbumActivity.class);
+                        Bundle b = new Bundle();
+                        b.putInt("key", 3);
+                        i.putExtras(b);
+                        startActivity(i);
+                    }
+                });
+                moreKhongLoi.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent i = new Intent(getActivity(), MoreAlbumActivity.class);
+                        Bundle b = new Bundle();
+                        b.putInt("key", 4);
+                        i.putExtras(b);
+                        startActivity(i);
                     }
                 });
             }

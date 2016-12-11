@@ -19,6 +19,7 @@ public class Song {
     public final String BITRATE ="BitRate";
     public final String TAG ="Tag";
     public final String RATING ="Rating";
+    public final String VIEW ="View";
 
 
     private long id;
@@ -31,6 +32,7 @@ public class Song {
     public String format;
     public int bitRate;
     public String tag;
+    public int view;
     public float rating;
 
     public Song(JSONObject object) {
@@ -59,6 +61,8 @@ public class Song {
                 tag = object.getString(TAG);
             if (object.has(RATING))
                 rating = Float.parseFloat(object.getString(RATING));
+            if (object.has(VIEW))
+                view = Integer.parseInt(object.getString(VIEW));
         } catch (Exception e) {
         }
     }

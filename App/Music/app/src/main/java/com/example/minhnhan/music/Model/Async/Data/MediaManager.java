@@ -3,10 +3,15 @@ package com.example.minhnhan.music.Model.Async.Data;
 
 import android.media.MediaPlayer;
 
+import com.example.minhnhan.music.Model.Album;
+import com.example.minhnhan.music.Model.Async.AsyncListener;
+import com.example.minhnhan.music.Model.Async.AsyncSongListen;
 import com.example.minhnhan.music.Model.Song;
 
 import java.io.IOException;
 import java.util.ArrayList;
+
+import static com.example.minhnhan.music.Utils.Constants.UPDATE_LISTEN;
 
 /**
  * Created by MinhNhan on 21/11/2016.
@@ -16,6 +21,7 @@ public class MediaManager {
     private static MediaManager instance;
     private MediaPlayer mPlayer;
     private int currentPlayID = 0;
+    private Album playingAlbum;
     private Song playingSong;
     private ArrayList<Song> playList = new ArrayList<>();
 
@@ -119,8 +125,23 @@ public class MediaManager {
             mPlayer.setDataSource(playingSong.getSourcePath());
             mPlayer.prepare();
             mPlayer.start();
+            AsyncSongListen asyncSongListen = new AsyncSongListen(new AsyncListener() {
+                @Override
+                public void onAsyncComplete() {
+
+                }
+            });
+            asyncSongListen.execute(UPDATE_LISTEN + playingSong.getId());
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public Album getPlayingAlbum() {
+        return playingAlbum;
+    }
+
+    public void setPlayingAlbum(Album playingAlbum) {
+        this.playingAlbum = playingAlbum;
     }
 }

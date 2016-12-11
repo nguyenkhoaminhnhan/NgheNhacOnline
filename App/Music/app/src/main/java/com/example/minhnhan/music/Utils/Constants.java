@@ -14,6 +14,8 @@ public class Constants {
     public static final String GET_TO_PLAY = DOMAIN + "song/gettoplay?id=";
     public static final String GET_SONG_BY_ALBUM_ID = DOMAIN + "song/GetSongByAlbum?albumID=";
     public static final String SEARCH_ALBUM = DOMAIN + "Album/searchAlbum?cat=%s&page=%d";
+    public static final String MORE_ALBUM = DOMAIN + "Album/getmorealbum?type=%d&page=%d";
+    public static final String UPDATE_LISTEN = DOMAIN + "song/updateluotnghe?id=";
 
     // params
     public static final String Song_URL = "songUrl";

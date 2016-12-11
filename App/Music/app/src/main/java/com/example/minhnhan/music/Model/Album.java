@@ -11,11 +11,13 @@ public class Album {
     public final String NAME ="Name";
     public final String IMAGE_PATH ="ImagePath";
     public final String DETAIL ="Detail";
+    public final String SINGER = "Singer";
 
     public long id;
     public String name;
     private String imagePath;
     public String detail;
+    public String singer;
 
     public Album(JSONObject object) {
         try {
@@ -29,6 +31,8 @@ public class Album {
                 setImagePath(object.getString(IMAGE_PATH));
             if (object.has(DETAIL))
                 detail = object.getString(DETAIL);
+            if (object.has(SINGER))
+                singer = object.getString(SINGER);
         } catch (Exception e) {
         }
     }

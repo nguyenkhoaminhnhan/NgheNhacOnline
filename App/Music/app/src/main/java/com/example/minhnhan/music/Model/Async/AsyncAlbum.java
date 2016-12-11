@@ -1,4 +1,4 @@
-package com.example.minhnhan.music.Model.Async.Data;
+package com.example.minhnhan.music.Model.Async;
 
 /**
  * Created by MinhNhan on 27/04/2016.
@@ -9,6 +9,8 @@ import android.os.AsyncTask;
 
 import com.example.minhnhan.music.Model.Album;
 import com.example.minhnhan.music.Model.Async.AsyncListener;
+import com.example.minhnhan.music.Model.Async.Data.DataManager;
+import com.example.minhnhan.music.Model.Async.Data.DataServices;
 import com.example.minhnhan.music.Model.Song;
 
 import org.json.JSONArray;

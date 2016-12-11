@@ -1,7 +1,6 @@
 package com.example.minhnhan.music.Adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,13 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.minhnhan.music.Activity.AlbumDetailActivity;
-import com.example.minhnhan.music.Activity.HomeActivity;
 import com.example.minhnhan.music.Model.Album;
-import com.example.minhnhan.music.Model.Async.AsyncAlbumSong;
-import com.example.minhnhan.music.Model.Async.AsyncListener;
-import com.example.minhnhan.music.Model.Async.Data.MediaManager;
-import com.example.minhnhan.music.Model.Category;
 import com.example.minhnhan.music.R;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -24,20 +17,17 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import java.util.ArrayList;
 
-import static com.example.minhnhan.music.Utils.Constants.GET_ALBUM;
-import static com.example.minhnhan.music.Utils.Constants.GET_SONG_BY_ALBUM_ID;
-
 /**
  * Created by Minh Nhan on 11/29/2016.
  */
 
-public class AlbumApdater extends RecyclerView.Adapter<AlbumApdater.ViewHolder> {
+public class MoreAlbumApdater extends RecyclerView.Adapter<MoreAlbumApdater.ViewHolder> {
 
     private ArrayList<Album> data;
     private DisplayImageOptions options;
     private Context context;
 
-    public AlbumApdater(Context context , ArrayList<Album> data) {
+    public MoreAlbumApdater(Context context, ArrayList<Album> data) {
         this.data = data;
         this.context = context;
         options = new DisplayImageOptions.Builder()
@@ -80,16 +70,8 @@ public class AlbumApdater extends RecyclerView.Adapter<AlbumApdater.ViewHolder> 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    final int position = getAdapterPosition();
-                    AsyncAlbumSong asyncAlbumSong = new AsyncAlbumSong(new AsyncListener() {
-                        @Override
-                        public void onAsyncComplete() {
-                            Intent i = new Intent(context, AlbumDetailActivity.class);
-                            MediaManager.getInstance().setPlayingAlbum(data.get(position));
-                            context.startActivity(i);
-                        }
-                    });
-                    asyncAlbumSong.execute(GET_SONG_BY_ALBUM_ID + data.get(position).id);
+                    int position = getAdapterPosition();
+
                 }
             });
             AlbumImage = (ImageView) itemView.findViewById(R.id.album_image);
@@ -101,6 +83,7 @@ public class AlbumApdater extends RecyclerView.Adapter<AlbumApdater.ViewHolder> 
         data = temp;
         notifyDataSetChanged();
     }
+
     public void addMore(ArrayList<Album> data) {
         if (this.data == null)
             this.data = data;

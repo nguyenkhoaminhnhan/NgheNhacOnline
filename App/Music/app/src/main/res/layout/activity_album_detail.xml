@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_album_detail"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    tools:context="com.example.minhnhan.music.Activity.AlbumDetailActivity">
+
+    <ImageView
+        android:id="@+id/detail_album_image"
+        android:layout_width="match_parent"
+        android:layout_height="320dp"
+        android:scaleType="fitXY" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/detail_album_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="330dp"
+                android:background="#fff"
+                android:orientation="vertical">
+                <TextView
+                    android:text="Chi Tiết:"
+                    android:textSize="15dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:textColor="#000"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/detail_album_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:maxLines="5"
+                    android:padding="10dp"
+                    android:scrollbars="vertical" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>
