@@ -28,7 +28,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/13/2016 04:18:13</publishTime>
     </File>
     <File Include="bin/Music.dll">
-      <publishTime>12/11/2016 02:01:36</publishTime>
+      <publishTime>12/11/2016 16:32:58</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
       <publishTime>11/13/2016 04:18:15</publishTime>
