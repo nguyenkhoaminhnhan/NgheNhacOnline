@@ -1,4 +1,4 @@
-package com.example.minhnhan.music.Activity;
+package com.example.minhnhan.music.Fragment;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -24,10 +24,12 @@ public class ImagePlayFragment extends Fragment {
 
     public Song data;
     private ImageView songImage;
+    private ImageView animate;
     private DisplayImageOptions options;
+
     public ImagePlayFragment(Song data) {
         this.data = data;
-         options = new DisplayImageOptions.Builder()
+        options = new DisplayImageOptions.Builder()
                 .showImageOnLoading(R.drawable.ic_stub)
                 .showImageForEmptyUri(R.drawable.ic_empty)
                 .showImageOnFail(R.drawable.default_image).cacheInMemory(true)
@@ -41,6 +43,7 @@ public class ImagePlayFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.image_play_body, container,
                 false);
         songImage = (ImageView) rootView.findViewById(R.id.play_image);
+        animate = (ImageView) rootView.findViewById(R.id.playing_animation);
 
         ImageLoader imageLoader = ImageLoader.getInstance();
         imageLoader.init(ImageLoaderConfiguration.createDefault(this.getContext()));

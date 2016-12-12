@@ -1,4 +1,4 @@
-package com.example.minhnhan.music.Activity;
+package com.example.minhnhan.music.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.minhnhan.music.Activity.MoreAlbumActivity;
 import com.example.minhnhan.music.Adapter.AlbumApdater;
 import com.example.minhnhan.music.Model.Async.AsyncAlbumPage;
 import com.example.minhnhan.music.Model.Async.AsyncListener;
@@ -69,16 +70,16 @@ public class AlbumFragment extends Fragment {
                 RecyclerView.LayoutManager khongLoiLayoutManager = new GridLayoutManager(getContext(), 3);
                 khongLoiView.setLayoutManager(khongLoiLayoutManager);
 
-                AlbumApdater vietNamAdapter = new AlbumApdater((HomeActivity) getActivity(), data.getVietNam());
+                AlbumApdater vietNamAdapter = new AlbumApdater(getActivity(), data.getVietNam());
                 vietNamView.setAdapter(vietNamAdapter);
 
-                AlbumApdater auMyAdapter = new AlbumApdater((HomeActivity) getActivity(), data.getAuMy());
+                AlbumApdater auMyAdapter = new AlbumApdater(getActivity(), data.getAuMy());
                 auMyView.setAdapter(auMyAdapter);
 
-                AlbumApdater ChauAAdapter = new AlbumApdater((HomeActivity) getActivity(), data.getChauA());
+                AlbumApdater ChauAAdapter = new AlbumApdater(getActivity(), data.getChauA());
                 chauAView.setAdapter(ChauAAdapter);
 
-                AlbumApdater khongLoiAdapter = new AlbumApdater((HomeActivity) getActivity(), data.getKhongLoi());
+                AlbumApdater khongLoiAdapter = new AlbumApdater(getActivity(), data.getKhongLoi());
                 khongLoiView.setAdapter(khongLoiAdapter);
 
                 moreViet.setOnClickListener(new View.OnClickListener() {
@@ -88,7 +89,7 @@ public class AlbumFragment extends Fragment {
                         Bundle b = new Bundle();
                         b.putInt("key", 1);
                         i.putExtras(b);
-                        startActivity(i);
+                        startActivityForResult(i,11);
                     }
                 });
                 moreAuMy.setOnClickListener(new View.OnClickListener() {
@@ -98,7 +99,7 @@ public class AlbumFragment extends Fragment {
                         Bundle b = new Bundle();
                         b.putInt("key", 2);
                         i.putExtras(b);
-                        startActivity(i);
+                        startActivityForResult(i,11);
                     }
                 });
                 moreChauA.setOnClickListener(new View.OnClickListener() {
@@ -108,7 +109,7 @@ public class AlbumFragment extends Fragment {
                         Bundle b = new Bundle();
                         b.putInt("key", 3);
                         i.putExtras(b);
-                        startActivity(i);
+                        startActivityForResult(i,11);
                     }
                 });
                 moreKhongLoi.setOnClickListener(new View.OnClickListener() {
@@ -118,7 +119,7 @@ public class AlbumFragment extends Fragment {
                         Bundle b = new Bundle();
                         b.putInt("key", 4);
                         i.putExtras(b);
-                        startActivity(i);
+                        startActivityForResult(i,11);
                     }
                 });
             }

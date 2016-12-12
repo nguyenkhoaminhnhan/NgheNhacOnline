@@ -1,4 +1,4 @@
-package com.example.minhnhan.music.Activity;
+package com.example.minhnhan.music.Fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,9 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.example.minhnhan.music.Activity.HomeActivity;
 import com.example.minhnhan.music.Adapter.HotSongAdapter;
 import com.example.minhnhan.music.Adapter.MySlideAdapter;
 import com.example.minhnhan.music.Adapter.PopularSongAdapter;
+import com.example.minhnhan.music.Adapter.SongListAdapter;
 import com.example.minhnhan.music.Model.Async.Data.DataManager;
 import com.example.minhnhan.music.R;
 import com.example.minhnhan.music.Utils.DepthPageTransformer;
@@ -62,10 +64,10 @@ public class HomeFragment extends Fragment {
                 DataManager.getInstance().getHomeDetail().getHotSongMonth());
         AddHotSongLinearL(hotSongMonthView, hotSongMonth, params);
         /*-------------------Song List---------------------------*/
-        LinearLayout hotSongView = (LinearLayout) rootView.findViewById(R.id.popular_container);
-        PopularSongAdapter hotSong = new PopularSongAdapter((HomeActivity)getActivity(),
+        LinearLayout popularSongView = (LinearLayout) rootView.findViewById(R.id.popular_container);
+        SongListAdapter popularSong = new SongListAdapter((HomeActivity)getActivity(),
                 DataManager.getInstance().getHomeDetail().getHotSong());
-        AddSongListLinearL(hotSongView, hotSong);
+        AddSongListLinearL(popularSongView, popularSong);
         return rootView;
     }
 }

@@ -1,5 +1,6 @@
 package com.example.minhnhan.music.Adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -29,11 +30,11 @@ public class PlayListAdapter extends BaseAdapter {
     public ArrayList<Song> data;
     private LayoutInflater mInflater;
     private DisplayImageOptions options;
-    private Context context;
+    private FullScreenPlayActivity activity;
     private Song item;
 
-    public PlayListAdapter(Context context, ArrayList<Song> data) {
-        mInflater = (LayoutInflater) context
+    public PlayListAdapter(FullScreenPlayActivity activity, ArrayList<Song> data) {
+        mInflater = (LayoutInflater) activity
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.data = data;
         options = new DisplayImageOptions.Builder()
@@ -42,7 +43,7 @@ public class PlayListAdapter extends BaseAdapter {
                 .showImageOnFail(R.drawable.default_image).cacheInMemory(true)
                 .cacheOnDisk(true).considerExifParams(true)
                 .bitmapConfig(Bitmap.Config.RGB_565).build();
-        this.context = context;
+        this.activity = activity;
     }
 
     @Override
@@ -78,8 +79,18 @@ public class PlayListAdapter extends BaseAdapter {
         holder.name.setText(item.name);
         holder.singer.setText(item.singer);
         ImageLoader imageLoader = ImageLoader.getInstance();
-        imageLoader.init(ImageLoaderConfiguration.createDefault(context));
+        imageLoader.init(ImageLoaderConfiguration.createDefault(activity));
         imageLoader.displayImage(item.getImagePath(), holder.image, options, null);
+
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MediaManager.getInstance().setCurrentPlayID(position);
+                MediaManager.getInstance().setPlayingSong(data.get(position));
+                MediaManager.getInstance().play();
+                activity.newMediaPlayer();
+            }
+        });
         return convertView;
     }
 

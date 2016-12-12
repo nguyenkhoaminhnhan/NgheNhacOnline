@@ -83,7 +83,9 @@ public class HotSongAdapter extends BaseAdapter {
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MediaManager.getInstance().setOnSongToPlay(data.get(position));
+                MediaManager.getInstance().setPlayList(data);
+                MediaManager.getInstance().setCurrentPlayID(position);
+                MediaManager.getInstance().setPlayingSong(data.get(position));
                 Intent i = new Intent(activity, FullScreenPlayActivity.class);
                 activity.startActivityForResult(i, 11);
             }

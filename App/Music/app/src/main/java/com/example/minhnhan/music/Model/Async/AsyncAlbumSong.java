@@ -43,7 +43,7 @@ public class AsyncAlbumSong extends AsyncTask<String, String, String> {
             for (int i = 0; i < objectList.length(); i++) {
                 albumSongs.add(new Song(objectList.getJSONObject(i)));
             }
-            MediaManager.getInstance().setPlayList(albumSongs);
+            MediaManager.getInstance().setPrepareList(albumSongs);
         } catch (JSONException e) {
             e.printStackTrace();
         }

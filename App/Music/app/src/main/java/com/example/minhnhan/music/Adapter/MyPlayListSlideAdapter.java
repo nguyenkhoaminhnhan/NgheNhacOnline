@@ -5,9 +5,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.view.ViewGroup;
 
-import com.example.minhnhan.music.Activity.ImagePlayFragment;
-import com.example.minhnhan.music.Activity.PlayListFragment;
-import com.example.minhnhan.music.Model.Async.Data.MediaManager;
+import com.example.minhnhan.music.Fragment.ImagePlayFragment;
+import com.example.minhnhan.music.Fragment.PlayListFragment;
 import com.example.minhnhan.music.Model.Song;
 
 import java.util.ArrayList;

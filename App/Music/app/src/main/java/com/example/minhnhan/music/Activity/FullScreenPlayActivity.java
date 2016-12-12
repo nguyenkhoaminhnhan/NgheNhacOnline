@@ -71,26 +71,24 @@ public class FullScreenPlayActivity extends AppCompatActivity {
         bodyPlay.setAdapter(playlist);
 
         mPlayer = MediaManager.getInstance().getmPlayer();
-
-        MediaManager.getInstance().resetCurrent();
         MediaManager.getInstance().play();
+        MediaManager.getInstance().setPlaylistSlide(playlist);
         newMediaPlayer();
-
 
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MediaManager.getInstance().next();
-                newMediaPlayer();
-                playlist.update();
+                if (MediaManager.getInstance().next()) {
+                    newMediaPlayer();
+                }
             }
         });
         preButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MediaManager.getInstance().prev();
-                newMediaPlayer();
-                playlist.update();
+                if (MediaManager.getInstance().prev()) {
+                    newMediaPlayer();
+                }
             }
         });
     }
@@ -109,7 +107,7 @@ public class FullScreenPlayActivity extends AppCompatActivity {
         }
     }
 
-    private void newMediaPlayer() {
+    public void newMediaPlayer() {
         playButton.setImageResource(R.drawable.uamp_ic_pause_white_48dp);
         songName.setText(MediaManager.getInstance().getPlayingSong().name);
         singerName.setText(MediaManager.getInstance().getPlayingSong().singer);
@@ -125,18 +123,19 @@ public class FullScreenPlayActivity extends AppCompatActivity {
             public void onCompletion(MediaPlayer mp) {
                 int currentPlayID = MediaManager.getInstance().getCurrentPlayID();
                 if (currentPlayID == MediaManager.getInstance().getDataSize() - 1) {
-                    playButton.setImageResource(R.drawable.uamp_ic_play_arrow_white_48dp);
-                    seekBar.setProgress(0);
-                    currentTime = 0;
-                    realTime.setText(formatter.format(currentTime));
-                    MediaManager.getInstance().resetCurrent();
 
+                    MediaManager.getInstance().resetCurrent();
+                    if (FullScreenPlayActivity.this != null) {
+                        newMediaPlayer();
+                    }
                 } else {
                     seekBar.setProgress(0);
                     currentTime = 0;
-                    realTime.setText(formatter.format(currentTime));
-                    MediaManager.getInstance().next();
-                    newMediaPlayer();
+                    if (FullScreenPlayActivity.this != null) {
+                        MediaManager.getInstance().next();
+                        newMediaPlayer();
+                    } else
+                        MediaManager.getInstance().next();
                 }
 
             }
@@ -161,8 +160,12 @@ public class FullScreenPlayActivity extends AppCompatActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 if (fromUser) {
+
                     seekBar.setProgress(progress);
+                    SeekBarProgressUpdater();
                     mPlayer.seekTo(progress);
+                    playButton.setImageResource(R.drawable.uamp_ic_pause_white_48dp);
+                    mPlayer.start();
                 }
             }
 

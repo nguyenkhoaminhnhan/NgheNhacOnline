@@ -1,4 +1,4 @@
-package com.example.minhnhan.music.Activity;
+package com.example.minhnhan.music.Fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

@@ -14,24 +14,22 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.minhnhan.music.Fragment.AlbumFragment;
+import com.example.minhnhan.music.Fragment.CategoryFragment;
+import com.example.minhnhan.music.Fragment.HomeFragment;
+import com.example.minhnhan.music.Fragment.SingerFragment;
 import com.example.minhnhan.music.Model.Async.AsyncAlbumSong;
 import com.example.minhnhan.music.Model.Async.AsyncListener;
-import com.example.minhnhan.music.Model.Async.Data.DataManager;
 import com.example.minhnhan.music.Model.Async.Data.MediaManager;
-import com.example.minhnhan.music.Model.Song;
 import com.example.minhnhan.music.R;
 import com.example.minhnhan.music.Utils.Constants;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-
-import java.io.IOException;
-import java.util.ArrayList;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -88,23 +86,25 @@ public class HomeActivity extends AppCompatActivity
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MediaManager.getInstance().next();
-                imageLoader.displayImage(MediaManager.getInstance().getPlayingSong().getImagePath(),
-                        songImage, options, null);
-                plName.setText(MediaManager.getInstance().getPlayingSong().name);
-                plSinger.setText(MediaManager.getInstance().getPlayingSong().singer);
-
+                if (MediaManager.getInstance().next()) {
+                    imageLoader.displayImage(MediaManager.getInstance().getPlayingSong().getImagePath(),
+                            songImage, options, null);
+                    plName.setText(MediaManager.getInstance().getPlayingSong().name);
+                    plSinger.setText(MediaManager.getInstance().getPlayingSong().singer);
+                    playButton.setImageResource(R.drawable.uamp_ic_play_arrow_48dp_black);
+                }
             }
         });
         preButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MediaManager.getInstance().prev();
-                imageLoader.displayImage(MediaManager.getInstance().getPlayingSong().getImagePath(),
-                        songImage, options, null);
-                plName.setText(MediaManager.getInstance().getPlayingSong().name);
-                plSinger.setText(MediaManager.getInstance().getPlayingSong().singer);
-
+                if (MediaManager.getInstance().prev()) {
+                    imageLoader.displayImage(MediaManager.getInstance().getPlayingSong().getImagePath(),
+                            songImage, options, null);
+                    plName.setText(MediaManager.getInstance().getPlayingSong().name);
+                    plSinger.setText(MediaManager.getInstance().getPlayingSong().singer);
+                    playButton.setImageResource(R.drawable.uamp_ic_play_arrow_48dp_black);
+                }
             }
         });
 
@@ -217,30 +217,22 @@ public class HomeActivity extends AppCompatActivity
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 11) {
-            MediaPlayer mPlayer = MediaManager.getInstance().getmPlayer();
-
-            plFrame.setVisibility(View.VISIBLE);
-            imageLoader.displayImage(MediaManager.getInstance().getPlayingSong().getImagePath(),
-                    songImage, options, null);
-            plName.setText(MediaManager.getInstance().getPlayingSong().name);
-            plSinger.setText(MediaManager.getInstance().getPlayingSong().singer);
-            if (mPlayer.isPlaying()) {
-                playButton.setImageResource(R.drawable.uamp_ic_pause_48dp_black);
-            } else {
-                playButton.setImageResource(R.drawable.uamp_ic_play_arrow_48dp_black);
-            }
+            updatePlayBack();
+            MediaManager.getInstance().setHomeActivity(HomeActivity.this);
         }
-
     }
 
-    public void playAlbum(long position) {
-        AsyncAlbumSong asyncAlbumSong = new AsyncAlbumSong(new AsyncListener() {
-            @Override
-            public void onAsyncComplete() {
-                Intent i = new Intent(HomeActivity.this, FullScreenPlayActivity.class);
-                startActivityForResult(i, 11);
-            }
-        });
-        asyncAlbumSong.execute(Constants.GET_SONG_BY_ALBUM_ID + position);
+    public void updatePlayBack() {
+        MediaPlayer mPlayer = MediaManager.getInstance().getmPlayer();
+        plFrame.setVisibility(View.VISIBLE);
+        imageLoader.displayImage(MediaManager.getInstance().getPlayingSong().getImagePath(),
+                songImage, options, null);
+        plName.setText(MediaManager.getInstance().getPlayingSong().name);
+        plSinger.setText(MediaManager.getInstance().getPlayingSong().singer);
+        if (mPlayer.isPlaying()) {
+            playButton.setImageResource(R.drawable.uamp_ic_pause_48dp_black);
+        } else {
+            playButton.setImageResource(R.drawable.uamp_ic_play_arrow_48dp_black);
+        }
     }
 }

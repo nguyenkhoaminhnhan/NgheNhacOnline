@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.view.ViewGroup;
 
 
-import com.example.minhnhan.music.Activity.ScreenSlidePageFragment;
+import com.example.minhnhan.music.Fragment.ScreenSlidePageFragment;
 import com.example.minhnhan.music.Model.Song;
 
 import java.util.ArrayList;
@@ -28,7 +28,7 @@ public class MySlideAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         item = data.get(position);
-        return new ScreenSlidePageFragment(data.get(position).getId(), item);
+        return new ScreenSlidePageFragment(position, item);
     }
 
     @Override
