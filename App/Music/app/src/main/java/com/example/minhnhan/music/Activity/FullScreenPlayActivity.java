@@ -65,7 +65,7 @@ public class FullScreenPlayActivity extends AppCompatActivity {
 
         /*---------------------set adapter------------------------------------*/
         FragmentManager manager = getSupportFragmentManager();
-        final MyPlayListSlideAdapter playlist = new MyPlayListSlideAdapter(manager,
+        playlist = new MyPlayListSlideAdapter(manager,
                 MediaManager.getInstance().getPlayList(),
                 MediaManager.getInstance().getPlayingSong());
         /*---------------------set pager--------------------------------------*/
@@ -75,14 +75,13 @@ public class FullScreenPlayActivity extends AppCompatActivity {
 
         bodyPlay.setAdapter(playlist);
         //Bind the title indicator to the adapter
-        CirclePageIndicator indicator = (CirclePageIndicator)findViewById(R.id.page_indicator);
+        CirclePageIndicator indicator = (CirclePageIndicator) findViewById(R.id.page_indicator);
         indicator.setViewPager(bodyPlay);
 
         mPlayer = MediaManager.getInstance().getmPlayer();
         MediaManager.getInstance().play();
-        //MediaManager.getInstance().setPlaylistSlide(playlist);
         newMediaPlayer();
-
+        MediaManager.getInstance().setPlayCompleteListener(playCompleteListener);
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,13 +100,30 @@ public class FullScreenPlayActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        listener = null;
+        playCompleteListener = null;
+    }
+
     MediaManager.IPlayListener listener = new MediaManager.IPlayListener() {
         @Override
-        public void onPlay(int currentPlayID) {
+        public void onPlay(final int currentPlayID) {
             mediaFileLength = mPlayer.getDuration();
             seekBar.setMax(mediaFileLength);
             endTime.setText(formatter.format(mediaFileLength));
             seekBarProgressUpdater();
+            playlist.update();
+        }
+    };
+
+    MediaManager.IPlayCompleteListener playCompleteListener = new MediaManager.IPlayCompleteListener() {
+        @Override
+        public void onPlayComplete() {
+            if (MediaManager.getInstance().next()) {
+                playlist.update();
+            }
         }
     };
 
@@ -126,35 +142,8 @@ public class FullScreenPlayActivity extends AppCompatActivity {
         playButton.setImageResource(R.drawable.uamp_ic_pause_white_48dp);
         songName.setText(MediaManager.getInstance().getPlayingSong().name);
         singerName.setText(MediaManager.getInstance().getPlayingSong().singer);
-        //mediaFileLength = mPlayer.getDuration();
-        //seekBar.setMax(mediaFileLength);
         formatter = new SimpleDateFormat("mm:ss");
-        //endTime.setText(formatter.format(mediaFileLength));
         MediaManager.getInstance().setPlayListener(listener);
-
-        /*------------------Update play complete---------------------------------------*/
-        mPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mp) {
-                /*int currentPlayID = MediaManager.getInstance().getCurrentPlayID();
-                if (currentPlayID == MediaManager.getInstance().getDataSize() - 1) {
-
-                    MediaManager.getInstance().resetCurrent();
-                    if (FullScreenPlayActivity.this != null) {
-                        newMediaPlayer();
-                    }
-                } else {
-                    seekBar.setProgress(0);
-                    currentTime = 0;
-                    if (FullScreenPlayActivity.this != null) {
-                        MediaManager.getInstance().next();
-                        newMediaPlayer();
-                    } else
-                        MediaManager.getInstance().next();
-                }*/
-
-            }
-        });
 
         /*------------------Play/Pause media---------------------------------------*/
         playButton.setOnClickListener(new View.OnClickListener() {

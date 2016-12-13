@@ -24,10 +24,19 @@ public class MediaManager {
         void onPlay(int currentPlayID);
     }
 
+    public interface IPlayCompleteListener {
+        void onPlayComplete();
+    }
+
     private IPlayListener playListener;
+    private IPlayCompleteListener playCompleteListener;
 
     public void setPlayListener(IPlayListener listener) {
         playListener = listener;
+    }
+
+    public void setPlayCompleteListener(IPlayCompleteListener listener) {
+        playCompleteListener = listener;
     }
 
     private static MediaManager instance;
@@ -55,6 +64,16 @@ public class MediaManager {
 
     public void setmPlayer(MediaPlayer mPlayer) {
         this.mPlayer = mPlayer;
+        mPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                if (playCompleteListener != null)
+                    playCompleteListener.onPlayComplete();
+                else {
+                    next();
+                }
+            }
+        });
     }
 
     public int getCurrentPlayID() {
@@ -129,13 +148,11 @@ public class MediaManager {
             currentPlayID++;
             playingSong = getPlayList().get(currentPlayID);
             play();
-            mPlayer.start();
             return true;
         } else {
             currentPlayID = 0;
             playingSong = getPlayList().get(currentPlayID);
             play();
-            mPlayer.start();
             return true;
         }
     }

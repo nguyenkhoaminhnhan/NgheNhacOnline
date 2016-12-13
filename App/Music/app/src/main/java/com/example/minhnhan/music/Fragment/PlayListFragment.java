@@ -26,7 +26,7 @@ public class PlayListFragment extends Fragment {
     public static final String ARG_PAGE = "page";
 
     public ArrayList<Song> data;
-
+    PlayListAdapter playListAdapter;
 
     public PlayListFragment(ArrayList<Song> data) {
         this.data = data;
@@ -38,9 +38,12 @@ public class PlayListFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.play_list, container,
                 false);
         ListView listView = (ListView) rootView.findViewById(R.id.play_song_list);
-        PlayListAdapter playListAdapter = new PlayListAdapter((FullScreenPlayActivity) getActivity(), data);
+        playListAdapter = new PlayListAdapter((FullScreenPlayActivity) getActivity(), data);
         listView.setAdapter(playListAdapter);
-        //MediaManager.getInstance().setPlayListAdapter(playListAdapter);
         return rootView;
+    }
+    public void update()
+    {
+        playListAdapter.updatePlaying(MediaManager.getInstance().getCurrentPlayID());
     }
 }

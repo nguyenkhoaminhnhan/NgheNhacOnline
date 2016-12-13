@@ -220,12 +220,23 @@ public class HomeActivity extends AppCompatActivity
         }
     };
 
+    MediaManager.IPlayCompleteListener playCompleteListener = new MediaManager.IPlayCompleteListener() {
+        @Override
+        public void onPlayComplete() {
+            if (MediaManager.getInstance().next())
+                updatePlayBack();
+        }
+    };
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 11) {
-            updatePlayBack();
-            MediaManager.getInstance().setPlayListener(listener);
+            if (plFrame.getVisibility() == View.VISIBLE) {
+                updatePlayBack();
+                MediaManager.getInstance().setPlayListener(listener);
+                MediaManager.getInstance().setPlayCompleteListener(playCompleteListener);
+            }
         }
     }
 

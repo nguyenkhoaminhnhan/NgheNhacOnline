@@ -54,5 +54,6 @@ public class MyPlayListSlideAdapter extends FragmentPagerAdapter {
 
     public void update() {
         imagePlayFragment.update();
+        playListFragment.update();
     }
 }

@@ -42,6 +42,9 @@ public class MoreAlbumActivity extends AppCompatActivity {
     private DisplayImageOptions options;
     private ImageLoader imageLoader;
 
+    GridLayoutManager layoutManager;
+    AlbumApdater albumApdater;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,8 +64,7 @@ public class MoreAlbumActivity extends AppCompatActivity {
                 .cacheOnDisk(true).considerExifParams(true)
                 .bitmapConfig(Bitmap.Config.RGB_565).build();
 
-        if(MediaManager.getInstance().getmPlayer().isPlaying())
-        {
+        if (MediaManager.getInstance().getmPlayer().isPlaying()) {
             updatePlayBack();
         }
 
@@ -138,33 +140,13 @@ public class MoreAlbumActivity extends AppCompatActivity {
                 RecyclerView catView = (RecyclerView) findViewById(R.id.more_album_content);
 
                 catView.setHasFixedSize(true);
-                RecyclerView.LayoutManager vietNamLayoutManager = new GridLayoutManager(MoreAlbumActivity.this, 2);
-                catView.setLayoutManager(vietNamLayoutManager);
+                layoutManager = new GridLayoutManager(MoreAlbumActivity.this, 2);
+                catView.setLayoutManager(layoutManager);
 
 
-                final AlbumApdater moreAlbumApdater = new AlbumApdater(MoreAlbumActivity.this, data);
-                catView.setAdapter(moreAlbumApdater);
-                catView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-                    @Override
-                    public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                        GridLayoutManager manager = (GridLayoutManager) recyclerView.getLayoutManager();
-                        int lastVisibleItemPosition = manager.findLastVisibleItemPosition();
-                        int totalItemCount = recyclerView.getLayoutManager().getItemCount();
-                        if (lastVisibleItemPosition - totalItemCount <= 1) {
-                            AsyncAlbum loadMore = new AsyncAlbum(new AsyncListener() {
-                                @Override
-                                public void onAsyncComplete() {
-                                    ArrayList<Album> temp = DataManager.getInstance().getMoreAlbum();
-                                    if (temp.size() > 0) {
-                                        page++;
-                                        moreAlbumApdater.addMore(DataManager.getInstance().getMoreAlbum());
-                                    }
-                                }
-                            });
-                            loadMore.execute(String.format(MORE_ALBUM, type, page));
-                        }
-                    }
-                });
+                albumApdater = new AlbumApdater(MoreAlbumActivity.this, data);
+                catView.setAdapter(albumApdater);
+                catView.addOnScrollListener(new MyScroll());
 
             }
         });
@@ -177,6 +159,13 @@ public class MoreAlbumActivity extends AppCompatActivity {
             updatePlayBack();
         }
     };
+    MediaManager.IPlayCompleteListener playCompleteListener = new MediaManager.IPlayCompleteListener() {
+        @Override
+        public void onPlayComplete() {
+            if (MediaManager.getInstance().next())
+                updatePlayBack();
+        }
+    };
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -184,6 +173,7 @@ public class MoreAlbumActivity extends AppCompatActivity {
         if (requestCode == 11) {
             updatePlayBack();
             MediaManager.getInstance().setPlayListener(listener);
+            MediaManager.getInstance().setPlayCompleteListener(playCompleteListener);
         }
     }
 
@@ -198,6 +188,37 @@ public class MoreAlbumActivity extends AppCompatActivity {
             playButton.setImageResource(R.drawable.uamp_ic_pause_48dp_black);
         } else {
             playButton.setImageResource(R.drawable.uamp_ic_play_arrow_48dp_black);
+        }
+    }
+
+    class MyScroll extends RecyclerView.OnScrollListener {
+
+        boolean canLoadMore = true;
+        boolean isLoading;
+
+        @Override
+        public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+            int lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition();
+            int totalItemCount = recyclerView.getLayoutManager().getItemCount();
+            if (lastVisibleItemPosition - totalItemCount <= 1) {
+                if (isLoading || !canLoadMore) {
+                    return;
+                }
+                isLoading = true;
+                AsyncAlbum loadMore = new AsyncAlbum(new AsyncListener() {
+                    @Override
+                    public void onAsyncComplete() {
+                        ArrayList<Album> temp = DataManager.getInstance().getMoreAlbum();
+                        canLoadMore = temp != null && temp.size() >= 12;
+                        isLoading = false;
+                        if (temp.size() > 0) {
+                            page++;
+                            albumApdater.addMore(DataManager.getInstance().getMoreAlbum());
+                        }
+                    }
+                });
+                loadMore.execute(String.format(MORE_ALBUM, type, page));
+            }
         }
     }
 

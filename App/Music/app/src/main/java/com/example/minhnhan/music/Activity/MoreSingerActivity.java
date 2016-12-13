@@ -48,6 +48,8 @@ public class MoreSingerActivity extends AppCompatActivity {
     private LinearLayout plFrame;
     private DisplayImageOptions options;
     private ImageLoader imageLoader;
+    GridLayoutManager layoutManager;
+    SingerApdater singerApdater;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -148,33 +150,13 @@ public class MoreSingerActivity extends AppCompatActivity {
                 RecyclerView contentView = (RecyclerView) findViewById(R.id.more_singer_content);
 
                 contentView.setHasFixedSize(true);
-                RecyclerView.LayoutManager LayoutManager = new GridLayoutManager(MoreSingerActivity.this, 3);
-                contentView.setLayoutManager(LayoutManager);
+                layoutManager = new GridLayoutManager(MoreSingerActivity.this, 3);
+                contentView.setLayoutManager(layoutManager);
 
 
-                final SingerApdater moreSingerApdater = new SingerApdater(MoreSingerActivity.this, data);
-                contentView.setAdapter(moreSingerApdater);
-                contentView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-                    @Override
-                    public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                        GridLayoutManager manager = (GridLayoutManager) recyclerView.getLayoutManager();
-                        int lastVisibleItemPosition = manager.findLastVisibleItemPosition();
-                        int totalItemCount = recyclerView.getLayoutManager().getItemCount();
-                        if (lastVisibleItemPosition - totalItemCount <= 1) {
-                            AsyncSinger loadMore = new AsyncSinger(new AsyncListener() {
-                                @Override
-                                public void onAsyncComplete() {
-                                    ArrayList<Singer> temp = DataManager.getInstance().getMoreSinger();
-                                    if (temp.size() > 0) {
-                                        page++;
-                                        moreSingerApdater.addMore(DataManager.getInstance().getMoreSinger());
-                                    }
-                                }
-                            });
-                            loadMore.execute(url + page);
-                        }
-                    }
-                });
+                singerApdater = new SingerApdater(MoreSingerActivity.this, data);
+                contentView.setAdapter(singerApdater);
+                contentView.addOnScrollListener(new MyScroll());
 
             }
         });
@@ -187,13 +169,20 @@ public class MoreSingerActivity extends AppCompatActivity {
             updatePlayBack();
         }
     };
-
+    MediaManager.IPlayCompleteListener playCompleteListener = new MediaManager.IPlayCompleteListener() {
+        @Override
+        public void onPlayComplete() {
+            if (MediaManager.getInstance().next())
+                updatePlayBack();
+        }
+    };
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 11) {
             updatePlayBack();
             MediaManager.getInstance().setPlayListener(listener);
+            MediaManager.getInstance().setPlayCompleteListener(playCompleteListener);
         }
     }
 
@@ -208,6 +197,37 @@ public class MoreSingerActivity extends AppCompatActivity {
             playButton.setImageResource(R.drawable.uamp_ic_pause_48dp_black);
         } else {
             playButton.setImageResource(R.drawable.uamp_ic_play_arrow_48dp_black);
+        }
+    }
+
+    class MyScroll extends RecyclerView.OnScrollListener {
+
+        boolean canLoadMore = true;
+        boolean isLoading;
+
+        @Override
+        public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+            int lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition();
+            int totalItemCount = recyclerView.getLayoutManager().getItemCount();
+            if (lastVisibleItemPosition - totalItemCount <= 1) {
+                if (isLoading || !canLoadMore) {
+                    return;
+                }
+                isLoading = true;
+                AsyncAlbum loadMore = new AsyncAlbum(new AsyncListener() {
+                    @Override
+                    public void onAsyncComplete() {
+                        ArrayList<Album> temp = DataManager.getInstance().getMoreAlbum();
+                        canLoadMore = temp != null && temp.size() >= 12;
+                        isLoading = false;
+                        if (temp.size() > 0) {
+                            page++;
+                            singerApdater.addMore(DataManager.getInstance().getMoreSinger());
+                        }
+                    }
+                });
+                loadMore.execute(String.format(MORE_ALBUM, type, page));
+            }
         }
     }
 }

@@ -51,8 +51,7 @@ public class AlbumDetailActivity extends AppCompatActivity {
         preButton = (ImageView) findViewById(R.id.dt_ab_pl_prev);
         nextButton = (ImageView) findViewById(R.id.dt_ab_pl_next);
 
-        if(MediaManager.getInstance().getmPlayer().isPlaying())
-        {
+        if (MediaManager.getInstance().getmPlayer().isPlaying()) {
             updatePlayBack();
         }
         playall.setOnClickListener(new View.OnClickListener() {
@@ -133,6 +132,13 @@ public class AlbumDetailActivity extends AppCompatActivity {
             updatePlayBack();
         }
     };
+    MediaManager.IPlayCompleteListener playCompleteListener = new MediaManager.IPlayCompleteListener() {
+        @Override
+        public void onPlayComplete() {
+            if (MediaManager.getInstance().next())
+                updatePlayBack();
+        }
+    };
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -140,6 +146,7 @@ public class AlbumDetailActivity extends AppCompatActivity {
         if (requestCode == 11) {
             updatePlayBack();
             MediaManager.getInstance().setPlayListener(listener);
+            MediaManager.getInstance().setPlayCompleteListener(playCompleteListener);
         }
     }
 
