@@ -17,6 +17,7 @@ import com.example.minhnhan.music.Adapter.MyPlayListSlideAdapter;
 import com.example.minhnhan.music.Model.Async.Data.MediaManager;
 import com.example.minhnhan.music.R;
 import com.example.minhnhan.music.Utils.DepthPageTransformer;
+import com.viewpagerindicator.CirclePageIndicator;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -73,6 +74,9 @@ public class FullScreenPlayActivity extends AppCompatActivity {
 
 
         bodyPlay.setAdapter(playlist);
+        //Bind the title indicator to the adapter
+        CirclePageIndicator indicator = (CirclePageIndicator)findViewById(R.id.page_indicator);
+        indicator.setViewPager(bodyPlay);
 
         mPlayer = MediaManager.getInstance().getmPlayer();
         MediaManager.getInstance().play();

@@ -18,6 +18,7 @@ import com.example.minhnhan.music.Adapter.SongListAdapter;
 import com.example.minhnhan.music.Model.Async.Data.DataManager;
 import com.example.minhnhan.music.R;
 import com.example.minhnhan.music.Utils.DepthPageTransformer;
+import com.viewpagerindicator.CirclePageIndicator;
 
 import static com.example.minhnhan.music.Utils.Utils.AddHotSongLinearL;
 import static com.example.minhnhan.music.Utils.Utils.AddSongListLinearL;
@@ -43,8 +44,6 @@ public class HomeFragment extends Fragment {
 
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(4 * metrics.widthPixels / 10,
                 LinearLayout.LayoutParams.MATCH_PARENT);
-
-
         /*-------------------Show Case---------------------------*/
         FragmentManager manager = getChildFragmentManager();
         MySlideAdapter showCase = new MySlideAdapter(manager,
@@ -52,6 +51,9 @@ public class HomeFragment extends Fragment {
         ViewPager showCasePager = (ViewPager) rootView.findViewById(R.id.show_case);
         showCasePager.setPageTransformer(true, new DepthPageTransformer());
         showCasePager.setAdapter(showCase);
+        //Bind the title indicator to the adapter
+        CirclePageIndicator indicator = (CirclePageIndicator) rootView.findViewById(R.id.page_indicator);
+        indicator.setViewPager(showCasePager);
         /*-------------------Hot Song Week---------------------------*/
         LinearLayout hotSongWeekView = (LinearLayout) rootView.findViewById(R.id.hot_song_week);
         HotSongAdapter hotSongWeek = new HotSongAdapter((HomeActivity) getActivity(),
@@ -65,7 +67,7 @@ public class HomeFragment extends Fragment {
         AddHotSongLinearL(hotSongMonthView, hotSongMonth, params);
         /*-------------------Song List---------------------------*/
         LinearLayout popularSongView = (LinearLayout) rootView.findViewById(R.id.popular_container);
-        SongListAdapter popularSong = new SongListAdapter((HomeActivity)getActivity(),
+        SongListAdapter popularSong = new SongListAdapter((HomeActivity) getActivity(),
                 DataManager.getInstance().getHomeDetail().getHotSong());
         AddSongListLinearL(popularSongView, popularSong);
         return rootView;
