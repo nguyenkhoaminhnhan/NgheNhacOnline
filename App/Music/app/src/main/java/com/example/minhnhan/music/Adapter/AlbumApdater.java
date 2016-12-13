@@ -35,7 +35,7 @@ public class AlbumApdater extends RecyclerView.Adapter<AlbumApdater.ViewHolder> 
     private DisplayImageOptions options;
     private Activity activity;
 
-    public AlbumApdater(Activity activity , ArrayList<Album> data) {
+    public AlbumApdater(Activity activity, ArrayList<Album> data) {
         this.data = data;
         this.activity = activity;
         options = new DisplayImageOptions.Builder()
@@ -58,6 +58,8 @@ public class AlbumApdater extends RecyclerView.Adapter<AlbumApdater.ViewHolder> 
     public void onBindViewHolder(ViewHolder holder, int position) {
         Album item = data.get(position);
         holder.AlbumName.setText(item.name);
+        holder.AlbumSingerName.setText(item.singer);
+
         ImageLoader imageLoader = ImageLoader.getInstance();
         imageLoader.init(ImageLoaderConfiguration.createDefault(activity));
         imageLoader.displayImage(item.getImagePath(), holder.AlbumImage, options, null);
@@ -72,6 +74,7 @@ public class AlbumApdater extends RecyclerView.Adapter<AlbumApdater.ViewHolder> 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView AlbumName;
         public ImageView AlbumImage;
+        public TextView AlbumSingerName;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -84,7 +87,7 @@ public class AlbumApdater extends RecyclerView.Adapter<AlbumApdater.ViewHolder> 
                         public void onAsyncComplete() {
                             Intent i = new Intent(activity, AlbumDetailActivity.class);
                             MediaManager.getInstance().setAlbum(data.get(position));
-                            activity.startActivityForResult(i,11);
+                            activity.startActivityForResult(i, 11);
                         }
                     });
                     asyncAlbumSong.execute(GET_SONG_BY_ALBUM_ID + data.get(position).id);
@@ -92,6 +95,7 @@ public class AlbumApdater extends RecyclerView.Adapter<AlbumApdater.ViewHolder> 
             });
             AlbumImage = (ImageView) itemView.findViewById(R.id.album_image);
             AlbumName = (TextView) itemView.findViewById(R.id.album_name);
+            AlbumSingerName =(TextView)itemView.findViewById(R.id.album_singer_name);
         }
     }
 
@@ -99,6 +103,7 @@ public class AlbumApdater extends RecyclerView.Adapter<AlbumApdater.ViewHolder> 
         data = temp;
         notifyDataSetChanged();
     }
+
     public void addMore(ArrayList<Album> data) {
         if (this.data == null)
             this.data = data;

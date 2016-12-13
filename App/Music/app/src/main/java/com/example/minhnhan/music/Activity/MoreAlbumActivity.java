@@ -138,7 +138,7 @@ public class MoreAlbumActivity extends AppCompatActivity {
                 RecyclerView catView = (RecyclerView) findViewById(R.id.more_cat_content);
 
                 catView.setHasFixedSize(true);
-                RecyclerView.LayoutManager vietNamLayoutManager = new GridLayoutManager(MoreAlbumActivity.this, 3);
+                RecyclerView.LayoutManager vietNamLayoutManager = new GridLayoutManager(MoreAlbumActivity.this, 2);
                 catView.setLayoutManager(vietNamLayoutManager);
 
 

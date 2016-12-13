@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:id="@+id/album_item"
-    android:layout_height="135dp"
+    android:layout_height="wrap_content"
     android:layout_marginBottom="7dp"
     android:layout_marginRight="3dp"
     android:background="#ffffff"
@@ -11,18 +11,32 @@
 
     <ImageView
         android:id="@+id/album_image"
-        android:layout_width="110dp"
-        android:layout_height="110dp"
+        android:layout_width="169dp"
+        android:layout_height="169dp"
         android:duplicateParentState="true"
         android:scaleType="fitXY" />
-
     <TextView
+        android:layout_marginTop="2dp"
+        android:paddingRight="5dp"
+        android:paddingLeft="5dp"
         android:id="@+id/album_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:duplicateParentState="true"
         android:ellipsize="end"
-        android:gravity="center"
         android:maxLines="1"
+        android:textSize="16dp"
+        android:textColor="#000"
         android:text="Album Name" />
+    <TextView
+        android:paddingRight="5dp"
+        android:paddingLeft="5dp"
+        android:layout_marginBottom="3dp"
+        android:id="@+id/album_singer_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:duplicateParentState="true"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="Album Singer Name" />
 </LinearLayout>

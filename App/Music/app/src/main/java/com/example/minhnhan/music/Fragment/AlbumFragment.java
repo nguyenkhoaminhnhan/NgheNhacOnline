@@ -52,22 +52,22 @@ public class AlbumFragment extends Fragment {
 
                 RecyclerView vietNamView = (RecyclerView) rootView.findViewById(R.id.album_viet_nam);
                 vietNamView.setHasFixedSize(true);
-                RecyclerView.LayoutManager vietNamLayoutManager = new GridLayoutManager(getContext(), 3);
+                RecyclerView.LayoutManager vietNamLayoutManager = new GridLayoutManager(getContext(), 2);
                 vietNamView.setLayoutManager(vietNamLayoutManager);
 
                 RecyclerView auMyView = (RecyclerView) rootView.findViewById(R.id.album_au_my);
                 auMyView.setHasFixedSize(true);
-                RecyclerView.LayoutManager auMyLayoutManager = new GridLayoutManager(getContext(), 3);
+                RecyclerView.LayoutManager auMyLayoutManager = new GridLayoutManager(getContext(), 2);
                 auMyView.setLayoutManager(auMyLayoutManager);
 
                 RecyclerView chauAView = (RecyclerView) rootView.findViewById(R.id.album_chau_a);
                 chauAView.setHasFixedSize(true);
-                RecyclerView.LayoutManager ChauALayoutManager = new GridLayoutManager(getContext(), 3);
+                RecyclerView.LayoutManager ChauALayoutManager = new GridLayoutManager(getContext(), 2);
                 chauAView.setLayoutManager(ChauALayoutManager);
 
                 RecyclerView khongLoiView = (RecyclerView) rootView.findViewById(R.id.album_khong_loi);
                 khongLoiView.setHasFixedSize(true);
-                RecyclerView.LayoutManager khongLoiLayoutManager = new GridLayoutManager(getContext(), 3);
+                RecyclerView.LayoutManager khongLoiLayoutManager = new GridLayoutManager(getContext(), 2);
                 khongLoiView.setLayoutManager(khongLoiLayoutManager);
 
                 AlbumApdater vietNamAdapter = new AlbumApdater(getActivity(), data.getVietNam());
