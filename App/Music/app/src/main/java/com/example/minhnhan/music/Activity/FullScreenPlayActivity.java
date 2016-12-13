@@ -1,26 +1,22 @@
 package com.example.minhnhan.music.Activity;
 
-import android.graphics.Bitmap;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.example.minhnhan.music.Adapter.MyPlayListSlideAdapter;
-import com.example.minhnhan.music.Adapter.MySlideAdapter;
-import com.example.minhnhan.music.Model.Async.Data.DataManager;
 import com.example.minhnhan.music.Model.Async.Data.MediaManager;
 import com.example.minhnhan.music.R;
 import com.example.minhnhan.music.Utils.DepthPageTransformer;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -40,7 +36,15 @@ public class FullScreenPlayActivity extends AppCompatActivity {
     private int mediaFileLength;
     private DateFormat formatter;
 
-    private final Handler handler = new Handler();
+    private final Handler handler = new Handler(new Handler.Callback() {
+        @Override
+        public boolean handleMessage(Message msg) {
+            if (msg.what == 1) {
+                seekBarProgressUpdater();
+            }
+            return false;
+        }
+    });
 
     MediaPlayer mPlayer;
 
@@ -72,7 +76,7 @@ public class FullScreenPlayActivity extends AppCompatActivity {
 
         mPlayer = MediaManager.getInstance().getmPlayer();
         MediaManager.getInstance().play();
-        MediaManager.getInstance().setPlaylistSlide(playlist);
+        //MediaManager.getInstance().setPlaylistSlide(playlist);
         newMediaPlayer();
 
         nextButton.setOnClickListener(new View.OnClickListener() {
@@ -93,35 +97,42 @@ public class FullScreenPlayActivity extends AppCompatActivity {
         });
     }
 
-    private void SeekBarProgressUpdater() {
+    MediaManager.IPlayListener listener = new MediaManager.IPlayListener() {
+        @Override
+        public void onPlay(int currentPlayID) {
+            mediaFileLength = mPlayer.getDuration();
+            seekBar.setMax(mediaFileLength);
+            endTime.setText(formatter.format(mediaFileLength));
+            seekBarProgressUpdater();
+        }
+    };
+
+    private void seekBarProgressUpdater() {
         currentTime = mPlayer.getCurrentPosition();
+        Log.d("debug", "current time " + currentTime);
         realTime.setText(formatter.format(currentTime));
         seekBar.setProgress(currentTime);
         if (mPlayer.isPlaying()) {
-            Runnable notification = new Runnable() {
-                public void run() {
-                    SeekBarProgressUpdater();
-                }
-            };
-            handler.post(notification);
+            handler.sendEmptyMessageDelayed(1, 500);
         }
     }
 
     public void newMediaPlayer() {
+        Log.d("debug", "----- newMediaPlayer ----- ");
         playButton.setImageResource(R.drawable.uamp_ic_pause_white_48dp);
         songName.setText(MediaManager.getInstance().getPlayingSong().name);
         singerName.setText(MediaManager.getInstance().getPlayingSong().singer);
-        mediaFileLength = mPlayer.getDuration();
-        seekBar.setMax(mediaFileLength);
+        //mediaFileLength = mPlayer.getDuration();
+        //seekBar.setMax(mediaFileLength);
         formatter = new SimpleDateFormat("mm:ss");
-        endTime.setText(formatter.format(mediaFileLength));
-        SeekBarProgressUpdater();
+        //endTime.setText(formatter.format(mediaFileLength));
+        MediaManager.getInstance().setPlayListener(listener);
 
         /*------------------Update play complete---------------------------------------*/
         mPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mp) {
-                int currentPlayID = MediaManager.getInstance().getCurrentPlayID();
+                /*int currentPlayID = MediaManager.getInstance().getCurrentPlayID();
                 if (currentPlayID == MediaManager.getInstance().getDataSize() - 1) {
 
                     MediaManager.getInstance().resetCurrent();
@@ -136,7 +147,7 @@ public class FullScreenPlayActivity extends AppCompatActivity {
                         newMediaPlayer();
                     } else
                         MediaManager.getInstance().next();
-                }
+                }*/
 
             }
         });
@@ -151,6 +162,7 @@ public class FullScreenPlayActivity extends AppCompatActivity {
                 } else if (!mPlayer.isPlaying()) {
                     mPlayer.start();
                     playButton.setImageResource(R.drawable.uamp_ic_pause_white_48dp);
+                    seekBarProgressUpdater();
                 }
             }
         });
@@ -160,23 +172,20 @@ public class FullScreenPlayActivity extends AppCompatActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 if (fromUser) {
-
                     seekBar.setProgress(progress);
-                    SeekBarProgressUpdater();
                     mPlayer.seekTo(progress);
                     playButton.setImageResource(R.drawable.uamp_ic_pause_white_48dp);
                     mPlayer.start();
+                    seekBarProgressUpdater();
                 }
             }
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-
             }
         });
     }

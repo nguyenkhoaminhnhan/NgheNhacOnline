@@ -181,12 +181,19 @@ public class MoreSingerActivity extends AppCompatActivity {
         asyncAlbum.execute(url + page);
     }
 
+    MediaManager.IPlayListener listener = new MediaManager.IPlayListener() {
+        @Override
+        public void onPlay(int currentPlayID) {
+            updatePlayBack();
+        }
+    };
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 11) {
             updatePlayBack();
-            MediaManager.getInstance().setMoreSingerActivity(MoreSingerActivity.this);
+            MediaManager.getInstance().setPlayListener(listener);
         }
     }
 

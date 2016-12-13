@@ -40,7 +40,7 @@ public class PlayListFragment extends Fragment {
         ListView listView = (ListView) rootView.findViewById(R.id.play_song_list);
         PlayListAdapter playListAdapter = new PlayListAdapter((FullScreenPlayActivity) getActivity(), data);
         listView.setAdapter(playListAdapter);
-        MediaManager.getInstance().setPlayListAdapter(playListAdapter);
+        //MediaManager.getInstance().setPlayListAdapter(playListAdapter);
         return rootView;
     }
 }

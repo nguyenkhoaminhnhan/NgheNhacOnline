@@ -2,13 +2,8 @@ package com.example.minhnhan.music.Model.Async.Data;
 
 
 import android.media.MediaPlayer;
+import android.util.Log;
 
-import com.example.minhnhan.music.Activity.AlbumDetailActivity;
-import com.example.minhnhan.music.Activity.HomeActivity;
-import com.example.minhnhan.music.Activity.MoreAlbumActivity;
-import com.example.minhnhan.music.Activity.MoreSingerActivity;
-import com.example.minhnhan.music.Adapter.MyPlayListSlideAdapter;
-import com.example.minhnhan.music.Adapter.PlayListAdapter;
 import com.example.minhnhan.music.Model.Album;
 import com.example.minhnhan.music.Model.Async.AsyncListener;
 import com.example.minhnhan.music.Model.Async.AsyncSongListen;
@@ -24,6 +19,17 @@ import static com.example.minhnhan.music.Utils.Constants.UPDATE_LISTEN;
  * Restore all data off program from server
  */
 public class MediaManager {
+
+    public interface IPlayListener {
+        void onPlay(int currentPlayID);
+    }
+
+    private IPlayListener playListener;
+
+    public void setPlayListener(IPlayListener listener) {
+        playListener = listener;
+    }
+
     private static MediaManager instance;
     private MediaPlayer mPlayer;
     private int currentPlayID = 0;
@@ -31,13 +37,6 @@ public class MediaManager {
     private Song playingSong;
     private ArrayList<Song> playList = new ArrayList<>();
     private ArrayList<Song> prepareList = new ArrayList<>();
-
-    private MoreAlbumActivity moreAlbumActivity;
-    private MoreSingerActivity moreSingerActivity;
-    private HomeActivity homeActivity;
-    private AlbumDetailActivity albumDetailActivity;
-    private MyPlayListSlideAdapter playlistSlide;
-    private PlayListAdapter playListAdapter;
 
     public static MediaManager getInstance() {
         if (instance == null)
@@ -79,7 +78,7 @@ public class MediaManager {
     }
 
     public int getDataSize() {
-        return playList == null ? 0 : playList.size();
+        return getPlayList() == null ? 0 : getPlayList().size();
     }
 
     public void setPlayList(ArrayList<Song> playList) {
@@ -90,51 +89,51 @@ public class MediaManager {
 
     public void playAgain() {
         currentPlayID = 0;
-        playingSong = playList.get(0);
+        playingSong = getPlayList().get(0);
         play();
     }
 
     public void resetCurrent() {
         currentPlayID = 0;
-        playingSong = playList.get(0);
+        playingSong = getPlayList().get(0);
         play();
     }
 
     public void setOnSongToPlay(Song data) {
-        playList.clear();
-        playList.add(data);
+        getPlayList().clear();
+        getPlayList().add(data);
         currentPlayID = 0;
-        playingSong = playList.get(0);
+        playingSong = getPlayList().get(0);
     }
 
     public boolean prev() {
-        if (playList.size() == 1)
+        if (getPlayList().size() == 1)
             return false;
         if (currentPlayID > 0) {
             currentPlayID--;
-            playingSong = playList.get(currentPlayID);
+            playingSong = getPlayList().get(currentPlayID);
             play();
             return true;
         } else {
-            currentPlayID = playList.size() - 1;
-            playingSong = playList.get(currentPlayID);
+            currentPlayID = getPlayList().size() - 1;
+            playingSong = getPlayList().get(currentPlayID);
             play();
             return true;
         }
     }
 
     public boolean next() {
-        if (playList.size() == 1)
+        if (getPlayList().size() == 1)
             return false;
-        if (currentPlayID < playList.size() - 1) {
+        if (currentPlayID < getPlayList().size() - 1) {
             currentPlayID++;
-            playingSong = playList.get(currentPlayID);
+            playingSong = getPlayList().get(currentPlayID);
             play();
             mPlayer.start();
             return true;
         } else {
             currentPlayID = 0;
-            playingSong = playList.get(currentPlayID);
+            playingSong = getPlayList().get(currentPlayID);
             play();
             mPlayer.start();
             return true;
@@ -159,30 +158,21 @@ public class MediaManager {
         }
         try {
             mPlayer.setDataSource(playingSong.getSourcePath());
-            mPlayer.prepare();
-            mPlayer.start();
-            AsyncSongListen asyncSongListen = new AsyncSongListen(new AsyncListener() {
+            mPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                 @Override
-                public void onAsyncComplete() {
-
+                public void onPrepared(MediaPlayer mp) {
+                    mPlayer.start();
+                    if (playListener != null) {
+                        playListener.onPlay(currentPlayID);
+                    }
                 }
             });
-            asyncSongListen.execute(UPDATE_LISTEN + playingSong.getId());
+            mPlayer.prepareAsync();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        if (moreAlbumActivity != null)
-            moreAlbumActivity.updatePlayBack();
-        if (moreSingerActivity != null)
-            moreSingerActivity.updatePlayBack();
-        if (homeActivity != null)
-            homeActivity.updatePlayBack();
-        if (albumDetailActivity != null)
-            albumDetailActivity.updatePlayBack();
-        if (playlistSlide != null)
-            playlistSlide.update();
-        if (playListAdapter != null)
-            playListAdapter.updatePlaying(currentPlayID);
+        AsyncSongListen asyncSongListen = new AsyncSongListen(null);
+        asyncSongListen.execute(UPDATE_LISTEN + playingSong.getId());
     }
 
     public Album getAlbum() {
@@ -205,53 +195,5 @@ public class MediaManager {
         setPlayList(prepareList);
         setPlayingSong(prepareList.get(startID));
         currentPlayID = startID;
-    }
-
-    public MoreAlbumActivity getMoreAlbumActivity() {
-        return moreAlbumActivity;
-    }
-
-    public void setMoreAlbumActivity(MoreAlbumActivity moreAlbumActivity) {
-        this.moreAlbumActivity = moreAlbumActivity;
-    }
-
-    public HomeActivity getHomeActivity() {
-        return homeActivity;
-    }
-
-    public void setHomeActivity(HomeActivity homeActivity) {
-        this.homeActivity = homeActivity;
-    }
-
-    public AlbumDetailActivity getAlbumDetailActivity() {
-        return albumDetailActivity;
-    }
-
-    public void setAlbumDetailActivity(AlbumDetailActivity albumDetailActivity) {
-        this.albumDetailActivity = albumDetailActivity;
-    }
-
-    public MyPlayListSlideAdapter getPlaylistSlide() {
-        return playlistSlide;
-    }
-
-    public void setPlaylistSlide(MyPlayListSlideAdapter playlistSlide) {
-        this.playlistSlide = playlistSlide;
-    }
-
-    public PlayListAdapter getPlayListAdapter() {
-        return playListAdapter;
-    }
-
-    public void setPlayListAdapter(PlayListAdapter playListAdapter) {
-        this.playListAdapter = playListAdapter;
-    }
-
-    public MoreSingerActivity getMoreSingerActivity() {
-        return moreSingerActivity;
-    }
-
-    public void setMoreSingerActivity(MoreSingerActivity moreSingerActivity) {
-        this.moreSingerActivity = moreSingerActivity;
     }
 }
