@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.minhnhan.music.Model.Album;
 import com.example.minhnhan.music.Model.Singer;
 import com.example.minhnhan.music.R;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -69,5 +70,13 @@ public class SingerApdater extends RecyclerView.Adapter<SingerApdater.ViewHolder
             singerImage = (ImageView)itemView.findViewById(R.id.singer_image);
             singerName = (TextView)itemView.findViewById(R.id.singer_name);
         }
+    }
+    public void addMore(ArrayList<Singer> data) {
+        if (this.data == null)
+            this.data = data;
+        else
+            this.data.addAll(data);
+        // yeu cau adapter refresh lai view
+        notifyDataSetChanged();
     }
 }

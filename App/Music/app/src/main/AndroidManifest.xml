@@ -30,7 +30,8 @@
             android:name=".Activity.FullScreenPlayActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Activity.MoreAlbumActivity" />
-        <activity android:name=".Activity.AlbumDetailActivity"></activity>
+        <activity android:name=".Activity.AlbumDetailActivity" />
+        <activity android:name=".Activity.MoreSingerActivity"></activity>
     </application>
 
 </manifest>

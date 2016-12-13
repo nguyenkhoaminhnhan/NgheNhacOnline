@@ -1,14 +1,18 @@
 package com.example.minhnhan.music.Fragment;
 
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.example.minhnhan.music.Activity.FullScreenPlayActivity;
 import com.example.minhnhan.music.Adapter.PlayListAdapter;
+import com.example.minhnhan.music.Model.Async.Data.MediaManager;
 import com.example.minhnhan.music.Model.Song;
 import com.example.minhnhan.music.R;
 
@@ -36,6 +40,7 @@ public class PlayListFragment extends Fragment {
         ListView listView = (ListView) rootView.findViewById(R.id.play_song_list);
         PlayListAdapter playListAdapter = new PlayListAdapter((FullScreenPlayActivity) getActivity(), data);
         listView.setAdapter(playListAdapter);
+        MediaManager.getInstance().setPlayListAdapter(playListAdapter);
         return rootView;
     }
 }

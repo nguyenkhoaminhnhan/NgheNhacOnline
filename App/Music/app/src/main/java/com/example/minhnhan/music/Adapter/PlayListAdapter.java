@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.minhnhan.music.Activity.FullScreenPlayActivity;
@@ -37,7 +38,8 @@ public class PlayListAdapter extends BaseAdapter {
     private DisplayImageOptions options;
     private FullScreenPlayActivity activity;
     private Song item;
-    private ViewHolder oldPlay;
+    private int oldPlayPositon;
+    private ArrayList<ViewHolder> listHolder;
 
     public PlayListAdapter(FullScreenPlayActivity activity, ArrayList<Song> data) {
         mInflater = (LayoutInflater) activity
@@ -50,6 +52,8 @@ public class PlayListAdapter extends BaseAdapter {
                 .cacheOnDisk(true).considerExifParams(true)
                 .bitmapConfig(Bitmap.Config.RGB_565).build();
         this.activity = activity;
+        listHolder = new ArrayList<>();
+        oldPlayPositon = MediaManager.getInstance().getCurrentPlayID();
     }
 
     @Override
@@ -90,9 +94,9 @@ public class PlayListAdapter extends BaseAdapter {
         imageLoader.init(ImageLoaderConfiguration.createDefault(activity));
         imageLoader.displayImage(item.getImagePath(), holder.image, options, null);
         holder.animation.setImageResource(R.drawable.uamp_ic_play_arrow_white_48dp);
+        listHolder.add(holder);
         if (MediaManager.getInstance().getCurrentPlayID() == position) {
-            oldPlay = holder;
-            updatePlaying(holder, position);
+            updatePlaying(position);
         }
 
         convertView.setOnClickListener(new View.OnClickListener() {
@@ -102,7 +106,7 @@ public class PlayListAdapter extends BaseAdapter {
                 MediaManager.getInstance().setPlayingSong(data.get(position));
                 MediaManager.getInstance().play();
                 activity.newMediaPlayer();
-                updatePlaying(holder, position);
+                updatePlaying(position);
 
             }
         });
@@ -135,16 +139,16 @@ public class PlayListAdapter extends BaseAdapter {
         return item.getImagePath();
     }
 
-    public void updatePlaying(ViewHolder holder, int position) {
-        oldPlay.animation.setImageResource(R.drawable.uamp_ic_play_arrow_white_48dp);
+    public void updatePlaying(int position) {
+        listHolder.get(oldPlayPositon).animation.setImageResource(R.drawable.uamp_ic_play_arrow_white_48dp);
 
         AnimationDrawable animation = (AnimationDrawable)
                 ContextCompat.getDrawable(activity, R.drawable.animation);
         ColorStateList sColorStatePlaying = ColorStateList.valueOf(activity.getResources().getColor(
                 R.color.colorAccent));
         DrawableCompat.setTintList(animation, sColorStatePlaying);
-        holder.animation.setImageDrawable(animation);
+        listHolder.get(position).animation.setImageDrawable(animation);
         animation.start();
-        oldPlay = holder;
+        oldPlayPositon = position;
     }
 }

@@ -6,7 +6,9 @@ import android.media.MediaPlayer;
 import com.example.minhnhan.music.Activity.AlbumDetailActivity;
 import com.example.minhnhan.music.Activity.HomeActivity;
 import com.example.minhnhan.music.Activity.MoreAlbumActivity;
+import com.example.minhnhan.music.Activity.MoreSingerActivity;
 import com.example.minhnhan.music.Adapter.MyPlayListSlideAdapter;
+import com.example.minhnhan.music.Adapter.PlayListAdapter;
 import com.example.minhnhan.music.Model.Album;
 import com.example.minhnhan.music.Model.Async.AsyncListener;
 import com.example.minhnhan.music.Model.Async.AsyncSongListen;
@@ -31,9 +33,11 @@ public class MediaManager {
     private ArrayList<Song> prepareList = new ArrayList<>();
 
     private MoreAlbumActivity moreAlbumActivity;
+    private MoreSingerActivity moreSingerActivity;
     private HomeActivity homeActivity;
     private AlbumDetailActivity albumDetailActivity;
     private MyPlayListSlideAdapter playlistSlide;
+    private PlayListAdapter playListAdapter;
 
     public static MediaManager getInstance() {
         if (instance == null)
@@ -169,12 +173,16 @@ public class MediaManager {
         }
         if (moreAlbumActivity != null)
             moreAlbumActivity.updatePlayBack();
-        else if (homeActivity != null)
+        if (moreSingerActivity != null)
+            moreSingerActivity.updatePlayBack();
+        if (homeActivity != null)
             homeActivity.updatePlayBack();
-        else if (albumDetailActivity != null)
+        if (albumDetailActivity != null)
             albumDetailActivity.updatePlayBack();
-        else if (playlistSlide != null)
+        if (playlistSlide != null)
             playlistSlide.update();
+        if (playListAdapter != null)
+            playListAdapter.updatePlaying(currentPlayID);
     }
 
     public Album getAlbum() {
@@ -229,5 +237,21 @@ public class MediaManager {
 
     public void setPlaylistSlide(MyPlayListSlideAdapter playlistSlide) {
         this.playlistSlide = playlistSlide;
+    }
+
+    public PlayListAdapter getPlayListAdapter() {
+        return playListAdapter;
+    }
+
+    public void setPlayListAdapter(PlayListAdapter playListAdapter) {
+        this.playListAdapter = playListAdapter;
+    }
+
+    public MoreSingerActivity getMoreSingerActivity() {
+        return moreSingerActivity;
+    }
+
+    public void setMoreSingerActivity(MoreSingerActivity moreSingerActivity) {
+        this.moreSingerActivity = moreSingerActivity;
     }
 }

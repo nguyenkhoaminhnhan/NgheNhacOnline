@@ -143,28 +143,28 @@ namespace Music.Controllers
 
             IQueryable<Singer> entities = db.Singers;
             var VietNam = entities.Where(x=> x.CustomInt1 ==1).OrderBy(x =>x.ID).Skip(12*page).Take(12).Select(x => new { x.ID, x.Name, x.ImagePath, x.Birthday,x.Nationality, x.Detail});
-            return Json(new { VietNam }, JsonRequestBehavior.AllowGet);
+            return Json(VietNam, JsonRequestBehavior.AllowGet);
         }
         public ActionResult getSingerAuMy(int page)
         {
 
             IQueryable<Singer> entities = db.Singers;
             var AuMy = entities.Where(x => x.CustomInt1 == 2).OrderBy(x => x.ID).Skip(12 * page).Take(12).Select(x => new { x.ID, x.Name, x.ImagePath, x.Birthday, x.Nationality, x.Detail });
-            return Json(new { AuMy }, JsonRequestBehavior.AllowGet);
+            return Json(AuMy, JsonRequestBehavior.AllowGet);
         }
         public ActionResult getSingerChauA(int page)
         {
 
             IQueryable<Singer> entities = db.Singers;
             var ChauA = entities.Where(x => x.CustomInt1 == 3).OrderBy(x => x.ID).Skip(12 * page).Take(12).Select(x => new { x.ID, x.Name, x.ImagePath, x.Birthday, x.Nationality, x.Detail });
-            return Json(new { ChauA }, JsonRequestBehavior.AllowGet);
+            return Json(ChauA, JsonRequestBehavior.AllowGet);
         }
         public ActionResult getSingerHoaTau(int page)
         {
 
             IQueryable<Singer> entities = db.Singers;
             var HoaTau = entities.Where(x => x.CustomInt1 == 4).OrderBy(x => x.ID).Skip(12 * page).Take(12).Select(x => new { x.ID, x.Name, x.ImagePath, x.Birthday, x.Nationality, x.Detail });
-            return Json(new { HoaTau }, JsonRequestBehavior.AllowGet);
+            return Json(HoaTau, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult searchSinger(string name, int page)
