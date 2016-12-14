@@ -1,20 +1,24 @@
 package com.example.minhnhan.music.Activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.media.MediaPlayer;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.minhnhan.music.Adapter.AlbumApdater;
+import com.example.minhnhan.music.Adapter.SongListAdapter;
 import com.example.minhnhan.music.Model.Album;
 import com.example.minhnhan.music.Model.Async.AsyncAlbum;
+import com.example.minhnhan.music.Model.Async.AsyncAlbumSong;
 import com.example.minhnhan.music.Model.Async.AsyncListener;
 import com.example.minhnhan.music.Model.Async.Data.DataManager;
 import com.example.minhnhan.music.Model.Async.Data.MediaManager;
@@ -23,13 +27,19 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
-import static com.example.minhnhan.music.Utils.Constants.MORE_ALBUM;
+import static com.example.minhnhan.music.Utils.Constants.GET_ALBUM_BY_CAT;
+import static com.example.minhnhan.music.Utils.Constants.GET_SONG_BY_CAT;
+import static com.example.minhnhan.music.Utils.Utils.AddSongListLinearL;
 
 public class CategoryDetailActivity extends AppCompatActivity {
-    private int type;
     private int page = 0;
+
+    String typeName;
+    long typeID;
 
     private ImageView songImage;
     private TextView plName;
@@ -41,18 +51,27 @@ public class CategoryDetailActivity extends AppCompatActivity {
     private DisplayImageOptions options;
     private ImageLoader imageLoader;
 
+    ProgressDialog progress;
+    View view;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_more_album);
+        setContentView(R.layout.activity_category_detail);
+
+        progress = new ProgressDialog(this);
+        progress.setTitle("Vui lòng chờ");
+        progress.setMessage("Đang tải...");
+        progress.setCancelable(false);
+        progress.show();
 
         imageLoader = ImageLoader.getInstance();
         imageLoader.init(ImageLoaderConfiguration.createDefault(this));
-        songImage = (ImageView) findViewById(R.id.more_ab_pl_image);
-        plName = (TextView) findViewById(R.id.more_ab_pl_song_name);
-        plSinger = (TextView) findViewById(R.id.more_ab_pl_singer_name);
-        playButton = (ImageView) findViewById(R.id.more_ab_pl_play_pause);
-        plFrame = (LinearLayout) findViewById(R.id.more_ab_pl_frame);
+        songImage = (ImageView) findViewById(R.id.dt_cat_pl_image);
+        plName = (TextView) findViewById(R.id.dt_cat_pl_song_name);
+        plSinger = (TextView) findViewById(R.id.dt_cat_pl_singer_name);
+        playButton = (ImageView) findViewById(R.id.dt_cat_pl_play_pause);
+        plFrame = (LinearLayout) findViewById(R.id.dt_cat_pl_frame);
         options = new DisplayImageOptions.Builder()
                 .showImageOnLoading(R.drawable.ic_stub)
                 .showImageForEmptyUri(R.drawable.ic_empty)
@@ -60,13 +79,18 @@ public class CategoryDetailActivity extends AppCompatActivity {
                 .cacheOnDisk(true).considerExifParams(true)
                 .bitmapConfig(Bitmap.Config.RGB_565).build();
 
-        if(MediaManager.getInstance().getmPlayer().isPlaying())
-        {
+        if (MediaManager.getInstance().getmPlayer().isPlaying()) {
             updatePlayBack();
         }
 
-        preButton = (ImageView) findViewById(R.id.more_ab_pl_prev);
-        nextButton = (ImageView) findViewById(R.id.more_ab_pl_next);
+        preButton = (ImageView) findViewById(R.id.dt_cat_pl_prev);
+        nextButton = (ImageView) findViewById(R.id.dt_cat_pl_next);
+
+        if (MediaManager.getInstance().isPlayed) {
+            updatePlayBack();
+            MediaManager.getInstance().setPlayListener(listener);
+            MediaManager.getInstance().setPlayCompleteListener(playCompleteListener);
+        }
 
         playButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,24 +132,22 @@ public class CategoryDetailActivity extends AppCompatActivity {
         });
 
         Bundle b = getIntent().getExtras();
-        if (b != null)
-            type = b.getInt("key");
-
-        TextView nameList = (TextView) findViewById(R.id.more_album_list_name);
-        ImageView image = (ImageView) findViewById(R.id.more_album_icon);
-        if (type == 1) {
-            nameList.setText("Việt Nam");
-            image.setImageResource(R.drawable.vietnam);
-        } else if (type == 2) {
-            nameList.setText("Âu Mỹ");
-            image.setImageResource(R.drawable.au_my);
-        } else if (type == 3) {
-            nameList.setText("Châu Á");
-            image.setImageResource(R.drawable.chau_a);
-        } else if (type == 4) {
-            nameList.setText("Không Lời");
-            image.setImageResource(R.drawable.khong_loi);
+        if (b != null) {
+            typeID = b.getLong("id");
+            typeName = b.getString("key");
+            this.setTitle(typeName);
         }
+
+        AsyncAlbumSong asyncAlbumSong = new AsyncAlbumSong(new AsyncListener() {
+            @Override
+            public void onAsyncComplete() {
+                LinearLayout listSong = (LinearLayout) findViewById(R.id.song_cat);
+                SongListAdapter data = new SongListAdapter
+                        (CategoryDetailActivity.this, MediaManager.getInstance().getPrepareList());
+                AddSongListLinearL(listSong, data);
+            }
+        });
+        asyncAlbumSong.execute(String.format(GET_SONG_BY_CAT, typeID, page));
 
         AsyncAlbum asyncAlbum = new AsyncAlbum(new AsyncListener() {
             @Override
@@ -133,40 +155,33 @@ public class CategoryDetailActivity extends AppCompatActivity {
                 page++;
                 ArrayList<Album> data = DataManager.getInstance().getMoreAlbum();
 
-                RecyclerView catView = (RecyclerView) findViewById(R.id.more_album_content);
+                RecyclerView albumView = (RecyclerView) findViewById(R.id.album_cat);
 
-                catView.setHasFixedSize(true);
+                albumView.setHasFixedSize(true);
                 RecyclerView.LayoutManager vietNamLayoutManager = new GridLayoutManager(CategoryDetailActivity.this, 2);
-                catView.setLayoutManager(vietNamLayoutManager);
+                albumView.setLayoutManager(vietNamLayoutManager);
 
 
                 final AlbumApdater moreAlbumApdater = new AlbumApdater(CategoryDetailActivity.this, data);
-                catView.setAdapter(moreAlbumApdater);
-                catView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                albumView.setAdapter(moreAlbumApdater);
+
+                view = findViewById(R.id.activity_category_detail);
+                ViewTreeObserver vto = view.getViewTreeObserver();
+                vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
                     @Override
-                    public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                        GridLayoutManager manager = (GridLayoutManager) recyclerView.getLayoutManager();
-                        int lastVisibleItemPosition = manager.findLastVisibleItemPosition();
-                        int totalItemCount = recyclerView.getLayoutManager().getItemCount();
-                        if (lastVisibleItemPosition - totalItemCount <= 1) {
-                            AsyncAlbum loadMore = new AsyncAlbum(new AsyncListener() {
-                                @Override
-                                public void onAsyncComplete() {
-                                    ArrayList<Album> temp = DataManager.getInstance().getMoreAlbum();
-                                    if (temp.size() > 0) {
-                                        page++;
-                                        moreAlbumApdater.addMore(DataManager.getInstance().getMoreAlbum());
-                                    }
-                                }
-                            });
-                            loadMore.execute(String.format(MORE_ALBUM, type, page));
-                        }
+                    public void onGlobalLayout() {
+                        view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                        progress.dismiss();
                     }
                 });
-
             }
         });
-        asyncAlbum.execute(String.format(MORE_ALBUM, type, page));
+        try {
+            typeName = URLEncoder.encode(typeName, "utf-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        asyncAlbum.execute(String.format(GET_ALBUM_BY_CAT, typeName, page));
     }
 
     MediaManager.IPlayListener listener = new MediaManager.IPlayListener() {
@@ -182,13 +197,16 @@ public class CategoryDetailActivity extends AppCompatActivity {
                 updatePlayBack();
         }
     };
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 11) {
-            updatePlayBack();
-            MediaManager.getInstance().setPlayListener(listener);
-            MediaManager.getInstance().setPlayCompleteListener(playCompleteListener);
+            if (MediaManager.getInstance().isPlayed) {
+                updatePlayBack();
+                MediaManager.getInstance().setPlayListener(listener);
+                MediaManager.getInstance().setPlayCompleteListener(playCompleteListener);
+            }
         }
     }
 

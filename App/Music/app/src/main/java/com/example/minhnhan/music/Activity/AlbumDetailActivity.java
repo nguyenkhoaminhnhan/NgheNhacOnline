@@ -1,11 +1,13 @@
 package com.example.minhnhan.music.Activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -34,10 +36,19 @@ public class AlbumDetailActivity extends AppCompatActivity {
     private DisplayImageOptions options;
     private ImageLoader imageLoader;
 
+    private ProgressDialog progress;
+    private View view;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_album_detail);
+        progress = new ProgressDialog(this);
+        progress.setTitle("Vui lòng chờ");
+        progress.setMessage("Đang tải...");
+        progress.setCancelable(false);
+        progress.show();
+
         TextView detail = (TextView) findViewById(R.id.detail_album_detail);
         ImageView image = (ImageView) findViewById(R.id.detail_album_image);
         RelativeLayout playall = (RelativeLayout) findViewById(R.id.play_all);
@@ -86,6 +97,12 @@ public class AlbumDetailActivity extends AppCompatActivity {
         preButton = (ImageView) findViewById(R.id.dt_ab_pl_prev);
         nextButton = (ImageView) findViewById(R.id.dt_ab_pl_next);
 
+        if (MediaManager.getInstance().isPlayed) {
+            updatePlayBack();
+            MediaManager.getInstance().setPlayListener(listener);
+            MediaManager.getInstance().setPlayCompleteListener(playCompleteListener);
+        }
+
         playButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -122,6 +139,16 @@ public class AlbumDetailActivity extends AppCompatActivity {
                     plSinger.setText(MediaManager.getInstance().getPlayingSong().singer);
                     playButton.setImageResource(R.drawable.uamp_ic_play_arrow_48dp_black);
                 }
+            }
+        });
+
+        view = findViewById(R.id.activity_album_detail);
+        ViewTreeObserver vto = view.getViewTreeObserver();
+        vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                progress.dismiss();
             }
         });
     }

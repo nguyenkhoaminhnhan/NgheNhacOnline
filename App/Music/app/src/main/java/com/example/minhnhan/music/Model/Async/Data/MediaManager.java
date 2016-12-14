@@ -20,6 +20,8 @@ import static com.example.minhnhan.music.Utils.Constants.UPDATE_LISTEN;
  */
 public class MediaManager {
 
+    public boolean isPlayed;
+
     public interface IPlayListener {
         void onPlay(int currentPlayID);
     }
@@ -179,6 +181,7 @@ public class MediaManager {
                 @Override
                 public void onPrepared(MediaPlayer mp) {
                     mPlayer.start();
+                    isPlayed = true;
                     if (playListener != null) {
                         playListener.onPlay(currentPlayID);
                     }

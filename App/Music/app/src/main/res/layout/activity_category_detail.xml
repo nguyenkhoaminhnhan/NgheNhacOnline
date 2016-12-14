@@ -4,46 +4,83 @@
     android:id="@+id/activity_category_detail"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#eee"
     tools:context="com.example.minhnhan.music.Activity.CategoryDetailActivity">
-    <LinearLayout
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
-        android:paddingTop="8dp"
-        android:orientation="vertical"
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/more_album_icon"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_marginRight="5dp"
-                android:background="@drawable/vietnam"
-                android:scaleType="fitXY" />
-
-            <TextView
-                android:id="@+id/more_album_list_name"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Album List Name"
-                android:textColor="#000000"
-                android:textSize="15dp"
-                android:textStyle="bold" />
-        </LinearLayout>
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/more_album_content"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
-    </LinearLayout>
+                <ImageView
+                    android:layout_marginLeft="5dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/ic_song" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Bài Hát"
+                    android:textColor="#000"
+                    android:textSize="18dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:paddingRight="6dp"
+                android:paddingLeft="1dp"
+                android:id="@+id/song_cat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"></LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp">
+
+                <ImageView
+                    android:layout_marginLeft="5dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/ic_list_song" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Album"
+                    android:textColor="#000"
+                    android:textSize="18dp" />
+            </LinearLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/album_cat"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:paddingLeft="7dp"></android.support.v7.widget.RecyclerView>
+        </LinearLayout>
+    </ScrollView>
+
     <LinearLayout
-        android:id="@+id/more_ab_pl_frame"
+        android:id="@+id/dt_cat_pl_frame"
         android:layout_width="match_parent"
         android:layout_height="63dp"
         android:layout_alignParentBottom="true"
@@ -56,7 +93,7 @@
         android:weightSum="1">
 
         <ImageView
-            android:id="@+id/more_ab_pl_image"
+            android:id="@+id/dt_cat_pl_image"
             android:layout_width="55dp"
             android:layout_height="match_parent"
             android:layout_weight="0.05"
@@ -73,7 +110,7 @@
             android:paddingTop="8dp">
 
             <TextView
-                android:id="@+id/more_ab_pl_song_name"
+                android:id="@+id/dt_cat_pl_song_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="5.11"
@@ -83,7 +120,7 @@
                 android:textSize="17dp" />
 
             <TextView
-                android:id="@+id/more_ab_pl_singer_name"
+                android:id="@+id/dt_cat_pl_singer_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="5.11"
@@ -93,21 +130,21 @@
 
 
         <ImageView
-            android:id="@+id/more_ab_pl_prev"
+            android:id="@+id/dt_cat_pl_prev"
             android:layout_width="40dp"
             android:layout_height="match_parent"
             android:background="?selectableItemBackgroundBorderless"
             android:src="@drawable/ic_skip_previous_48dp_black" />
 
         <ImageView
-            android:id="@+id/more_ab_pl_play_pause"
+            android:id="@+id/dt_cat_pl_play_pause"
             android:layout_width="40dp"
             android:layout_height="match_parent"
             android:background="?selectableItemBackgroundBorderless"
             android:src="@drawable/uamp_ic_play_arrow_48dp_black" />
 
         <ImageView
-            android:id="@+id/more_ab_pl_next"
+            android:id="@+id/dt_cat_pl_next"
             android:layout_width="40dp"
             android:layout_height="match_parent"
             android:background="?selectableItemBackgroundBorderless"

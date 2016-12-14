@@ -87,6 +87,7 @@ public class FullScreenPlayActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (MediaManager.getInstance().next()) {
                     newMediaPlayer();
+                    playlist.update();
                 }
             }
         });
@@ -95,16 +96,10 @@ public class FullScreenPlayActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (MediaManager.getInstance().prev()) {
                     newMediaPlayer();
+                    playlist.update();
                 }
             }
         });
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        listener = null;
-        playCompleteListener = null;
     }
 
     MediaManager.IPlayListener listener = new MediaManager.IPlayListener() {
@@ -114,7 +109,6 @@ public class FullScreenPlayActivity extends AppCompatActivity {
             seekBar.setMax(mediaFileLength);
             endTime.setText(formatter.format(mediaFileLength));
             seekBarProgressUpdater();
-            playlist.update();
         }
     };
 
@@ -182,4 +176,5 @@ public class FullScreenPlayActivity extends AppCompatActivity {
             }
         });
     }
+
 }

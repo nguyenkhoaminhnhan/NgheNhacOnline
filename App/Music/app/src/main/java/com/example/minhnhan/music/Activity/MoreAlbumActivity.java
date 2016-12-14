@@ -1,5 +1,6 @@
 package com.example.minhnhan.music.Activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.media.MediaPlayer;
@@ -8,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -45,10 +47,18 @@ public class MoreAlbumActivity extends AppCompatActivity {
     GridLayoutManager layoutManager;
     AlbumApdater albumApdater;
 
+    ProgressDialog progress;
+    View view;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_more_album);
+        progress = new ProgressDialog(this);
+        progress.setTitle("Vui lòng chờ");
+        progress.setMessage("Đang tải...");
+        progress.setCancelable(false);
+        progress.show();
 
         imageLoader = ImageLoader.getInstance();
         imageLoader.init(ImageLoaderConfiguration.createDefault(this));
@@ -70,6 +80,12 @@ public class MoreAlbumActivity extends AppCompatActivity {
 
         preButton = (ImageView) findViewById(R.id.more_ab_pl_prev);
         nextButton = (ImageView) findViewById(R.id.more_ab_pl_next);
+
+        if (MediaManager.getInstance().isPlayed) {
+            updatePlayBack();
+            MediaManager.getInstance().setPlayListener(listener);
+            MediaManager.getInstance().setPlayCompleteListener(playCompleteListener);
+        }
 
         playButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -148,6 +164,15 @@ public class MoreAlbumActivity extends AppCompatActivity {
                 catView.setAdapter(albumApdater);
                 catView.addOnScrollListener(new MyScroll());
 
+                view = findViewById(R.id.activity_more_album);
+                ViewTreeObserver vto = view.getViewTreeObserver();
+                vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                    @Override
+                    public void onGlobalLayout() {
+                        view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                        progress.dismiss();
+                    }
+                });
             }
         });
         asyncAlbum.execute(String.format(MORE_ALBUM, type, page));
@@ -171,9 +196,11 @@ public class MoreAlbumActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 11) {
-            updatePlayBack();
-            MediaManager.getInstance().setPlayListener(listener);
-            MediaManager.getInstance().setPlayCompleteListener(playCompleteListener);
+            if (MediaManager.getInstance().isPlayed) {
+                updatePlayBack();
+                MediaManager.getInstance().setPlayListener(listener);
+                MediaManager.getInstance().setPlayCompleteListener(playCompleteListener);
+            }
         }
     }
 

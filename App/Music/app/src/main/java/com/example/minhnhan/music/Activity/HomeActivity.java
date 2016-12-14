@@ -232,7 +232,7 @@ public class HomeActivity extends AppCompatActivity
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 11) {
-            if (plFrame.getVisibility() == View.VISIBLE) {
+            if (MediaManager.getInstance().isPlayed) {
                 updatePlayBack();
                 MediaManager.getInstance().setPlayListener(listener);
                 MediaManager.getInstance().setPlayCompleteListener(playCompleteListener);

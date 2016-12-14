@@ -256,6 +256,23 @@ namespace Music.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult GetSongByCat(long catID, int page)
+        {
+            var entities = db.Song_Category;
+            var result = entities.Where(x => x.Category_ID == catID).OrderByDescending(x => x.Song_ID).Skip(10 * page).Take(10)
+                .Select(x => new { x.Song_ID, x.Song.Name, x.Song.ImagePath, Album = x.Song.Album.Name, Singer = x.Song.Singer.Name, x.Song.SourcePath, View = x.Song.CustomInt3 });
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult GetSongBySinger(long singerID, int page)
+        {
+            var entities = db.Songs;
+            var result = entities.Where(x => x.Singer_ID == singerID).OrderByDescending(x => x.ID).Skip(10 * page).Take(10)
+                .Select(x =>
+                    new { x.ID, x.Name, x.ImagePath, Album = x.Album.Name, Singer = x.Singer.Name, x.SourcePath, View = x.CustomInt3 });
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
         //Search Song Action        
         public ActionResult Search(string search_query)
         {

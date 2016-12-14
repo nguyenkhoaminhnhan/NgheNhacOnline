@@ -125,17 +125,24 @@ namespace Music.Controllers
             var KhongLoi = entities.Where(x => x.CustomInt1 == 4).Take(10).Select(x => new { x.ID, x.Name, x.ImagePath, x.Detail, Singer = x.CustomString2 });
             return Json(new { VietNam, AuMy, ChauA, KhongLoi }, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult searchAlbum(string cat, int page)
+        public ActionResult getAlbumByCat(string cat, int page)
         {
             IQueryable<Album> entities = db.Albums;
-            var result = entities.Where(x => x.CustomString1.ToLower().Contains(cat.ToLower())).OrderBy(x => x.ID).Skip(12 * page).Take(12).Select(x => new { x.ID, x.Name, x.ImagePath, x.Detail, Singer = x.CustomString2 });
+            var result = entities.Where(x => x.CustomString1.ToLower().Contains(cat.ToLower())).OrderBy(x => x.ID).Skip(10 * page).Take(10).Select(x => new { x.ID, x.Name, x.ImagePath, x.Detail, Singer = x.CustomString2 });
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult getAlbumBySinger(string sName, int page)
+        {
+            IQueryable<Album> entities = db.Albums;
+            var result = entities.Where(x => x.CustomString2.ToLower().Contains(sName.ToLower())).OrderBy(x => x.ID).Skip(6 * page).Take(6).Select(x => new { x.ID, x.Name, x.ImagePath, x.Detail, Singer = x.CustomString2 });
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult getMoreAlbum(int type, int page)
         {
             IQueryable<Album> entities = db.Albums;
-            var result = entities.Where(x => type == x.CustomInt1).OrderBy(x => x.ID).Skip(12 * page).Take(12).Select(x => new { x.ID, x.Name, x.ImagePath, x.Detail, Singer = x.CustomString2 });
+            var result = entities.Where(x => type == x.CustomInt1).OrderBy(x => x.ID).Skip(10 * page).Take(10).Select(x => new { x.ID, x.Name, x.ImagePath, x.Detail, Singer = x.CustomString2 });
             return Json(result, JsonRequestBehavior.AllowGet);
         }
         //Search Ablum Action

@@ -1,7 +1,9 @@
 package com.example.minhnhan.music.Adapter;
 
-import android.content.Context;
+import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.minhnhan.music.Activity.AlbumDetailActivity;
+import com.example.minhnhan.music.Activity.CategoryDetailActivity;
 import com.example.minhnhan.music.Model.Category;
 import com.example.minhnhan.music.R;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -24,12 +28,12 @@ import java.util.ArrayList;
 public class CategoryApdater extends RecyclerView.Adapter<CategoryApdater.ViewHolder> {
 
     private ArrayList<Category> data;
-    private Context context;
+    private Activity activity;
     private DisplayImageOptions options;
 
-    public CategoryApdater(Context context, ArrayList<Category> data) {
+    public CategoryApdater(Activity activity, ArrayList<Category> data) {
         this.data = data;
-        this.context = context;
+        this.activity = activity;
         options = new DisplayImageOptions.Builder()
                 .showImageOnLoading(R.drawable.ic_stub)
                 .showImageForEmptyUri(R.drawable.ic_empty)
@@ -51,7 +55,7 @@ public class CategoryApdater extends RecyclerView.Adapter<CategoryApdater.ViewHo
         Category item = data.get(position);
         holder.albumName.setText(item.name);
         ImageLoader imageLoader = ImageLoader.getInstance();
-        imageLoader.init(ImageLoaderConfiguration.createDefault(context));
+        imageLoader.init(ImageLoaderConfiguration.createDefault(activity));
         imageLoader.displayImage(item.getImagePath(), holder.albumImage, options, null);
     }
 
@@ -60,14 +64,28 @@ public class CategoryApdater extends RecyclerView.Adapter<CategoryApdater.ViewHo
         return data == null ? 0 : data.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView albumName;
         public ImageView albumImage;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            albumImage = (ImageView)itemView.findViewById(R.id.category_image);
-            albumName = (TextView)itemView.findViewById(R.id.category_name);
+            albumImage = (ImageView) itemView.findViewById(R.id.category_image);
+            albumName = (TextView) itemView.findViewById(R.id.category_name);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    final int position = getAdapterPosition();
+
+                    Intent i = new Intent(activity, CategoryDetailActivity.class);
+                    Category cat = data.get(position);
+                    Bundle b = new Bundle();
+                    b.putLong("id", cat.id);
+                    b.putString("key", cat.name);
+                    i.putExtras(b);
+                    activity.startActivityForResult(i, 11);
+                }
+            });
         }
     }
 }

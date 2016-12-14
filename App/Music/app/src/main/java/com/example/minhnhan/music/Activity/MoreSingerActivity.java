@@ -1,5 +1,6 @@
 package com.example.minhnhan.music.Activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.media.MediaPlayer;
@@ -8,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -51,10 +53,19 @@ public class MoreSingerActivity extends AppCompatActivity {
     GridLayoutManager layoutManager;
     SingerApdater singerApdater;
 
+    ProgressDialog progress;
+    View view;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_more_singer);
+
+        progress = new ProgressDialog(this);
+        progress.setTitle("Vui lòng chờ");
+        progress.setMessage("Đang tải...");
+        progress.setCancelable(false);
+        progress.show();
 
         imageLoader = ImageLoader.getInstance();
         imageLoader.init(ImageLoaderConfiguration.createDefault(this));
@@ -76,6 +87,12 @@ public class MoreSingerActivity extends AppCompatActivity {
 
         preButton = (ImageView) findViewById(R.id.more_si_pl_prev);
         nextButton = (ImageView) findViewById(R.id.more_si_pl_next);
+
+        if (MediaManager.getInstance().isPlayed) {
+            updatePlayBack();
+            MediaManager.getInstance().setPlayListener(listener);
+            MediaManager.getInstance().setPlayCompleteListener(playCompleteListener);
+        }
 
         playButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -158,6 +175,16 @@ public class MoreSingerActivity extends AppCompatActivity {
                 contentView.setAdapter(singerApdater);
                 contentView.addOnScrollListener(new MyScroll());
 
+                view = findViewById(R.id.activity_more_singer);
+                ViewTreeObserver vto = view.getViewTreeObserver();
+                vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                    @Override
+                    public void onGlobalLayout() {
+                        view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                        progress.dismiss();
+                    }
+                });
+
             }
         });
         asyncAlbum.execute(url + page);
@@ -176,13 +203,16 @@ public class MoreSingerActivity extends AppCompatActivity {
                 updatePlayBack();
         }
     };
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 11) {
-            updatePlayBack();
-            MediaManager.getInstance().setPlayListener(listener);
-            MediaManager.getInstance().setPlayCompleteListener(playCompleteListener);
+            if (MediaManager.getInstance().isPlayed) {
+                updatePlayBack();
+                MediaManager.getInstance().setPlayListener(listener);
+                MediaManager.getInstance().setPlayCompleteListener(playCompleteListener);
+            }
         }
     }
 
@@ -214,10 +244,10 @@ public class MoreSingerActivity extends AppCompatActivity {
                     return;
                 }
                 isLoading = true;
-                AsyncAlbum loadMore = new AsyncAlbum(new AsyncListener() {
+                AsyncSinger loadMore = new AsyncSinger(new AsyncListener() {
                     @Override
                     public void onAsyncComplete() {
-                        ArrayList<Album> temp = DataManager.getInstance().getMoreAlbum();
+                        ArrayList<Singer> temp = DataManager.getInstance().getMoreSinger();
                         canLoadMore = temp != null && temp.size() >= 12;
                         isLoading = false;
                         if (temp.size() > 0) {
@@ -226,7 +256,7 @@ public class MoreSingerActivity extends AppCompatActivity {
                         }
                     }
                 });
-                loadMore.execute(String.format(MORE_ALBUM, type, page));
+                loadMore.execute(url + page);
             }
         }
     }

@@ -65,16 +65,16 @@ public class CategoryFragment extends Fragment {
                 RecyclerView.LayoutManager khongLoiLayoutManager = new GridLayoutManager(getContext(), 3);
                 khongLoiView.setLayoutManager(khongLoiLayoutManager);
 
-                CategoryApdater vietNamAdapter = new CategoryApdater(getContext(), data.getVietNam());
+                CategoryApdater vietNamAdapter = new CategoryApdater(getActivity(), data.getVietNam());
                 vietNamView.setAdapter(vietNamAdapter);
 
-                CategoryApdater auMyAdapter = new CategoryApdater(getContext(), data.getAuMy());
+                CategoryApdater auMyAdapter = new CategoryApdater(getActivity(), data.getAuMy());
                 auMyView.setAdapter(auMyAdapter);
 
-                CategoryApdater ChauAAdapter = new CategoryApdater(getContext(), data.getChauA());
+                CategoryApdater ChauAAdapter = new CategoryApdater(getActivity(), data.getChauA());
                 chauAView.setAdapter(ChauAAdapter);
 
-                CategoryApdater khongLoiAdapter = new CategoryApdater(getContext(), data.getKhongLoi());
+                CategoryApdater khongLoiAdapter = new CategoryApdater(getActivity(), data.getKhongLoi());
                 khongLoiView.setAdapter(khongLoiAdapter);
 
                 ViewTreeObserver vto = rootView.getViewTreeObserver();
