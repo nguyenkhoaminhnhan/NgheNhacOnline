@@ -82,6 +82,7 @@ public class CategoryApdater extends RecyclerView.Adapter<CategoryApdater.ViewHo
                     Bundle b = new Bundle();
                     b.putLong("id", cat.id);
                     b.putString("key", cat.name);
+                    b.putString("path",cat.getImagePath());
                     i.putExtras(b);
                     activity.startActivityForResult(i, 11);
                 }

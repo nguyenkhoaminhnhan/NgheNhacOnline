@@ -14,7 +14,7 @@ public class Singer {
     public final String IMAGE_PATH = "ImagePath";
     public final String DETAIL = "Detail";
 
-    private long id;
+    public long id;
     public String name;
     public String birthday;
     public String nation;

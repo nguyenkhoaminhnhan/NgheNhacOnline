@@ -33,6 +33,7 @@ import java.util.ArrayList;
 
 import static com.example.minhnhan.music.Utils.Constants.GET_ALBUM_BY_CAT;
 import static com.example.minhnhan.music.Utils.Constants.GET_SONG_BY_CAT;
+import static com.example.minhnhan.music.Utils.Constants.MORE_ALBUM;
 import static com.example.minhnhan.music.Utils.Utils.AddSongListLinearL;
 
 public class CategoryDetailActivity extends AppCompatActivity {
@@ -51,6 +52,8 @@ public class CategoryDetailActivity extends AppCompatActivity {
     private DisplayImageOptions options;
     private ImageLoader imageLoader;
 
+    AlbumApdater moreAlbumApdater;
+    GridLayoutManager layoutManager;
     ProgressDialog progress;
     View view;
 
@@ -72,6 +75,8 @@ public class CategoryDetailActivity extends AppCompatActivity {
         plSinger = (TextView) findViewById(R.id.dt_cat_pl_singer_name);
         playButton = (ImageView) findViewById(R.id.dt_cat_pl_play_pause);
         plFrame = (LinearLayout) findViewById(R.id.dt_cat_pl_frame);
+        ImageView background = (ImageView)findViewById(R.id.dt_cat_background);
+
         options = new DisplayImageOptions.Builder()
                 .showImageOnLoading(R.drawable.ic_stub)
                 .showImageForEmptyUri(R.drawable.ic_empty)
@@ -136,7 +141,11 @@ public class CategoryDetailActivity extends AppCompatActivity {
             typeID = b.getLong("id");
             typeName = b.getString("key");
             this.setTitle(typeName);
+            String imagePath = b.getString("path");
+            imageLoader.displayImage(imagePath,
+                    background, options, null);
         }
+
 
         AsyncAlbumSong asyncAlbumSong = new AsyncAlbumSong(new AsyncListener() {
             @Override
@@ -158,12 +167,13 @@ public class CategoryDetailActivity extends AppCompatActivity {
                 RecyclerView albumView = (RecyclerView) findViewById(R.id.album_cat);
 
                 albumView.setHasFixedSize(true);
-                RecyclerView.LayoutManager vietNamLayoutManager = new GridLayoutManager(CategoryDetailActivity.this, 2);
-                albumView.setLayoutManager(vietNamLayoutManager);
+                layoutManager = new GridLayoutManager(CategoryDetailActivity.this, 2);
+                albumView.setLayoutManager(layoutManager);
 
 
-                final AlbumApdater moreAlbumApdater = new AlbumApdater(CategoryDetailActivity.this, data);
+                moreAlbumApdater = new AlbumApdater(CategoryDetailActivity.this, data);
                 albumView.setAdapter(moreAlbumApdater);
+                albumView.addOnScrollListener(new MyScroll());
 
                 view = findViewById(R.id.activity_category_detail);
                 ViewTreeObserver vto = view.getViewTreeObserver();
@@ -221,6 +231,37 @@ public class CategoryDetailActivity extends AppCompatActivity {
             playButton.setImageResource(R.drawable.uamp_ic_pause_48dp_black);
         } else {
             playButton.setImageResource(R.drawable.uamp_ic_play_arrow_48dp_black);
+        }
+    }
+
+    class MyScroll extends RecyclerView.OnScrollListener {
+
+        boolean canLoadMore = true;
+        boolean isLoading;
+
+        @Override
+        public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+            int lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition();
+            int totalItemCount = recyclerView.getLayoutManager().getItemCount();
+            if (lastVisibleItemPosition - totalItemCount <= 1) {
+                if (isLoading || !canLoadMore) {
+                    return;
+                }
+                isLoading = true;
+                AsyncAlbum loadMore = new AsyncAlbum(new AsyncListener() {
+                    @Override
+                    public void onAsyncComplete() {
+                        ArrayList<Album> temp = DataManager.getInstance().getMoreAlbum();
+                        canLoadMore = temp != null && temp.size() >= 12;
+                        isLoading = false;
+                        if (temp.size() > 0) {
+                            page++;
+                            moreAlbumApdater.addMore(DataManager.getInstance().getMoreAlbum());
+                        }
+                    }
+                });
+                loadMore.execute(String.format(GET_ALBUM_BY_CAT, typeName, page));
+            }
         }
     }
 }

@@ -1,7 +1,10 @@
 package com.example.minhnhan.music.Adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +12,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.minhnhan.music.Activity.CategoryDetailActivity;
+import com.example.minhnhan.music.Activity.SingerDetailActivity;
 import com.example.minhnhan.music.Model.Album;
+import com.example.minhnhan.music.Model.Category;
 import com.example.minhnhan.music.Model.Singer;
 import com.example.minhnhan.music.R;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -25,12 +31,12 @@ import java.util.ArrayList;
 public class SingerApdater extends RecyclerView.Adapter<SingerApdater.ViewHolder> {
 
     private ArrayList<Singer> data;
-    private Context context;
+    private Activity activity;
     private DisplayImageOptions options;
 
-    public SingerApdater(Context context, ArrayList<Singer> data) {
+    public SingerApdater(Activity activity, ArrayList<Singer> data) {
         this.data = data;
-        this.context = context;
+        this.activity = activity;
         options = new DisplayImageOptions.Builder()
                 .showImageOnLoading(R.drawable.ic_stub)
                 .showImageForEmptyUri(R.drawable.ic_empty)
@@ -52,7 +58,7 @@ public class SingerApdater extends RecyclerView.Adapter<SingerApdater.ViewHolder
         Singer item = data.get(position);
         holder.singerName.setText(item.name);
         ImageLoader imageLoader = ImageLoader.getInstance();
-        imageLoader.init(ImageLoaderConfiguration.createDefault(context));
+        imageLoader.init(ImageLoaderConfiguration.createDefault(activity));
         imageLoader.displayImage(item.getImagePath(), holder.singerImage, options, null);
     }
 
@@ -61,7 +67,7 @@ public class SingerApdater extends RecyclerView.Adapter<SingerApdater.ViewHolder
         return data == null ? 0 : data.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public  class ViewHolder extends RecyclerView.ViewHolder {
         public TextView singerName;
         public ImageView singerImage;
 
@@ -69,6 +75,24 @@ public class SingerApdater extends RecyclerView.Adapter<SingerApdater.ViewHolder
             super(itemView);
             singerImage = (ImageView)itemView.findViewById(R.id.singer_image);
             singerName = (TextView)itemView.findViewById(R.id.singer_name);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    final int position = getAdapterPosition();
+
+                    Intent i = new Intent(activity, SingerDetailActivity.class);
+                    Singer singer = data.get(position);
+                    Bundle b = new Bundle();
+                    b.putLong("id", singer.id);
+                    b.putString("name", singer.name);
+                    b.putString("path",singer.getImagePath());
+                    b.putString("detail",singer.detail);
+                    b.putString("birth",singer.birthday);
+                    b.putString("nation",singer.nation);
+                    i.putExtras(b);
+                    activity.startActivityForResult(i, 11);
+                }
+            });
         }
     }
     public void addMore(ArrayList<Singer> data) {

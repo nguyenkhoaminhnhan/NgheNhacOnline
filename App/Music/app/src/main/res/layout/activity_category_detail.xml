@@ -7,18 +7,25 @@
     android:background="#eee"
     tools:context="com.example.minhnhan.music.Activity.CategoryDetailActivity">
 
+    <ImageView
+        android:id="@+id/dt_cat_background"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:scaleType="fitXY" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:paddingTop="5dp"
         android:paddingBottom="5dp"
         android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="250dp"
+            android:background="#eee"
             android:orientation="vertical">
 
             <LinearLayout
@@ -28,9 +35,9 @@
                 android:layout_marginTop="10dp">
 
                 <ImageView
-                    android:layout_marginLeft="5dp"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
+                    android:layout_marginLeft="5dp"
                     android:layout_marginRight="10dp"
                     android:background="@drawable/ic_song" />
 
@@ -43,12 +50,12 @@
             </LinearLayout>
 
             <LinearLayout
-                android:paddingRight="6dp"
-                android:paddingLeft="1dp"
                 android:id="@+id/song_cat"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"></LinearLayout>
+                android:orientation="vertical"
+                android:paddingLeft="1dp"
+                android:paddingRight="6dp"></LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -57,9 +64,9 @@
                 android:layout_marginTop="10dp">
 
                 <ImageView
-                    android:layout_marginLeft="5dp"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
+                    android:layout_marginLeft="5dp"
                     android:layout_marginRight="10dp"
                     android:background="@drawable/ic_list_song" />
 

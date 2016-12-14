@@ -21,6 +21,8 @@ public class Constants {
     public static final String GET_SINGER_CHAU_A = DOMAIN + "singer/getSingerChauA?page=";
     public static final String GET_SINGER_HOA_TAU= DOMAIN + "singer/getSingerHoaTau?page=";
     public static final String GET_SONG_BY_CAT= DOMAIN + "Song/GetSongByCat?catid=%d&page=%d";
+    public static final String GET_SONG_BY_SINGER= DOMAIN + "song/GetSongBySinger?singerid=%d&page=%d";
+    public static final String GET_ALBUM_BY_SINGER= DOMAIN + "album/getAlbumBySinger?sName=%s&page=%d";
 
 
 

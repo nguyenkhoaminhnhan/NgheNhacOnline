@@ -81,16 +81,16 @@ public class SingerFragment extends Fragment {
                 RecyclerView.LayoutManager khongLoiLayoutManager = new GridLayoutManager(getContext(), 3);
                 hoaTauView.setLayoutManager(khongLoiLayoutManager);
 
-                SingerApdater vietNamAdapter = new SingerApdater(getContext(), data.getVietNam());
+                SingerApdater vietNamAdapter = new SingerApdater(getActivity(), data.getVietNam());
                 vietNamView.setAdapter(vietNamAdapter);
 
-                SingerApdater auMyAdapter = new SingerApdater(getContext(), data.getAuMy());
+                SingerApdater auMyAdapter = new SingerApdater(getActivity(), data.getAuMy());
                 auMyView.setAdapter(auMyAdapter);
 
-                SingerApdater ChauAAdapter = new SingerApdater(getContext(), data.getChauA());
+                SingerApdater ChauAAdapter = new SingerApdater(getActivity(), data.getChauA());
                 chauAView.setAdapter(ChauAAdapter);
 
-                SingerApdater hoaTauAdapter = new SingerApdater(getContext(), data.getHoaTau());
+                SingerApdater hoaTauAdapter = new SingerApdater(getActivity(), data.getHoaTau());
                 hoaTauView.setAdapter(hoaTauAdapter);
 
                 moreViet.setOnClickListener(new View.OnClickListener() {
