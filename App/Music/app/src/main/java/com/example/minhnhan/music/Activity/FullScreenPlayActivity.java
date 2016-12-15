@@ -37,11 +37,11 @@ public class FullScreenPlayActivity extends AppCompatActivity {
     private int mediaFileLength;
     private DateFormat formatter;
 
-    private final Handler handler = new Handler(new Handler.Callback() {
+    private Handler handler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
             if (msg.what == 1) {
-                seekBarProgressUpdater();
+                MediaManager.getInstance().seekBarListener.seekBarUpdater();
             }
             return false;
         }
@@ -108,7 +108,8 @@ public class FullScreenPlayActivity extends AppCompatActivity {
             mediaFileLength = mPlayer.getDuration();
             seekBar.setMax(mediaFileLength);
             endTime.setText(formatter.format(mediaFileLength));
-            seekBarProgressUpdater();
+            MediaManager.getInstance().seekBarListener = seekBarListener;
+            seekBarListener.seekBarUpdater();
         }
     };
 
@@ -121,15 +122,28 @@ public class FullScreenPlayActivity extends AppCompatActivity {
         }
     };
 
-    private void seekBarProgressUpdater() {
-        currentTime = mPlayer.getCurrentPosition();
-        Log.d("debug", "current time " + currentTime);
-        realTime.setText(formatter.format(currentTime));
-        seekBar.setProgress(currentTime);
-        if (mPlayer.isPlaying()) {
-            handler.sendEmptyMessageDelayed(1, 500);
+    private MediaManager.ISeekBarListener seekBarListener = new MediaManager.ISeekBarListener() {
+        @Override
+        public void seekBarUpdater() {
+            currentTime = MediaManager.getInstance().getmPlayer().getCurrentPosition();
+            realTime.setText(formatter.format(currentTime));
+            seekBar.setProgress(currentTime);
+            if (MediaManager.getInstance().getmPlayer().isPlaying()) {
+                handler.sendEmptyMessageDelayed(1, 500);
+            } else
+                handler.removeMessages(1);
         }
-    }
+    };
+
+    /*private void seekBarProgressUpdater() {
+            currentTime = MediaManager.getInstance().getmPlayer().getCurrentPosition();
+            realTime.setText(formatter.format(currentTime));
+            seekBar.setProgress(currentTime);
+            if (MediaManager.getInstance().getmPlayer().isPlaying()) {
+                handler.sendEmptyMessageDelayed(1, 500);
+            } else
+                handler.removeMessages(1);
+    }*/
 
     public void newMediaPlayer() {
         Log.d("debug", "----- newMediaPlayer ----- ");
@@ -149,7 +163,7 @@ public class FullScreenPlayActivity extends AppCompatActivity {
                 } else if (!mPlayer.isPlaying()) {
                     mPlayer.start();
                     playButton.setImageResource(R.drawable.uamp_ic_pause_white_48dp);
-                    seekBarProgressUpdater();
+                    MediaManager.getInstance().seekBarListener.seekBarUpdater();
                 }
             }
         });
@@ -163,7 +177,7 @@ public class FullScreenPlayActivity extends AppCompatActivity {
                     mPlayer.seekTo(progress);
                     playButton.setImageResource(R.drawable.uamp_ic_pause_white_48dp);
                     mPlayer.start();
-                    seekBarProgressUpdater();
+                    MediaManager.getInstance().seekBarListener.seekBarUpdater();
                 }
             }
 
@@ -176,5 +190,4 @@ public class FullScreenPlayActivity extends AppCompatActivity {
             }
         });
     }
-
 }

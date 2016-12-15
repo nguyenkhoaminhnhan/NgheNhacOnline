@@ -7,10 +7,10 @@ import org.json.JSONObject;
  */
 
 public class Album {
-    public final String ID ="ID";
-    public final String NAME ="Name";
-    public final String IMAGE_PATH ="ImagePath";
-    public final String DETAIL ="Detail";
+    public final String ID = "ID";
+    public final String NAME = "Name";
+    public final String IMAGE_PATH = "ImagePath";
+    public final String DETAIL = "Detail";
     public final String SINGER = "Singer";
 
     public long id;

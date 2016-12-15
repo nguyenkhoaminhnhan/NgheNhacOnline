@@ -7,12 +7,7 @@ package com.example.minhnhan.music.Model.Async;
 
 import android.os.AsyncTask;
 
-import com.example.minhnhan.music.Model.Async.Data.DataManager;
 import com.example.minhnhan.music.Model.Async.Data.DataServices;
-import com.example.minhnhan.music.Model.Page.AlbumPage;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
 

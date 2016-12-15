@@ -2,10 +2,10 @@ package com.example.minhnhan.music.Activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 
 import com.example.minhnhan.music.Model.Async.AsyncHomePage;
 import com.example.minhnhan.music.Model.Async.AsyncListener;
@@ -120,9 +120,9 @@ public class SplashActivity extends AppCompatActivity {
                 HomePage homePage = DataManager.getInstance().getHomeDetail();
                 if (homePage != null
                         && homePage.getShowCase().size() > 0
-                        &&homePage.getHotSong().size() >0
-                        &&homePage.getHotSongWeek().size() >0
-                        &&homePage.getHotSongMonth().size() >0) {
+                        && homePage.getHotSong().size() > 0
+                        && homePage.getHotSongWeek().size() > 0
+                        && homePage.getHotSongMonth().size() > 0) {
                     //Go to Map activity
                     Intent i = new Intent(SplashActivity.this, HomeActivity.class);
                     startActivity(i);

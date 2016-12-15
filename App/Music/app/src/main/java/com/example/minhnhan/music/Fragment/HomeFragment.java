@@ -13,7 +13,6 @@ import android.widget.LinearLayout;
 import com.example.minhnhan.music.Activity.HomeActivity;
 import com.example.minhnhan.music.Adapter.HotSongAdapter;
 import com.example.minhnhan.music.Adapter.MySlideAdapter;
-import com.example.minhnhan.music.Adapter.PopularSongAdapter;
 import com.example.minhnhan.music.Adapter.SongListAdapter;
 import com.example.minhnhan.music.Model.Async.Data.DataManager;
 import com.example.minhnhan.music.R;

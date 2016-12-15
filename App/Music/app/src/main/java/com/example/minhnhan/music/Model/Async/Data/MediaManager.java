@@ -2,10 +2,8 @@ package com.example.minhnhan.music.Model.Async.Data;
 
 
 import android.media.MediaPlayer;
-import android.util.Log;
 
 import com.example.minhnhan.music.Model.Album;
-import com.example.minhnhan.music.Model.Async.AsyncListener;
 import com.example.minhnhan.music.Model.Async.AsyncSongListen;
 import com.example.minhnhan.music.Model.Song;
 
@@ -26,12 +24,17 @@ public class MediaManager {
         void onPlay(int currentPlayID);
     }
 
+    public interface ISeekBarListener {
+        void seekBarUpdater();
+    }
+
     public interface IPlayCompleteListener {
         void onPlayComplete();
     }
 
     private IPlayListener playListener;
     private IPlayCompleteListener playCompleteListener;
+    public ISeekBarListener seekBarListener;
 
     public void setPlayListener(IPlayListener listener) {
         playListener = listener;

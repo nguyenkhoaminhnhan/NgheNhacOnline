@@ -1,7 +1,6 @@
 package com.example.minhnhan.music.Adapter;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -12,10 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.minhnhan.music.Activity.CategoryDetailActivity;
 import com.example.minhnhan.music.Activity.SingerDetailActivity;
-import com.example.minhnhan.music.Model.Album;
-import com.example.minhnhan.music.Model.Category;
 import com.example.minhnhan.music.Model.Singer;
 import com.example.minhnhan.music.R;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -67,14 +63,14 @@ public class SingerApdater extends RecyclerView.Adapter<SingerApdater.ViewHolder
         return data == null ? 0 : data.size();
     }
 
-    public  class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView singerName;
         public ImageView singerImage;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            singerImage = (ImageView)itemView.findViewById(R.id.singer_image);
-            singerName = (TextView)itemView.findViewById(R.id.singer_name);
+            singerImage = (ImageView) itemView.findViewById(R.id.singer_image);
+            singerName = (TextView) itemView.findViewById(R.id.singer_name);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -85,16 +81,17 @@ public class SingerApdater extends RecyclerView.Adapter<SingerApdater.ViewHolder
                     Bundle b = new Bundle();
                     b.putLong("id", singer.id);
                     b.putString("name", singer.name);
-                    b.putString("path",singer.getImagePath());
-                    b.putString("detail",singer.detail);
-                    b.putString("birth",singer.birthday);
-                    b.putString("nation",singer.nation);
+                    b.putString("path", singer.getImagePath());
+                    b.putString("detail", singer.detail);
+                    b.putString("birth", singer.birthday);
+                    b.putString("nation", singer.nation);
                     i.putExtras(b);
                     activity.startActivityForResult(i, 11);
                 }
             });
         }
     }
+
     public void addMore(ArrayList<Singer> data) {
         if (this.data == null)
             this.data = data;

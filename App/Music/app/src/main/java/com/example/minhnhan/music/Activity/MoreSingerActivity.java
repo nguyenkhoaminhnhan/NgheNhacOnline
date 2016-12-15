@@ -4,20 +4,17 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.media.MediaPlayer;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.minhnhan.music.Adapter.AlbumApdater;
 import com.example.minhnhan.music.Adapter.SingerApdater;
-import com.example.minhnhan.music.Model.Album;
-import com.example.minhnhan.music.Model.Async.AsyncAlbum;
 import com.example.minhnhan.music.Model.Async.AsyncListener;
 import com.example.minhnhan.music.Model.Async.AsyncSinger;
 import com.example.minhnhan.music.Model.Async.Data.DataManager;
@@ -34,7 +31,6 @@ import static com.example.minhnhan.music.Utils.Constants.GET_SINGER_AU_MY;
 import static com.example.minhnhan.music.Utils.Constants.GET_SINGER_CHAU_A;
 import static com.example.minhnhan.music.Utils.Constants.GET_SINGER_HOA_TAU;
 import static com.example.minhnhan.music.Utils.Constants.GET_SINGER_VN;
-import static com.example.minhnhan.music.Utils.Constants.MORE_ALBUM;
 
 public class MoreSingerActivity extends AppCompatActivity {
 
@@ -47,7 +43,7 @@ public class MoreSingerActivity extends AppCompatActivity {
     private ImageView preButton;
     private ImageView playButton;
     private ImageView nextButton;
-    private LinearLayout plFrame;
+    private RelativeLayout plFrame;
     private DisplayImageOptions options;
     private ImageLoader imageLoader;
     GridLayoutManager layoutManager;
@@ -73,7 +69,7 @@ public class MoreSingerActivity extends AppCompatActivity {
         plName = (TextView) findViewById(R.id.more_si_pl_song_name);
         plSinger = (TextView) findViewById(R.id.more_si_pl_singer_name);
         playButton = (ImageView) findViewById(R.id.more_si_pl_play_pause);
-        plFrame = (LinearLayout) findViewById(R.id.more_si_pl_frame);
+        plFrame = (RelativeLayout) findViewById(R.id.more_si_pl_frame);
         options = new DisplayImageOptions.Builder()
                 .showImageOnLoading(R.drawable.ic_stub)
                 .showImageForEmptyUri(R.drawable.ic_empty)

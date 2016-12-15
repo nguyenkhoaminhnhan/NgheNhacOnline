@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
-import android.widget.LinearLayout;
 
 import com.example.minhnhan.music.Adapter.CategoryApdater;
 import com.example.minhnhan.music.Model.Async.AsyncCategory;
@@ -26,6 +25,7 @@ import static com.example.minhnhan.music.Utils.Constants.GET_CATEGORY;
 
 public class CategoryFragment extends Fragment {
     ProgressDialog progress;
+
     public CategoryFragment() {
 
     }

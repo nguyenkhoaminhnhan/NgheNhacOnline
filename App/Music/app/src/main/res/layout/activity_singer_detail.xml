@@ -21,168 +21,177 @@
         android:scrollbars="none">
 
         <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="320dp"
-            android:background="#eee"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="320dp"></LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp">
+                android:background="#eee"
+                android:orientation="vertical">
 
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/ic_singer_info" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp">
+
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/ic_singer_info" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Thông tin"
+                        android:textColor="#000"
+                        android:textSize="18dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingLeft="15dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="15dp"
+                            android:text="Tên thật"
+                            android:textColor="#000"
+                            android:textSize="15dp" />
+
+                        <TextView
+                            android:id="@+id/singer_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_marginLeft="80dp" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="15dp"
+                            android:text="Ngày sinh"
+                            android:textColor="#000"
+                            android:textSize="15dp" />
+
+                        <TextView
+                            android:id="@+id/singer_birth"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_marginLeft="80dp" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="15dp"
+                            android:text="Quốc gia"
+                            android:textColor="#000"
+                            android:textSize="15dp" />
+
+                        <TextView
+                            android:id="@+id/singer_nation"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_marginLeft="80dp" />
+                    </RelativeLayout>
+                </LinearLayout>
 
                 <TextView
+                    android:id="@+id/singer_detail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Thông tin"
-                    android:textColor="#000"
-                    android:textSize="18dp" />
-            </LinearLayout>
+                    android:padding="15dp" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingLeft="15dp">
-
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp">
+
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/ic_song" />
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="15dp"
-                        android:text="Tên thật"
+                        android:text="Bài Hát"
                         android:textColor="#000"
-                        android:textSize="15dp" />
+                        android:textSize="18dp" />
+                </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/singer_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:layout_marginLeft="80dp" />
-                </RelativeLayout>
-
-                <RelativeLayout
+                <LinearLayout
+                    android:id="@+id/song_singer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="vertical"
+                    android:paddingLeft="1dp"
+                    android:paddingRight="6dp"></LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp">
+
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/ic_list_song" />
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="15dp"
-                        android:text="Ngày sinh"
+                        android:text="Album"
                         android:textColor="#000"
-                        android:textSize="15dp" />
+                        android:textSize="18dp" />
+                </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/singer_birth"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:layout_marginLeft="80dp" />
-                </RelativeLayout>
-
-                <RelativeLayout
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/album_singer"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="15dp"
-                        android:text="Quốc gia"
-                        android:textColor="#000"
-                        android:textSize="15dp" />
-
-                    <TextView
-                        android:id="@+id/singer_nation"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:layout_marginLeft="80dp" />
-                </RelativeLayout>
+                    android:layout_height="fill_parent"
+                    android:paddingLeft="7dp"></android.support.v7.widget.RecyclerView>
             </LinearLayout>
-
-            <TextView
-                android:id="@+id/singer_detail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="15dp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp">
-
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/ic_song" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Bài Hát"
-                    android:textColor="#000"
-                    android:textSize="18dp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/song_singer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingLeft="1dp"
-                android:paddingRight="6dp"></LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp">
-
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/ic_list_song" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Album"
-                    android:textColor="#000"
-                    android:textSize="18dp" />
-            </LinearLayout>
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/album_singer"
-                android:layout_width="match_parent"
-                android:layout_height="fill_parent"
-                android:paddingLeft="7dp"></android.support.v7.widget.RecyclerView>
         </LinearLayout>
     </ScrollView>
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/dt_singer_pl_frame"
         android:layout_width="match_parent"
         android:layout_height="63dp"
@@ -190,52 +199,56 @@
         android:layout_alignParentStart="true"
         android:layout_gravity="bottom"
         android:background="@drawable/playback_bgr"
-        android:orientation="horizontal"
         android:padding="5dp"
         android:visibility="invisible"
         android:weightSum="1">
 
-        <ImageView
-            android:id="@+id/dt_singer_pl_image"
-            android:layout_width="55dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.05"
-            android:background="@drawable/default_image"
-            android:scaleType="fitXY" />
-
         <LinearLayout
-            android:layout_width="105dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.84"
-            android:orientation="vertical"
-            android:paddingBottom="8dp"
-            android:paddingLeft="10dp"
-            android:paddingTop="8dp">
+            android:id="@+id/dt_singer_pl_info"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/dt_singer_pl_song_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="5.11"
-                android:ellipsize="end"
-                android:singleLine="true"
-                android:textColor="#171d2e"
-                android:textSize="17dp" />
+            <ImageView
+                android:id="@+id/dt_singer_pl_image"
+                android:layout_width="55dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/default_image"
+                android:scaleType="fitXY" />
 
-            <TextView
-                android:id="@+id/dt_singer_pl_singer_name"
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="5.11"
-                android:ellipsize="end"
-                android:singleLine="true" />
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:orientation="vertical"
+                android:paddingBottom="5dp"
+                android:paddingLeft="10dp"
+                android:paddingTop="8dp">
+
+                <TextView
+                    android:id="@+id/dt_singer_pl_song_name"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:textColor="#171d2e"
+                    android:textSize="17dp" />
+
+                <TextView
+                    android:id="@+id/dt_singer_pl_singer_name"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:singleLine="true" />
+            </LinearLayout>
+
         </LinearLayout>
-
 
         <ImageView
             android:id="@+id/dt_singer_pl_prev"
             android:layout_width="40dp"
             android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="100dp"
             android:background="?selectableItemBackgroundBorderless"
             android:src="@drawable/ic_skip_previous_48dp_black" />
 
@@ -243,6 +256,8 @@
             android:id="@+id/dt_singer_pl_play_pause"
             android:layout_width="40dp"
             android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="55dp"
             android:background="?selectableItemBackgroundBorderless"
             android:src="@drawable/uamp_ic_play_arrow_48dp_black" />
 
@@ -250,7 +265,9 @@
             android:id="@+id/dt_singer_pl_next"
             android:layout_width="40dp"
             android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
             android:background="?selectableItemBackgroundBorderless"
             android:src="@drawable/ic_skip_next__48dp_black" />
-    </LinearLayout>
+    </RelativeLayout>
 </RelativeLayout>

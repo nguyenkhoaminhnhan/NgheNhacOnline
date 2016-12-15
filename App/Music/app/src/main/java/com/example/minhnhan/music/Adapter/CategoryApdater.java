@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.minhnhan.music.Activity.AlbumDetailActivity;
 import com.example.minhnhan.music.Activity.CategoryDetailActivity;
 import com.example.minhnhan.music.Model.Category;
 import com.example.minhnhan.music.R;
@@ -82,7 +81,7 @@ public class CategoryApdater extends RecyclerView.Adapter<CategoryApdater.ViewHo
                     Bundle b = new Bundle();
                     b.putLong("id", cat.id);
                     b.putString("key", cat.name);
-                    b.putString("path",cat.getImagePath());
+                    b.putString("path", cat.getImagePath());
                     i.putExtras(b);
                     activity.startActivityForResult(i, 11);
                 }

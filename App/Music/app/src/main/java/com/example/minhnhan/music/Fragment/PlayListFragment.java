@@ -1,14 +1,11 @@
 package com.example.minhnhan.music.Fragment;
 
-import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.ListView;
+import android.widget.LinearLayout;
 
 import com.example.minhnhan.music.Activity.FullScreenPlayActivity;
 import com.example.minhnhan.music.Adapter.PlayListAdapter;
@@ -17,6 +14,8 @@ import com.example.minhnhan.music.Model.Song;
 import com.example.minhnhan.music.R;
 
 import java.util.ArrayList;
+
+import static com.example.minhnhan.music.Utils.Utils.AddSongListLinearL;
 
 /**
  * Created by Minh Nhan on 11/23/2016.
@@ -37,13 +36,13 @@ public class PlayListFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.play_list, container,
                 false);
-        ListView listView = (ListView) rootView.findViewById(R.id.play_song_list);
+        LinearLayout listView = (LinearLayout) rootView.findViewById(R.id.play_song_list);
         playListAdapter = new PlayListAdapter((FullScreenPlayActivity) getActivity(), data);
-        listView.setAdapter(playListAdapter);
+        AddSongListLinearL(listView, playListAdapter);
         return rootView;
     }
-    public void update()
-    {
+
+    public void update() {
         playListAdapter.updatePlaying(MediaManager.getInstance().getCurrentPlayID());
     }
 }

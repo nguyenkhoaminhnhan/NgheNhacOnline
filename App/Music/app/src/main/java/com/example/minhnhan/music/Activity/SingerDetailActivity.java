@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.minhnhan.music.Adapter.AlbumApdater;
@@ -30,9 +31,7 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.jar.Attributes;
 
-import static com.example.minhnhan.music.Utils.Constants.GET_ALBUM_BY_CAT;
 import static com.example.minhnhan.music.Utils.Constants.GET_ALBUM_BY_SINGER;
 import static com.example.minhnhan.music.Utils.Constants.GET_SONG_BY_SINGER;
 import static com.example.minhnhan.music.Utils.Utils.AddSongListLinearL;
@@ -50,7 +49,7 @@ public class SingerDetailActivity extends AppCompatActivity {
     private ImageView preButton;
     private ImageView playButton;
     private ImageView nextButton;
-    private LinearLayout plFrame;
+    private RelativeLayout plFrame;
     private DisplayImageOptions options;
     private ImageLoader imageLoader;
     private TextView sDetail;
@@ -80,7 +79,7 @@ public class SingerDetailActivity extends AppCompatActivity {
         plName = (TextView) findViewById(R.id.dt_singer_pl_song_name);
         plSinger = (TextView) findViewById(R.id.dt_singer_pl_singer_name);
         playButton = (ImageView) findViewById(R.id.dt_singer_pl_play_pause);
-        plFrame = (LinearLayout) findViewById(R.id.dt_singer_pl_frame);
+        plFrame = (RelativeLayout) findViewById(R.id.dt_singer_pl_frame);
         sDetail = (TextView) findViewById(R.id.singer_detail);
         ImageView background = (ImageView) findViewById(R.id.dt_singer_background);
         sName = (TextView) findViewById(R.id.singer_name);
@@ -196,7 +195,7 @@ public class SingerDetailActivity extends AppCompatActivity {
 
                 moreAlbumApdater = new AlbumApdater(SingerDetailActivity.this, data);
                 albumView.setAdapter(moreAlbumApdater);
-                //albumView.addOnScrollListener(new SingerDetailActivity.MyScroll());
+                albumView.addOnScrollListener(new SingerDetailActivity.MyScroll());
 
                 view = findViewById(R.id.activity_singer_detail);
                 ViewTreeObserver vto = view.getViewTreeObserver();
@@ -266,7 +265,7 @@ public class SingerDetailActivity extends AppCompatActivity {
         public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
             int lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition();
             int totalItemCount = recyclerView.getLayoutManager().getItemCount();
-            if (lastVisibleItemPosition - totalItemCount == 1) {
+            if (lastVisibleItemPosition - totalItemCount <= 1) {
                 if (isLoading || !canLoadMore) {
                     return;
                 }
@@ -283,7 +282,7 @@ public class SingerDetailActivity extends AppCompatActivity {
                         }
                     }
                 });
-                loadMore.execute(String.format(GET_ALBUM_BY_CAT, singerName, page));
+                loadMore.execute(String.format(GET_ALBUM_BY_SINGER, singerName, page));
             }
         }
     }

@@ -5,7 +5,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.view.ViewGroup;
 
-
 import com.example.minhnhan.music.Fragment.ScreenSlidePageFragment;
 import com.example.minhnhan.music.Model.Song;
 
@@ -17,9 +16,10 @@ import java.util.ArrayList;
 
 public class MySlideAdapter extends FragmentPagerAdapter {
 
-    private  ArrayList<Song> data;
+    private ArrayList<Song> data;
     private Song item;
     public int selectedItem;
+
     public MySlideAdapter(FragmentManager fm, ArrayList<Song> data) {
         super(fm);
         this.data = data;

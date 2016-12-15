@@ -8,18 +8,18 @@ import org.json.JSONObject;
 
 public class Song {
 
-    public final String ID ="ID";
-    public final String NAME ="Name";
-    public final String IMAGE_PATH ="ImagePath";
-    public final String SOURCE_PATH ="SourcePath";
-    public final String ALBUM_NAME ="Album";
-    public final String SINGER_NAME ="Singer";
-    public final String YEAR ="Year";
-    public final String FORMAT ="Format";
-    public final String BITRATE ="BitRate";
-    public final String TAG ="Tag";
-    public final String RATING ="Rating";
-    public final String VIEW ="View";
+    public final String ID = "ID";
+    public final String NAME = "Name";
+    public final String IMAGE_PATH = "ImagePath";
+    public final String SOURCE_PATH = "SourcePath";
+    public final String ALBUM_NAME = "Album";
+    public final String SINGER_NAME = "Singer";
+    public final String YEAR = "Year";
+    public final String FORMAT = "Format";
+    public final String BITRATE = "BitRate";
+    public final String TAG = "Tag";
+    public final String RATING = "Rating";
+    public final String VIEW = "View";
 
 
     private long id;

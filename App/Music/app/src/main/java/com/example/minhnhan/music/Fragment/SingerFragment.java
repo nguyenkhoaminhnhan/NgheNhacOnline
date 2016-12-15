@@ -10,22 +10,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.minhnhan.music.Activity.MoreAlbumActivity;
 import com.example.minhnhan.music.Activity.MoreSingerActivity;
-import com.example.minhnhan.music.Adapter.CategoryApdater;
 import com.example.minhnhan.music.Adapter.SingerApdater;
-import com.example.minhnhan.music.Model.Async.AsyncCategory;
 import com.example.minhnhan.music.Model.Async.AsyncListener;
 import com.example.minhnhan.music.Model.Async.AsyncSingerPage;
 import com.example.minhnhan.music.Model.Async.Data.DataManager;
-import com.example.minhnhan.music.Model.Page.CategoryPage;
 import com.example.minhnhan.music.Model.Page.SingerPage;
 import com.example.minhnhan.music.R;
 
-import static com.example.minhnhan.music.Utils.Constants.GET_CATEGORY;
 import static com.example.minhnhan.music.Utils.Constants.GET_SINGER;
 
 /**

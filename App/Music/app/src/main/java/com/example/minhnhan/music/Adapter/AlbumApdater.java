@@ -1,7 +1,6 @@
 package com.example.minhnhan.music.Adapter;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
@@ -95,7 +94,7 @@ public class AlbumApdater extends RecyclerView.Adapter<AlbumApdater.ViewHolder> 
             });
             AlbumImage = (ImageView) itemView.findViewById(R.id.album_image);
             AlbumName = (TextView) itemView.findViewById(R.id.album_name);
-            AlbumSingerName =(TextView)itemView.findViewById(R.id.album_singer_name);
+            AlbumSingerName = (TextView) itemView.findViewById(R.id.album_singer_name);
         }
     }
 

@@ -32,7 +32,7 @@ public class AlbumDetailActivity extends AppCompatActivity {
     private ImageView preButton;
     private ImageView playButton;
     private ImageView nextButton;
-    private LinearLayout plFrame;
+    private RelativeLayout plFrame;
     private DisplayImageOptions options;
     private ImageLoader imageLoader;
 
@@ -54,13 +54,13 @@ public class AlbumDetailActivity extends AppCompatActivity {
         RelativeLayout playall = (RelativeLayout) findViewById(R.id.play_all);
         imageLoader = ImageLoader.getInstance();
         imageLoader.init(ImageLoaderConfiguration.createDefault(this));
-        songImage = (ImageView) findViewById(R.id.dt_ab_pl_image);
-        plName = (TextView) findViewById(R.id.dt_ab_pl_song_name);
-        plSinger = (TextView) findViewById(R.id.dt_ab_pl_singer_name);
-        playButton = (ImageView) findViewById(R.id.dt_ab_pl_play_pause);
-        plFrame = (LinearLayout) findViewById(R.id.dt_ab_pl_frame);
-        preButton = (ImageView) findViewById(R.id.dt_ab_pl_prev);
-        nextButton = (ImageView) findViewById(R.id.dt_ab_pl_next);
+        songImage = (ImageView) findViewById(R.id.pl_image);
+        plName = (TextView) findViewById(R.id.pl_song_name);
+        plSinger = (TextView) findViewById(R.id.pl_singer_name);
+        playButton = (ImageView) findViewById(R.id.pl_play_pause);
+        plFrame = (RelativeLayout) findViewById(R.id.pl_frame);
+        preButton = (ImageView) findViewById(R.id.pl_prev);
+        nextButton = (ImageView) findViewById(R.id.pl_next);
 
         if (MediaManager.getInstance().getmPlayer().isPlaying()) {
             updatePlayBack();
@@ -94,8 +94,8 @@ public class AlbumDetailActivity extends AppCompatActivity {
                 MediaManager.getInstance().getPrepareList());
         AddSongListLinearL(playlist, songListAdapter);
 
-        preButton = (ImageView) findViewById(R.id.dt_ab_pl_prev);
-        nextButton = (ImageView) findViewById(R.id.dt_ab_pl_next);
+        preButton = (ImageView) findViewById(R.id.pl_prev);
+        nextButton = (ImageView) findViewById(R.id.pl_next);
 
         if (MediaManager.getInstance().isPlayed) {
             updatePlayBack();

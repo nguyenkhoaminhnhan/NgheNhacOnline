@@ -16,17 +16,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.minhnhan.music.Fragment.AlbumFragment;
 import com.example.minhnhan.music.Fragment.CategoryFragment;
 import com.example.minhnhan.music.Fragment.HomeFragment;
 import com.example.minhnhan.music.Fragment.SingerFragment;
-import com.example.minhnhan.music.Model.Async.AsyncAlbumSong;
-import com.example.minhnhan.music.Model.Async.AsyncListener;
 import com.example.minhnhan.music.Model.Async.Data.MediaManager;
 import com.example.minhnhan.music.R;
-import com.example.minhnhan.music.Utils.Constants;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -44,7 +42,7 @@ public class HomeActivity extends AppCompatActivity
     private ImageView preButton;
     private ImageView playButton;
     private ImageView nextButton;
-    private LinearLayout plFrame;
+    private RelativeLayout plFrame;
     private DisplayImageOptions options;
     private ImageLoader imageLoader;
 
@@ -58,7 +56,7 @@ public class HomeActivity extends AppCompatActivity
         plName = (TextView) findViewById(R.id.pl_song_name);
         plSinger = (TextView) findViewById(R.id.pl_singer_name);
         playButton = (ImageView) findViewById(R.id.pl_play_pause);
-        plFrame = (LinearLayout) findViewById(R.id.pl_frame);
+        plFrame = (RelativeLayout) findViewById(R.id.pl_frame);
         options = new DisplayImageOptions.Builder()
                 .showImageOnLoading(R.drawable.ic_stub)
                 .showImageForEmptyUri(R.drawable.ic_empty)
@@ -132,6 +130,8 @@ public class HomeActivity extends AppCompatActivity
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        MediaManager.getInstance().getmPlayer().pause();
+        MediaManager.getInstance().getmPlayer().reset();
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -236,6 +236,14 @@ public class HomeActivity extends AppCompatActivity
                 updatePlayBack();
                 MediaManager.getInstance().setPlayListener(listener);
                 MediaManager.getInstance().setPlayCompleteListener(playCompleteListener);
+                LinearLayout plInfo = (LinearLayout) findViewById(R.id.pl_info);
+                plInfo.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent i = new Intent(HomeActivity.this, FullScreenPlayActivity.class);
+                        HomeActivity.this.startActivityForResult(i, 11);
+                    }
+                });
             }
         }
     }

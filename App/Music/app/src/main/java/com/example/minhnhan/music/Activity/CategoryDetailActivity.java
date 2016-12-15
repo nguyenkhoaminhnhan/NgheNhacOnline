@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.minhnhan.music.Adapter.AlbumApdater;
@@ -33,7 +34,6 @@ import java.util.ArrayList;
 
 import static com.example.minhnhan.music.Utils.Constants.GET_ALBUM_BY_CAT;
 import static com.example.minhnhan.music.Utils.Constants.GET_SONG_BY_CAT;
-import static com.example.minhnhan.music.Utils.Constants.MORE_ALBUM;
 import static com.example.minhnhan.music.Utils.Utils.AddSongListLinearL;
 
 public class CategoryDetailActivity extends AppCompatActivity {
@@ -48,7 +48,7 @@ public class CategoryDetailActivity extends AppCompatActivity {
     private ImageView preButton;
     private ImageView playButton;
     private ImageView nextButton;
-    private LinearLayout plFrame;
+    private RelativeLayout plFrame;
     private DisplayImageOptions options;
     private ImageLoader imageLoader;
 
@@ -74,8 +74,8 @@ public class CategoryDetailActivity extends AppCompatActivity {
         plName = (TextView) findViewById(R.id.dt_cat_pl_song_name);
         plSinger = (TextView) findViewById(R.id.dt_cat_pl_singer_name);
         playButton = (ImageView) findViewById(R.id.dt_cat_pl_play_pause);
-        plFrame = (LinearLayout) findViewById(R.id.dt_cat_pl_frame);
-        ImageView background = (ImageView)findViewById(R.id.dt_cat_background);
+        plFrame = (RelativeLayout) findViewById(R.id.dt_cat_pl_frame);
+        ImageView background = (ImageView) findViewById(R.id.dt_cat_background);
 
         options = new DisplayImageOptions.Builder()
                 .showImageOnLoading(R.drawable.ic_stub)

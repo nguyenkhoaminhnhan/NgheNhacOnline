@@ -9,7 +9,6 @@ import android.os.AsyncTask;
 
 import com.example.minhnhan.music.Model.Async.Data.DataManager;
 import com.example.minhnhan.music.Model.Async.Data.DataServices;
-import com.example.minhnhan.music.Model.Page.HomePage;
 import com.example.minhnhan.music.Model.Page.SingerPage;
 
 import org.json.JSONException;

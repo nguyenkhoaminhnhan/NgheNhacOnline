@@ -11,7 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.minhnhan.music.Adapter.AlbumApdater;
@@ -40,7 +40,7 @@ public class MoreAlbumActivity extends AppCompatActivity {
     private ImageView preButton;
     private ImageView playButton;
     private ImageView nextButton;
-    private LinearLayout plFrame;
+    private RelativeLayout plFrame;
     private DisplayImageOptions options;
     private ImageLoader imageLoader;
 
@@ -66,7 +66,7 @@ public class MoreAlbumActivity extends AppCompatActivity {
         plName = (TextView) findViewById(R.id.more_ab_pl_song_name);
         plSinger = (TextView) findViewById(R.id.more_ab_pl_singer_name);
         playButton = (ImageView) findViewById(R.id.more_ab_pl_play_pause);
-        plFrame = (LinearLayout) findViewById(R.id.more_ab_pl_frame);
+        plFrame = (RelativeLayout) findViewById(R.id.more_ab_pl_frame);
         options = new DisplayImageOptions.Builder()
                 .showImageOnLoading(R.drawable.ic_stub)
                 .showImageForEmptyUri(R.drawable.ic_empty)

@@ -7,7 +7,6 @@ package com.example.minhnhan.music.Model.Async;
 
 import android.os.AsyncTask;
 
-import com.example.minhnhan.music.Model.Album;
 import com.example.minhnhan.music.Model.Async.Data.DataManager;
 import com.example.minhnhan.music.Model.Async.Data.DataServices;
 import com.example.minhnhan.music.Model.Singer;

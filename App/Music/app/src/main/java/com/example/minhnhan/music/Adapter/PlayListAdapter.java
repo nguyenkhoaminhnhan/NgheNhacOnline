@@ -1,24 +1,20 @@
 package com.example.minhnhan.music.Adapter;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.drawable.AnimationDrawable;
-import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.minhnhan.music.Activity.FullScreenPlayActivity;
-import com.example.minhnhan.music.Activity.HomeActivity;
 import com.example.minhnhan.music.Model.Async.Data.MediaManager;
 import com.example.minhnhan.music.Model.Song;
 import com.example.minhnhan.music.R;
@@ -87,6 +83,7 @@ public class PlayListAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
+        Log.i("View holder", "" + position);
         item = data.get(position);
         holder.name.setText(item.name);
         holder.singer.setText(item.singer);
