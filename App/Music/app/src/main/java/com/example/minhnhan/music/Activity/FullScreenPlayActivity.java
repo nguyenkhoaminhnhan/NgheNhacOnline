@@ -62,6 +62,7 @@ public class FullScreenPlayActivity extends AppCompatActivity {
         realTime = (TextView) findViewById(R.id.real_time);
         endTime = (TextView) findViewById(R.id.end_time);
         seekBar = (SeekBar) findViewById(R.id.seekBar1);
+        formatter = new SimpleDateFormat("mm:ss");
 
         /*---------------------set adapter------------------------------------*/
         FragmentManager manager = getSupportFragmentManager();
@@ -79,13 +80,25 @@ public class FullScreenPlayActivity extends AppCompatActivity {
         indicator.setViewPager(bodyPlay);
 
         mPlayer = MediaManager.getInstance().getmPlayer();
-        MediaManager.getInstance().play();
+        if (MediaManager.getInstance().isContinue) {
+            newMediaPlayer();
+            MediaManager.getInstance().setPlayListener(listener);
+            MediaManager.getInstance().continuePlay();
+            MediaManager.getInstance().isContinue = false;
+        } else {
+            MediaManager.getInstance().play();
+            newMediaPlayer();
+            MediaManager.getInstance().setPlayListener(listener);
+        }
+
+
         newMediaPlayer();
         MediaManager.getInstance().setPlayCompleteListener(playCompleteListener);
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (MediaManager.getInstance().next()) {
+                    Log.d("debug", "----- Next Button ----- ");
                     newMediaPlayer();
                     playlist.update();
                 }
@@ -95,6 +108,7 @@ public class FullScreenPlayActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (MediaManager.getInstance().prev()) {
+                    Log.d("debug", "----- Pre Button ----- ");
                     newMediaPlayer();
                     playlist.update();
                 }
@@ -117,6 +131,7 @@ public class FullScreenPlayActivity extends AppCompatActivity {
         @Override
         public void onPlayComplete() {
             if (MediaManager.getInstance().next()) {
+                Log.d("debug", "----- Play Complete ----- ");
                 playlist.update();
             }
         }
@@ -150,8 +165,8 @@ public class FullScreenPlayActivity extends AppCompatActivity {
         playButton.setImageResource(R.drawable.uamp_ic_pause_white_48dp);
         songName.setText(MediaManager.getInstance().getPlayingSong().name);
         singerName.setText(MediaManager.getInstance().getPlayingSong().singer);
-        formatter = new SimpleDateFormat("mm:ss");
-        MediaManager.getInstance().setPlayListener(listener);
+
+        //MediaManager.getInstance().setPlayListener(listener);
 
         /*------------------Play/Pause media---------------------------------------*/
         playButton.setOnClickListener(new View.OnClickListener() {

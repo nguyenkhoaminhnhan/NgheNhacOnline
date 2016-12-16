@@ -216,6 +216,15 @@ public class CategoryDetailActivity extends AppCompatActivity {
                 updatePlayBack();
                 MediaManager.getInstance().setPlayListener(listener);
                 MediaManager.getInstance().setPlayCompleteListener(playCompleteListener);
+                LinearLayout plInfo = (LinearLayout) findViewById(R.id.dt_cat_pl_info);
+                plInfo.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        MediaManager.getInstance().isContinue = true;
+                        Intent i = new Intent(CategoryDetailActivity.this, FullScreenPlayActivity.class);
+                        CategoryDetailActivity.this.startActivityForResult(i, 11);
+                    }
+                });
             }
         }
     }

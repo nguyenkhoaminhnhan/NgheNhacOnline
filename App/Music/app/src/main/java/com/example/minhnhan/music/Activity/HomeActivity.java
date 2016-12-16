@@ -188,14 +188,14 @@ public class HomeActivity extends AppCompatActivity
                 this.setTitle("Thể Loại");
                 break;
             case R.id.nav_singer:
-                SingerFragment singerFragment = new SingerFragment();
+                SingerFragment singerFragment = new SingerFragment(HomeActivity.this);
                 fragmentManager.beginTransaction()
                         .replace(R.id.content_home, singerFragment)
                         .commit();
                 this.setTitle("Ca Sĩ");
                 break;
             case R.id.nav_album:
-                AlbumFragment albumFragment = new AlbumFragment(fragmentManager);
+                AlbumFragment albumFragment = new AlbumFragment(HomeActivity.this);
                 fragmentManager.beginTransaction()
                         .replace(R.id.content_home, albumFragment)
                         .commit();
@@ -240,6 +240,7 @@ public class HomeActivity extends AppCompatActivity
                 plInfo.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        MediaManager.getInstance().isContinue = true;
                         Intent i = new Intent(HomeActivity.this, FullScreenPlayActivity.class);
                         HomeActivity.this.startActivityForResult(i, 11);
                     }

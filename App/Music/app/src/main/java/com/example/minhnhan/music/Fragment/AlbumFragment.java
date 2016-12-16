@@ -1,17 +1,16 @@
 package com.example.minhnhan.music.Fragment;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.minhnhan.music.Activity.MoreAlbumActivity;
@@ -31,11 +30,10 @@ import static com.example.minhnhan.music.Utils.Constants.GET_ALBUM;
 public class AlbumFragment extends Fragment {
 
     ProgressDialog progress;
-    private FragmentManager fragmentManager;
-    LinearLayout layout;
+    private Activity activity;
 
-    public AlbumFragment(FragmentManager fragmentManager) {
-        this.fragmentManager = fragmentManager;
+    public AlbumFragment(Activity activity) {
+        this.activity = activity;
     }
 
     @Override
@@ -79,56 +77,56 @@ public class AlbumFragment extends Fragment {
                 RecyclerView.LayoutManager khongLoiLayoutManager = new GridLayoutManager(getContext(), 2);
                 khongLoiView.setLayoutManager(khongLoiLayoutManager);
 
-                AlbumApdater vietNamAdapter = new AlbumApdater(getActivity(), data.getVietNam());
+                AlbumApdater vietNamAdapter = new AlbumApdater(activity, data.getVietNam());
                 vietNamView.setAdapter(vietNamAdapter);
 
-                AlbumApdater auMyAdapter = new AlbumApdater(getActivity(), data.getAuMy());
+                AlbumApdater auMyAdapter = new AlbumApdater(activity, data.getAuMy());
                 auMyView.setAdapter(auMyAdapter);
 
-                AlbumApdater ChauAAdapter = new AlbumApdater(getActivity(), data.getChauA());
+                AlbumApdater ChauAAdapter = new AlbumApdater(activity, data.getChauA());
                 chauAView.setAdapter(ChauAAdapter);
 
-                AlbumApdater khongLoiAdapter = new AlbumApdater(getActivity(), data.getKhongLoi());
+                AlbumApdater khongLoiAdapter = new AlbumApdater(activity, data.getKhongLoi());
                 khongLoiView.setAdapter(khongLoiAdapter);
 
                 moreViet.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent i = new Intent(getActivity(), MoreAlbumActivity.class);
+                        Intent i = new Intent(activity, MoreAlbumActivity.class);
                         Bundle b = new Bundle();
                         b.putInt("key", 1);
                         i.putExtras(b);
-                        startActivityForResult(i, 11);
+                        activity.startActivityForResult(i, 11);
                     }
                 });
                 moreAuMy.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent i = new Intent(getActivity(), MoreAlbumActivity.class);
+                        Intent i = new Intent(activity, MoreAlbumActivity.class);
                         Bundle b = new Bundle();
                         b.putInt("key", 2);
                         i.putExtras(b);
-                        startActivityForResult(i, 11);
+                        activity.startActivityForResult(i, 11);
                     }
                 });
                 moreChauA.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent i = new Intent(getActivity(), MoreAlbumActivity.class);
+                        Intent i = new Intent(activity, MoreAlbumActivity.class);
                         Bundle b = new Bundle();
                         b.putInt("key", 3);
                         i.putExtras(b);
-                        startActivityForResult(i, 11);
+                        activity.startActivityForResult(i, 11);
                     }
                 });
                 moreKhongLoi.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent i = new Intent(getActivity(), MoreAlbumActivity.class);
+                        Intent i = new Intent(activity, MoreAlbumActivity.class);
                         Bundle b = new Bundle();
                         b.putInt("key", 4);
                         i.putExtras(b);
-                        startActivityForResult(i, 11);
+                        activity.startActivityForResult(i, 11);
                     }
                 });
 

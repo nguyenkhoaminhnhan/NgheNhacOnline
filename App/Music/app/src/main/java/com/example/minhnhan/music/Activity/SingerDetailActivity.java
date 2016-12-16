@@ -238,6 +238,15 @@ public class SingerDetailActivity extends AppCompatActivity {
                 updatePlayBack();
                 MediaManager.getInstance().setPlayListener(listener);
                 MediaManager.getInstance().setPlayCompleteListener(playCompleteListener);
+                LinearLayout plInfo = (LinearLayout) findViewById(R.id.dt_singer_pl_info);
+                plInfo.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        MediaManager.getInstance().isContinue = true;
+                        Intent i = new Intent(SingerDetailActivity.this, FullScreenPlayActivity.class);
+                        SingerDetailActivity.this.startActivityForResult(i, 11);
+                    }
+                });
             }
         }
     }

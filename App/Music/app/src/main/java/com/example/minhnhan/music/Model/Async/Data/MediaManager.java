@@ -19,6 +19,7 @@ import static com.example.minhnhan.music.Utils.Constants.UPDATE_LISTEN;
 public class MediaManager {
 
     public boolean isPlayed;
+    public boolean isContinue;
 
     public interface IPlayListener {
         void onPlay(int currentPlayID);
@@ -183,11 +184,12 @@ public class MediaManager {
             mPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                 @Override
                 public void onPrepared(MediaPlayer mp) {
-                    mPlayer.start();
                     isPlayed = true;
+                    mPlayer.start();
                     if (playListener != null) {
                         playListener.onPlay(currentPlayID);
                     }
+
                 }
             });
             mPlayer.prepareAsync();
@@ -196,6 +198,12 @@ public class MediaManager {
         }
         AsyncSongListen asyncSongListen = new AsyncSongListen(null);
         asyncSongListen.execute(UPDATE_LISTEN + playingSong.getId());
+    }
+
+    public void continuePlay() {
+        if (playListener != null) {
+            playListener.onPlay(currentPlayID);
+        }
     }
 
     public Album getAlbum() {

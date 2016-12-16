@@ -54,13 +54,13 @@ public class AlbumDetailActivity extends AppCompatActivity {
         RelativeLayout playall = (RelativeLayout) findViewById(R.id.play_all);
         imageLoader = ImageLoader.getInstance();
         imageLoader.init(ImageLoaderConfiguration.createDefault(this));
-        songImage = (ImageView) findViewById(R.id.pl_image);
-        plName = (TextView) findViewById(R.id.pl_song_name);
-        plSinger = (TextView) findViewById(R.id.pl_singer_name);
-        playButton = (ImageView) findViewById(R.id.pl_play_pause);
-        plFrame = (RelativeLayout) findViewById(R.id.pl_frame);
-        preButton = (ImageView) findViewById(R.id.pl_prev);
-        nextButton = (ImageView) findViewById(R.id.pl_next);
+        songImage = (ImageView) findViewById(R.id.detail_album_pl_image);
+        plName = (TextView) findViewById(R.id.detail_album_pl_song_name);
+        plSinger = (TextView) findViewById(R.id.detail_album_pl_singer_name);
+        playButton = (ImageView) findViewById(R.id.detail_album_pl_play_pause);
+        plFrame = (RelativeLayout) findViewById(R.id.detail_album_pl_frame);
+        preButton = (ImageView) findViewById(R.id.detail_album_pl_prev);
+        nextButton = (ImageView) findViewById(R.id.detail_album_pl_next);
 
         if (MediaManager.getInstance().getmPlayer().isPlaying()) {
             updatePlayBack();
@@ -93,9 +93,6 @@ public class AlbumDetailActivity extends AppCompatActivity {
         SongListAdapter songListAdapter = new SongListAdapter(this,
                 MediaManager.getInstance().getPrepareList());
         AddSongListLinearL(playlist, songListAdapter);
-
-        preButton = (ImageView) findViewById(R.id.pl_prev);
-        nextButton = (ImageView) findViewById(R.id.pl_next);
 
         if (MediaManager.getInstance().isPlayed) {
             updatePlayBack();
@@ -174,6 +171,15 @@ public class AlbumDetailActivity extends AppCompatActivity {
             updatePlayBack();
             MediaManager.getInstance().setPlayListener(listener);
             MediaManager.getInstance().setPlayCompleteListener(playCompleteListener);
+            LinearLayout plInfo = (LinearLayout) findViewById(R.id.detail_album_pl_info);
+            plInfo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    MediaManager.getInstance().isContinue = true;
+                    Intent i = new Intent(AlbumDetailActivity.this, FullScreenPlayActivity.class);
+                    AlbumDetailActivity.this.startActivityForResult(i, 11);
+                }
+            });
         }
     }
 

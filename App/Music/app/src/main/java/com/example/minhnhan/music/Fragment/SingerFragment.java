@@ -1,5 +1,6 @@
 package com.example.minhnhan.music.Fragment;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,9 +30,10 @@ import static com.example.minhnhan.music.Utils.Constants.GET_SINGER;
 public class SingerFragment extends Fragment {
 
     ProgressDialog progress;
+    Activity activity;
 
-    public SingerFragment() {
-
+    public SingerFragment(Activity activity) {
+        this.activity = activity;
     }
 
     @Override
@@ -75,16 +77,16 @@ public class SingerFragment extends Fragment {
                 RecyclerView.LayoutManager khongLoiLayoutManager = new GridLayoutManager(getContext(), 3);
                 hoaTauView.setLayoutManager(khongLoiLayoutManager);
 
-                SingerApdater vietNamAdapter = new SingerApdater(getActivity(), data.getVietNam());
+                SingerApdater vietNamAdapter = new SingerApdater(activity, data.getVietNam());
                 vietNamView.setAdapter(vietNamAdapter);
 
-                SingerApdater auMyAdapter = new SingerApdater(getActivity(), data.getAuMy());
+                SingerApdater auMyAdapter = new SingerApdater(activity, data.getAuMy());
                 auMyView.setAdapter(auMyAdapter);
 
-                SingerApdater ChauAAdapter = new SingerApdater(getActivity(), data.getChauA());
+                SingerApdater ChauAAdapter = new SingerApdater(activity, data.getChauA());
                 chauAView.setAdapter(ChauAAdapter);
 
-                SingerApdater hoaTauAdapter = new SingerApdater(getActivity(), data.getHoaTau());
+                SingerApdater hoaTauAdapter = new SingerApdater(activity, data.getHoaTau());
                 hoaTauView.setAdapter(hoaTauAdapter);
 
                 moreViet.setOnClickListener(new View.OnClickListener() {
@@ -94,7 +96,7 @@ public class SingerFragment extends Fragment {
                         Bundle b = new Bundle();
                         b.putInt("key", 1);
                         i.putExtras(b);
-                        startActivityForResult(i, 11);
+                        activity.startActivityForResult(i, 11);
                     }
                 });
                 moreAuMy.setOnClickListener(new View.OnClickListener() {
@@ -104,7 +106,7 @@ public class SingerFragment extends Fragment {
                         Bundle b = new Bundle();
                         b.putInt("key", 2);
                         i.putExtras(b);
-                        startActivityForResult(i, 11);
+                        activity.startActivityForResult(i, 11);
                     }
                 });
                 moreChauA.setOnClickListener(new View.OnClickListener() {
@@ -114,7 +116,7 @@ public class SingerFragment extends Fragment {
                         Bundle b = new Bundle();
                         b.putInt("key", 3);
                         i.putExtras(b);
-                        startActivityForResult(i, 11);
+                        activity.startActivityForResult(i, 11);
                     }
                 });
                 moreKhongLoi.setOnClickListener(new View.OnClickListener() {
@@ -124,7 +126,7 @@ public class SingerFragment extends Fragment {
                         Bundle b = new Bundle();
                         b.putInt("key", 4);
                         i.putExtras(b);
-                        startActivityForResult(i, 11);
+                        activity.startActivityForResult(i, 11);
                     }
                 });
 

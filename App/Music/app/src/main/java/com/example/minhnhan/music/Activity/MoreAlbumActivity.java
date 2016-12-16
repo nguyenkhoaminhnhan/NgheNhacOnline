@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -200,6 +201,15 @@ public class MoreAlbumActivity extends AppCompatActivity {
                 updatePlayBack();
                 MediaManager.getInstance().setPlayListener(listener);
                 MediaManager.getInstance().setPlayCompleteListener(playCompleteListener);
+                LinearLayout plInfo = (LinearLayout) findViewById(R.id.more_ab_pl_info);
+                plInfo.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        MediaManager.getInstance().isContinue = true;
+                        Intent i = new Intent(MoreAlbumActivity.this, FullScreenPlayActivity.class);
+                        MoreAlbumActivity.this.startActivityForResult(i, 11);
+                    }
+                });
             }
         }
     }
