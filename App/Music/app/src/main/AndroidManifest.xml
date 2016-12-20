@@ -34,7 +34,6 @@
         <activity android:name=".Activity.MoreSingerActivity" />
         <activity android:name=".Activity.CategoryDetailActivity" />
         <activity android:name=".Activity.SingerDetailActivity" />
-        <activity android:name=".Activity.CateDetailActivity"></activity>
     </application>
 
 </manifest>

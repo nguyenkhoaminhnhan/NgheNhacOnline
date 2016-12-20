@@ -1,10 +1,12 @@
 package com.example.minhnhan.music.Utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 
@@ -15,6 +17,13 @@ import java.net.URL;
  * Created by MinhNhan on 01/06/2016.
  */
 public class Utils {
+    public static void hideSoftKeyboard(Activity activity) {
+        InputMethodManager inputMethodManager =
+                (InputMethodManager) activity.getSystemService(
+                        Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(
+                activity.getCurrentFocus().getWindowToken(), 0);
+    }
 
     public static boolean isNetworkAvailable(Context context) {
         ConnectivityManager cm = (ConnectivityManager)

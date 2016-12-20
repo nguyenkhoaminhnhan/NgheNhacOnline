@@ -14,6 +14,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -29,12 +32,17 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
+import static com.example.minhnhan.music.Utils.Utils.hideSoftKeyboard;
+
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private FragmentManager fragmentManager = getSupportFragmentManager();
     HomeFragment homeFragment;
     private int idPage;
+
+    boolean isSearch;
+    String titleNow = "Trang Chủ";
 
     private ImageView songImage;
     private TextView plName;
@@ -45,6 +53,7 @@ public class HomeActivity extends AppCompatActivity
     private RelativeLayout plFrame;
     private DisplayImageOptions options;
     private ImageLoader imageLoader;
+    FrameLayout contentHome;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +66,13 @@ public class HomeActivity extends AppCompatActivity
         plSinger = (TextView) findViewById(R.id.pl_singer_name);
         playButton = (ImageView) findViewById(R.id.pl_play_pause);
         plFrame = (RelativeLayout) findViewById(R.id.pl_frame);
+        contentHome = (FrameLayout) findViewById(R.id.content_home);
+        contentHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                hideSoftKeyboard(HomeActivity.this);
+            }
+        });
         options = new DisplayImageOptions.Builder()
                 .showImageOnLoading(R.drawable.ic_stub)
                 .showImageForEmptyUri(R.drawable.ic_empty)
@@ -125,6 +141,22 @@ public class HomeActivity extends AppCompatActivity
                 .commit();
         this.setTitle("Trang Chủ");
 
+        final EditText searchTXT = (EditText) findViewById(R.id.search_txt);
+        ImageButton searchBtn = (ImageButton) findViewById(R.id.home_search);
+        searchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isSearch == true) {
+                    isSearch = false;
+                    searchTXT.setVisibility(View.INVISIBLE);
+                    HomeActivity.this.setTitle(titleNow);
+                } else {
+                    isSearch = true;
+                    searchTXT.setVisibility(View.VISIBLE);
+                    HomeActivity.this.setTitle("");
+                }
+            }
+        });
     }
 
     @Override
@@ -178,28 +210,40 @@ public class HomeActivity extends AppCompatActivity
                 fragmentManager.beginTransaction()
                         .replace(R.id.content_home, homeFragment)
                         .commit();
-                this.setTitle("Trang Chủ");
+                titleNow = "Trang Chủ";
+                if (!isSearch) {
+                    this.setTitle(titleNow);
+                }
                 break;
             case R.id.nav_category:
                 CategoryFragment categoryFragment = new CategoryFragment();
                 fragmentManager.beginTransaction()
                         .replace(R.id.content_home, categoryFragment)
                         .commit();
-                this.setTitle("Thể Loại");
+                titleNow = "Thể Loại";
+                if (!isSearch) {
+                    this.setTitle(titleNow);
+                }
                 break;
             case R.id.nav_singer:
                 SingerFragment singerFragment = new SingerFragment(HomeActivity.this);
                 fragmentManager.beginTransaction()
                         .replace(R.id.content_home, singerFragment)
                         .commit();
-                this.setTitle("Ca Sĩ");
+                titleNow = "Ca Sĩ";
+                if (!isSearch) {
+                    this.setTitle(titleNow);
+                }
                 break;
             case R.id.nav_album:
                 AlbumFragment albumFragment = new AlbumFragment(HomeActivity.this);
                 fragmentManager.beginTransaction()
                         .replace(R.id.content_home, albumFragment)
                         .commit();
-                this.setTitle("Album");
+                titleNow = "Album";
+                if (!isSearch) {
+                    this.setTitle(titleNow);
+                }
                 break;
             case R.id.nav_share:
                 break;

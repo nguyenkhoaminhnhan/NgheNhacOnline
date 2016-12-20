@@ -87,12 +87,10 @@ public class FullScreenPlayActivity extends AppCompatActivity {
             MediaManager.getInstance().isContinue = false;
         } else {
             MediaManager.getInstance().play();
-            newMediaPlayer();
+
             MediaManager.getInstance().setPlayListener(listener);
         }
 
-
-        newMediaPlayer();
         MediaManager.getInstance().setPlayCompleteListener(playCompleteListener);
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,6 +117,7 @@ public class FullScreenPlayActivity extends AppCompatActivity {
     MediaManager.IPlayListener listener = new MediaManager.IPlayListener() {
         @Override
         public void onPlay(final int currentPlayID) {
+            newMediaPlayer();
             mediaFileLength = mPlayer.getDuration();
             seekBar.setMax(mediaFileLength);
             endTime.setText(formatter.format(mediaFileLength));
