@@ -19,7 +19,7 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="colorControlNormal">#fff</item>
-        <item name="colorControlActivated">#fff</item>
+        <item name="colorControlActivated">#f67f06</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.example.minhnhan.music.Adapter.AlbumApdater;
 import com.example.minhnhan.music.Adapter.CategoryApdater;
@@ -33,10 +34,12 @@ public class SearchAlbumFragment extends Fragment {
                              Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.search_si_cat_alb_fragment, container,
                 false);
+        ImageView icon = (ImageView)rootView.findViewById(R.id.icon);
+        icon.setImageResource(R.drawable.ic_list_song);
         ArrayList<Album> data = DataManager.getInstance().getAlbum();
         RecyclerView albumView = (RecyclerView) rootView.findViewById(R.id.search_list);
         albumView.setHasFixedSize(true);
-        RecyclerView.LayoutManager vietNamLayoutManager = new GridLayoutManager(getContext(), 3);
+        RecyclerView.LayoutManager vietNamLayoutManager = new GridLayoutManager(getContext(), 2);
         albumView.setLayoutManager(vietNamLayoutManager);
 
         AlbumApdater albumApdater = new AlbumApdater(getActivity(), data);

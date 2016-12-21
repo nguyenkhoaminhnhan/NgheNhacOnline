@@ -15,6 +15,8 @@ import com.example.minhnhan.music.Model.Song;
 
 import java.util.ArrayList;
 
+import static android.drm.DrmStore.DrmObjectType.CONTENT;
+
 /**
  * Created by Minh Nhan on 11/23/2016.
  */
@@ -53,12 +55,24 @@ public class SearchSlideAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 2;
+        return 4;
     }
 
     /*public Song get(int position) {
 
     }*/
+
+    @Override
+    public CharSequence getPageTitle(int position) {
+        if(position==0)
+            return "Bài Hát";
+        if(position==1)
+            return "Ca Sĩ";
+        if(position==2)
+            return "Album";
+        else
+            return "Thể Loại";
+    }
 
     public void update() {
     }

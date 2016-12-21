@@ -47,7 +47,10 @@ public class AsyncSearchPage extends AsyncTask<String, String, String> {
             if(object.has("Song"))
             {
                 String songData = object.getString("Song");
-                JSONArray jsonArray = new JSONArray(songData);
+                JSONArray jsonArrayTemp = new JSONArray(songData);
+                String temp= jsonArrayTemp.getString(0);
+                JSONArray jsonArray = new JSONArray(temp);
+
                 ArrayList<Song> results = new ArrayList<>();
                 for (int i = 0; i < jsonArray.length(); i++) {
                     Song song = new Song(jsonArray.getJSONObject(i));
@@ -58,7 +61,10 @@ public class AsyncSearchPage extends AsyncTask<String, String, String> {
             if(object.has("Singer"))
             {
                 String singerData = object.getString("Singer");
-                JSONArray jsonArray = new JSONArray(singerData);
+                JSONArray jsonArrayTemp = new JSONArray(singerData);
+                String temp= jsonArrayTemp.getString(0);
+                JSONArray jsonArray = new JSONArray(temp);
+
                 ArrayList<Singer> results = new ArrayList<>();
                 for (int i = 0; i < jsonArray.length(); i++) {
                     Singer singer = new Singer(jsonArray.getJSONObject(i));
@@ -68,7 +74,10 @@ public class AsyncSearchPage extends AsyncTask<String, String, String> {
             }if(object.has("Cat"))
             {
                 String catData = object.getString("Cat");
-                JSONArray jsonArray = new JSONArray(catData);
+                JSONArray jsonArrayTemp = new JSONArray(catData);
+                String temp= jsonArrayTemp.getString(0);
+                JSONArray jsonArray = new JSONArray(temp);
+
                 ArrayList<Category> results = new ArrayList<>();
                 for (int i = 0; i < jsonArray.length(); i++) {
                     Category category = new Category(jsonArray.getJSONObject(i));
@@ -78,7 +87,10 @@ public class AsyncSearchPage extends AsyncTask<String, String, String> {
             }if(object.has("Album"))
             {
                 String albumData = object.getString("Album");
-                JSONArray jsonArray = new JSONArray(albumData);
+                JSONArray jsonArrayTemp = new JSONArray(albumData);
+                String temp= jsonArrayTemp.getString(0);
+                JSONArray jsonArray = new JSONArray(temp);
+
                 ArrayList<Album> results = new ArrayList<>();
                 for (int i = 0; i < jsonArray.length(); i++) {
                     Album album = new Album(jsonArray.getJSONObject(i));

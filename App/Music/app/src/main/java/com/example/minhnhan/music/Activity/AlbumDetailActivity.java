@@ -1,5 +1,6 @@
 package com.example.minhnhan.music.Activity;
 
+import android.app.AliasActivity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -183,18 +184,20 @@ public class AlbumDetailActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 11) {
-            updatePlayBack();
-            MediaManager.getInstance().setPlayListener(listener);
-            MediaManager.getInstance().setPlayCompleteListener(playCompleteListener);
-            LinearLayout plInfo = (LinearLayout) findViewById(R.id.detail_album_pl_info);
-            plInfo.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    MediaManager.getInstance().isContinue = true;
-                    Intent i = new Intent(AlbumDetailActivity.this, FullScreenPlayActivity.class);
-                    AlbumDetailActivity.this.startActivityForResult(i, 11);
-                }
-            });
+            if (MediaManager.getInstance().isPlayed) {
+                updatePlayBack();
+                MediaManager.getInstance().setPlayListener(listener);
+                MediaManager.getInstance().setPlayCompleteListener(playCompleteListener);
+                LinearLayout plInfo = (LinearLayout) findViewById(R.id.pl_info);
+                plInfo.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        MediaManager.getInstance().isContinue = true;
+                        Intent i = new Intent(AlbumDetailActivity.this, FullScreenPlayActivity.class);
+                        AlbumDetailActivity.this.startActivityForResult(i, 11);
+                    }
+                });
+            }
         }
     }
 

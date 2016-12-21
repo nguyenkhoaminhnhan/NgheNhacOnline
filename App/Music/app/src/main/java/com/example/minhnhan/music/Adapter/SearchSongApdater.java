@@ -1,14 +1,18 @@
 package com.example.minhnhan.music.Adapter;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.minhnhan.music.Activity.FullScreenPlayActivity;
+import com.example.minhnhan.music.Model.Async.Data.MediaManager;
 import com.example.minhnhan.music.Model.Song;
 import com.example.minhnhan.music.R;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -21,64 +25,73 @@ import java.util.ArrayList;
  * Created by Minh Nhan on 11/29/2016.
  */
 
-public class SearchSongApdater extends RecyclerView.Adapter<SearchSongApdater.ViewHolder> {
-
-    private ArrayList<Song> data;
+public class SearchSongApdater extends BaseAdapter {
+    public ArrayList<Song> data;
+    private LayoutInflater mInflater;
     private DisplayImageOptions options;
     private Activity activity;
+    private Song item;
 
     public SearchSongApdater(Activity activity, ArrayList<Song> data) {
+        mInflater = (LayoutInflater) activity
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.data = data;
-        this.activity = activity;
         options = new DisplayImageOptions.Builder()
                 .showImageOnLoading(R.drawable.ic_stub)
                 .showImageForEmptyUri(R.drawable.ic_empty)
                 .showImageOnFail(R.drawable.default_image).cacheInMemory(true)
                 .cacheOnDisk(true).considerExifParams(true)
                 .bitmapConfig(Bitmap.Config.RGB_565).build();
+        this.activity = activity;
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.song_row, parent, false);
-        ViewHolder viewHolder = new ViewHolder(view);
-        return viewHolder;
+    public int getCount() {
+        return data == null ? 0 : data.size();
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        Song item = data.get(position);
+    public Object getItem(int position) {
+        return data == null ? null : data.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public View getView(final int position, View convertView, ViewGroup parent) {
+        ViewHolder holder;
+        if (convertView == null) {
+            convertView = mInflater.inflate(R.layout.s_song_row, parent, false);
+            holder = new ViewHolder();
+            holder.name = (TextView) convertView.findViewById(R.id.song_name);
+            holder.singer = (TextView) convertView.findViewById(R.id.singer);
+            holder.image = (ImageView) convertView.findViewById(R.id.song_image);
+            convertView.setTag(holder);
+        } else {
+            holder = (ViewHolder) convertView.getTag();
+        }
+
+        item = data.get(position);
         holder.name.setText(item.name);
         holder.singer.setText(item.singer);
-
         ImageLoader imageLoader = ImageLoader.getInstance();
         imageLoader.init(ImageLoaderConfiguration.createDefault(activity));
         imageLoader.displayImage(item.getImagePath(), holder.image, options, null);
 
-    }
-
-    @Override
-    public int getItemCount() {
-        return data == null ? 0 : data.size();
-    }
-
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        private ImageView image;
-        private TextView name;
-        private TextView singer;
-
-        public ViewHolder(View itemView) {
-            super(itemView);
-            image = (ImageView) itemView.findViewById(R.id.song_image);
-            name = (TextView) itemView.findViewById(R.id.song_name);
-            singer = (TextView) itemView.findViewById(R.id.singer);
-        }
-    }
-
-    public void setdata(ArrayList<Song> temp) {
-        data = temp;
-        notifyDataSetChanged();
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MediaManager.getInstance().setPlayList(data);
+                MediaManager.getInstance().setCurrentPlayID(position);
+                MediaManager.getInstance().setPlayingSong(data.get(position));
+                Intent i = new Intent(activity, FullScreenPlayActivity.class);
+                activity.startActivityForResult(i, 11);
+            }
+        });
+        return convertView;
     }
 
     public void addMore(ArrayList<Song> data) {
@@ -88,5 +101,21 @@ public class SearchSongApdater extends RecyclerView.Adapter<SearchSongApdater.Vi
             this.data.addAll(data);
         // yeu cau adapter refresh lai view
         notifyDataSetChanged();
+    }
+
+    private class ViewHolder {
+        private ImageView image;
+        private TextView name;
+        private TextView singer;
+
+    }
+
+    public void setdata(ArrayList<Song> temp) {
+        data = temp;
+        notifyDataSetChanged();
+    }
+
+    public String getImageUrl() {
+        return item.getImagePath();
     }
 }

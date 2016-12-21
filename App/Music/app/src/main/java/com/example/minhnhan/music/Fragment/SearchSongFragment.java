@@ -7,8 +7,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 import com.example.minhnhan.music.Adapter.SearchSongApdater;
+import com.example.minhnhan.music.Adapter.SongListAdapter;
 import com.example.minhnhan.music.Model.Async.Data.DataManager;
 import com.example.minhnhan.music.Model.Song;
 import com.example.minhnhan.music.R;
@@ -34,10 +36,8 @@ public class SearchSongFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.search_song_fragment, container,
                 false);
-        RecyclerView listView = (RecyclerView) rootView.findViewById(R.id.search_song_list);
+        ListView listView = (ListView) rootView.findViewById(R.id.search_song_list);
         songList = new SearchSongApdater(getActivity(), data);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-        listView.setLayoutManager(layoutManager);
         listView.setAdapter(songList);
         return rootView;
     }

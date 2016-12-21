@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_serach"
     android:layout_width="match_parent"
@@ -10,6 +11,15 @@
         android:id="@+id/search_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"></android.support.v4.view.ViewPager>
+
+    <com.viewpagerindicator.UnderlinePageIndicator
+        android:id="@+id/indicator"
+        android:layout_width="fill_parent"
+        android:layout_height="2dp"
+        android:background="#FFCCCCCC"
+        app:fadeDelay="1000"
+        app:fadeLength="1000"
+        app:selectedColor="#FFCC0000" />
 
     <RelativeLayout
         android:id="@+id/search_pl_frame"

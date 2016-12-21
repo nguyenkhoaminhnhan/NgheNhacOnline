@@ -3,9 +3,9 @@ package com.example.minhnhan.music.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.media.MediaPlayer;
+import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -13,13 +13,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.minhnhan.music.Adapter.SearchSlideAdapter;
-import com.example.minhnhan.music.Model.Async.AsyncListener;
-import com.example.minhnhan.music.Model.Async.AsyncSearchPage;
 import com.example.minhnhan.music.Model.Async.Data.MediaManager;
 import com.example.minhnhan.music.R;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.viewpagerindicator.UnderlinePageIndicator;
 
 public class SearchActivity extends AppCompatActivity {
 
@@ -161,24 +160,52 @@ public class SearchActivity extends AppCompatActivity {
         SearchSlideAdapter searchSlideAdapter = new SearchSlideAdapter(getSupportFragmentManager());
         viewPager.setAdapter(searchSlideAdapter);
 
+        UnderlinePageIndicator indicator = (UnderlinePageIndicator) findViewById(R.id.indicator);
+        indicator.setViewPager(viewPager);
+
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                if (position == 0)
+                    SearchActivity.this.setTitle("Bài Hát");
+                else if (position == 1)
+                    SearchActivity.this.setTitle("Ca Sĩ");
+                else if (position == 2)
+                    SearchActivity.this.setTitle("Album");
+                else if (position == 3)
+                    SearchActivity.this.setTitle("Thể Loại");
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 11) {
-            updatePlayBack();
-            MediaManager.getInstance().setPlayListener(listener);
-            MediaManager.getInstance().setPlayCompleteListener(playCompleteListener);
-            LinearLayout plInfo = (LinearLayout) findViewById(R.id.detail_album_pl_info);
-            plInfo.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    MediaManager.getInstance().isContinue = true;
-                    Intent i = new Intent(SearchActivity.this, FullScreenPlayActivity.class);
-                    SearchActivity.this.startActivityForResult(i, 11);
-                }
-            });
+            if (MediaManager.getInstance().isPlayed) {
+                updatePlayBack();
+                MediaManager.getInstance().setPlayListener(listener);
+                MediaManager.getInstance().setPlayCompleteListener(playCompleteListener);
+                LinearLayout plInfo = (LinearLayout) findViewById(R.id.search_pl_info);
+                plInfo.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        MediaManager.getInstance().isContinue = true;
+                        Intent i = new Intent(SearchActivity.this, FullScreenPlayActivity.class);
+                        SearchActivity.this.startActivityForResult(i, 11);
+                    }
+                });
+            }
         }
     }
 

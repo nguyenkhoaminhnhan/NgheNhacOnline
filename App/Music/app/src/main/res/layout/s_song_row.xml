@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingLeft="5dp"
     android:paddingBottom="2dp">
 
     <LinearLayout
@@ -20,23 +19,23 @@
             android:scaleType="fitXY" />
 
         <LinearLayout
-            android:padding="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="5dp">
 
             <TextView
                 android:id="@+id/song_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="3dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_marginTop="2dp"
                 android:ellipsize="end"
                 android:singleLine="true"
                 android:textColor="#000"
-                android:textSize="17dp"
-                android:layout_marginBottom="3dp"/>
+                android:textSize="17dp" />
 
             <TextView
                 android:id="@+id/singer"

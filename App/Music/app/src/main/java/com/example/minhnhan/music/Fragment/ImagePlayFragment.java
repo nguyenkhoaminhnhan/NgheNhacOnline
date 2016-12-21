@@ -23,8 +23,7 @@ public class ImagePlayFragment extends Fragment {
     public static final String ARG_PAGE = "page";
 
     public Song data;
-    private ImageView songImage;
-    private ImageView animate;
+    public ImageView songImage;
     private DisplayImageOptions options;
 
     public ImagePlayFragment(Song data) {
@@ -43,8 +42,6 @@ public class ImagePlayFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.image_play_body, container,
                 false);
         songImage = (ImageView) rootView.findViewById(R.id.play_image);
-        animate = (ImageView) rootView.findViewById(R.id.playing_animation);
-
         ImageLoader imageLoader = ImageLoader.getInstance();
         imageLoader.init(ImageLoaderConfiguration.createDefault(this.getContext()));
         imageLoader.displayImage(data.getImagePath(), songImage, options, null);

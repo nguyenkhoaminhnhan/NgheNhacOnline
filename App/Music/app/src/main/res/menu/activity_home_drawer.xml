@@ -1,35 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_list_song"
             android:title="Trang Chủ" />
         <item
             android:id="@+id/nav_category"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_list_song"
             android:title="Thể Loại" />
         <item
             android:id="@+id/nav_album"
-            android:icon="@drawable/ic_menu_manage"
+            android:icon="@drawable/ic_list_song"
             android:title="Album" />
         <item
             android:id="@+id/nav_singer"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_list_song"
             android:title="Ca Sĩ" />
     </group>
-
-    <item android:title="Communicate">
+    <item android:title="Lớp SE405.H11">
         <menu>
             <item
                 android:id="@+id/nav_share"
                 android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:title="Sản phẩm của nhóm 11" />
             <item
-                android:id="@+id/nav_send"
                 android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:title="Nguyễn Khoa Minh Nhân" />
+            <item
+                android:icon="@drawable/ic_menu_send"
+                android:title="Tô Thế Tân" />
+            <item
+                android:icon="@drawable/ic_menu_send"
+                android:title="Phạm Thanh Phú" />
         </menu>
     </item>
 

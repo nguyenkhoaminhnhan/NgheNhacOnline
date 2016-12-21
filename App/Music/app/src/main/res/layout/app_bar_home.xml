@@ -31,8 +31,9 @@
                 android:layout_marginLeft="55dp"
                 android:layout_marginRight="87dp"
                 android:hint="Search..."
-                android:visibility="invisible"
-                android:textCursorDrawable="@drawable/cursor" />
+                android:singleLine="true"
+                android:textCursorDrawable="@drawable/cursor"
+                android:visibility="invisible" />
 
             <ImageButton
                 android:id="@+id/home_search"

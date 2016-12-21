@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.example.minhnhan.music.Adapter.SingerApdater;
 import com.example.minhnhan.music.Model.Async.Data.DataManager;
@@ -32,6 +33,8 @@ public class SearchSingerFragment extends Fragment {
                              Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.search_si_cat_alb_fragment, container,
                 false);
+        ImageView icon = (ImageView)rootView.findViewById(R.id.icon);
+        icon.setImageResource(R.drawable.ic_singer_info);
         ArrayList<Singer> data = DataManager.getInstance().getSinger();
         RecyclerView singerView = (RecyclerView) rootView.findViewById(R.id.search_list);
         singerView.setHasFixedSize(true);

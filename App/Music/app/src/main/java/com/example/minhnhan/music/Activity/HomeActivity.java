@@ -1,5 +1,6 @@
 package com.example.minhnhan.music.Activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.media.MediaPlayer;
@@ -16,7 +17,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -31,7 +31,6 @@ import com.example.minhnhan.music.Model.Async.AsyncListener;
 import com.example.minhnhan.music.Model.Async.AsyncSearchPage;
 import com.example.minhnhan.music.Model.Async.Data.MediaManager;
 import com.example.minhnhan.music.R;
-import com.example.minhnhan.music.Utils.Constants;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -63,11 +62,17 @@ public class HomeActivity extends AppCompatActivity
     private ImageLoader imageLoader;
 
     private EditText searchTXT;
+    ProgressDialog progress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        progress = new ProgressDialog(this);
+        progress.setTitle("Vui lòng chờ");
+        progress.setMessage("Đang tải...");
+        progress.setCancelable(false);
+
         imageLoader = ImageLoader.getInstance();
         imageLoader.init(ImageLoaderConfiguration.createDefault(this));
         songImage = (ImageView) findViewById(R.id.pl_image);
@@ -145,31 +150,77 @@ public class HomeActivity extends AppCompatActivity
                 .commit();
         this.setTitle("Trang Chủ");
 
-        final EditText searchTXT = (EditText) findViewById(R.id.search_txt);
+        searchTXT = (EditText) findViewById(R.id.search_txt);
         ImageButton searchBtn = (ImageButton) findViewById(R.id.home_search);
+
+        searchTXT.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                if (keyEvent.getAction() == KeyEvent.ACTION_DOWN) {
+                    switch (i) {
+                        case KeyEvent.KEYCODE_DPAD_CENTER:
+                        case KeyEvent.KEYCODE_ENTER:
+                            if (!searchTXT.getText().toString().equals("")) {
+                                progress.show();
+                                String query = searchTXT.getText().toString();
+                                try {
+                                    query = URLEncoder.encode(query, "utf-8");
+                                } catch (UnsupportedEncodingException e) {
+                                    e.printStackTrace();
+                                }
+                                AsyncSearchPage asyncSearchPage = new AsyncSearchPage(new AsyncListener() {
+                                    @Override
+                                    public void onAsyncComplete() {
+                                        Intent i = new Intent(HomeActivity.this, SearchActivity.class);
+                                        isSearch = false;
+                                        searchTXT.setText("");
+                                        searchTXT.setVisibility(View.INVISIBLE);
+                                        HomeActivity.this.setTitle(titleNow);
+                                        HomeActivity.this.startActivityForResult(i, 11);
+                                        progress.dismiss();
+                                    }
+                                });
+                                asyncSearchPage.execute(String.format(GET_SEARCH_ALL, query, "all", 0));
+                            }
+                            return true;
+                        default:
+                            break;
+                    }
+                }
+                return false;
+            }
+        });
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (searchTXT.getText().equals("") && isSearch == true) {
-                    isSearch = false;
-                    searchTXT.setVisibility(View.INVISIBLE);
-                    HomeActivity.this.setTitle(titleNow);
-                    hideSoftKeyboard(HomeActivity.this);
-                } else if (!searchTXT.getText().equals("") && isSearch) {
-                    String query = searchTXT.getText().toString();
-                    try {
-                        query = URLEncoder.encode(query, "utf-8");
-                    } catch (UnsupportedEncodingException e) {
-                        e.printStackTrace();
-                    }
-                    AsyncSearchPage asyncSearchPage = new AsyncSearchPage(new AsyncListener() {
-                        @Override
-                        public void onAsyncComplete() {
-                            Intent i = new Intent(HomeActivity.this, SearchActivity.class);
-                            HomeActivity.this.startActivityForResult(i, 11);
+                if (isSearch == true) {
+                    if (searchTXT.getText().toString().equals("")) {
+                        isSearch = false;
+                        searchTXT.setVisibility(View.INVISIBLE);
+                        HomeActivity.this.setTitle(titleNow);
+                        hideSoftKeyboard(HomeActivity.this);
+                    } else if (!searchTXT.getText().toString().equals("")) {
+                        progress.show();
+                        String query = searchTXT.getText().toString();
+                        try {
+                            query = URLEncoder.encode(query, "utf-8");
+                        } catch (UnsupportedEncodingException e) {
+                            e.printStackTrace();
                         }
-                    });
-                    asyncSearchPage.execute(String.format(GET_SEARCH_ALL, query, "all", 0));
+                        AsyncSearchPage asyncSearchPage = new AsyncSearchPage(new AsyncListener() {
+                            @Override
+                            public void onAsyncComplete() {
+                                Intent i = new Intent(HomeActivity.this, SearchActivity.class);
+                                isSearch = false;
+                                searchTXT.setText("");
+                                searchTXT.setVisibility(View.INVISIBLE);
+                                HomeActivity.this.setTitle(titleNow);
+                                HomeActivity.this.startActivityForResult(i, 11);
+                                progress.dismiss();
+                            }
+                        });
+                        asyncSearchPage.execute(String.format(GET_SEARCH_ALL, query, "all", 0));
+                    }
                 } else {
                     isSearch = true;
                     searchTXT.setVisibility(View.VISIBLE);
@@ -189,8 +240,9 @@ public class HomeActivity extends AppCompatActivity
 
                 }
             };
-            MediaManager.getInstance().getmPlayer().stop();
-            MediaManager.getInstance().getmPlayer().release();
+            if (MediaManager.getInstance().isPlayed) {
+                MediaManager.getInstance().getmPlayer().stop();
+            }
         } catch (Exception e) {
         }
 
@@ -275,10 +327,10 @@ public class HomeActivity extends AppCompatActivity
                     this.setTitle(titleNow);
                 }
                 break;
-            case R.id.nav_share:
+            /*case R.id.nav_share:
                 break;
             case R.id.nav_send:
-                break;
+                break;*/
         }
 
         idPage = id;
