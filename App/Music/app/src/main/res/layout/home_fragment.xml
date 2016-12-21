@@ -42,7 +42,7 @@
                 android:layout_marginTop="10dp"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
-                android:text="Hot Song Week"
+                android:text="Bài hát hay của tuần"
                 android:textColor="#000000"
                 android:textSize="16dp"
                 android:textStyle="bold" />
@@ -71,7 +71,7 @@
                 android:layout_marginTop="10dp"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
-                android:text="Hot Song Month"
+                android:text="Bài hát hay của tháng"
                 android:textColor="#000000"
                 android:textSize="16dp"
                 android:textStyle="bold" />
@@ -99,7 +99,7 @@
                 android:layout_marginTop="10dp"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
-                android:text="Popular Song"
+                android:text="Bài hát HOT"
                 android:textColor="#000000"
                 android:textSize="16dp"
                 android:textStyle="bold" />

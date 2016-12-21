@@ -25,7 +25,7 @@
         <activity
             android:name=".Activity.HomeActivity"
             android:label="@string/title_activity_home"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.Custom" />
         <activity
             android:name=".Activity.FullScreenPlayActivity"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -34,6 +34,7 @@
         <activity android:name=".Activity.MoreSingerActivity" />
         <activity android:name=".Activity.CategoryDetailActivity" />
         <activity android:name=".Activity.SingerDetailActivity" />
+        <activity android:name=".Activity.SearchActivity"></activity>
     </application>
 
 </manifest>

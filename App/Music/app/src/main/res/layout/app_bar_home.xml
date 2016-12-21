@@ -32,7 +32,7 @@
                 android:layout_marginRight="87dp"
                 android:hint="Search..."
                 android:visibility="invisible"
-                style="@android:style/Widget.Holo.Light.EditText" />
+                android:textCursorDrawable="@drawable/cursor" />
 
             <ImageButton
                 android:id="@+id/home_search"

@@ -96,7 +96,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_toEndOf="@+id/real_time"
-                android:layout_toStartOf="@+id/end_time" />
+                android:layout_toStartOf="@+id/end_time"/>
 
             <TextView
                 android:id="@+id/end_time"

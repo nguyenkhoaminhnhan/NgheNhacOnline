@@ -53,7 +53,6 @@ public class HomeActivity extends AppCompatActivity
     private RelativeLayout plFrame;
     private DisplayImageOptions options;
     private ImageLoader imageLoader;
-    FrameLayout contentHome;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,13 +65,6 @@ public class HomeActivity extends AppCompatActivity
         plSinger = (TextView) findViewById(R.id.pl_singer_name);
         playButton = (ImageView) findViewById(R.id.pl_play_pause);
         plFrame = (RelativeLayout) findViewById(R.id.pl_frame);
-        contentHome = (FrameLayout) findViewById(R.id.content_home);
-        contentHome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                hideSoftKeyboard(HomeActivity.this);
-            }
-        });
         options = new DisplayImageOptions.Builder()
                 .showImageOnLoading(R.drawable.ic_stub)
                 .showImageForEmptyUri(R.drawable.ic_empty)
@@ -150,6 +142,7 @@ public class HomeActivity extends AppCompatActivity
                     isSearch = false;
                     searchTXT.setVisibility(View.INVISIBLE);
                     HomeActivity.this.setTitle(titleNow);
+                    hideSoftKeyboard(HomeActivity.this);
                 } else {
                     isSearch = true;
                     searchTXT.setVisibility(View.VISIBLE);
@@ -162,8 +155,18 @@ public class HomeActivity extends AppCompatActivity
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        MediaManager.getInstance().getmPlayer().pause();
-        MediaManager.getInstance().getmPlayer().reset();
+        try {
+            MediaManager.getInstance().seekBarListener = new MediaManager.ISeekBarListener() {
+                @Override
+                public void seekBarUpdater() {
+
+                }
+            };
+            MediaManager.getInstance().getmPlayer().stop();
+            MediaManager.getInstance().getmPlayer().release();
+        } catch (Exception e) {
+        }
+
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {

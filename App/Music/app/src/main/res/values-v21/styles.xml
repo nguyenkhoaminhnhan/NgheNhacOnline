@@ -6,4 +6,16 @@
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
+
+    <style name="AppTheme.Custom">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="colorControlNormal">#fff</item>
+        <item name="colorControlActivated">#fff</item>
+    </style>
+
+    <style name="EditTextCustomHolo" parent="android:Widget.EditText">
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:colorControlActivated">#fff</item>
+    </style>
 </resources>

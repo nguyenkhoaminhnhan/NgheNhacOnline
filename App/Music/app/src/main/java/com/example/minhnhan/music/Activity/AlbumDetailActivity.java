@@ -1,10 +1,12 @@
 package com.example.minhnhan.music.Activity;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -69,9 +71,21 @@ public class AlbumDetailActivity extends AppCompatActivity {
         playall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MediaManager.getInstance().setPrepareToPlay(0);
-                Intent i = new Intent(AlbumDetailActivity.this, FullScreenPlayActivity.class);
-                AlbumDetailActivity.this.startActivityForResult(i, 11);
+                if (MediaManager.getInstance().getPrepareList().size() > 0) {
+                    MediaManager.getInstance().setPrepareToPlay(0);
+                    Intent i = new Intent(AlbumDetailActivity.this, FullScreenPlayActivity.class);
+                    AlbumDetailActivity.this.startActivityForResult(i, 11);
+                } else {
+                    AlertDialog.Builder dlgAlert = new AlertDialog.Builder(AlbumDetailActivity.this);
+                    dlgAlert.setMessage("Chúng tôi sẽ cập nhật thêm bài hát mới!");
+                    dlgAlert.setTitle("Xin lỗi");
+                    dlgAlert.setPositiveButton("Tiếp tục", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            finish();
+                        }
+                    });
+                    dlgAlert.create().show();
+                }
             }
         });
 
