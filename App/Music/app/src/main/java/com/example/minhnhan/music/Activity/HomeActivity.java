@@ -11,6 +11,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,12 +27,19 @@ import com.example.minhnhan.music.Fragment.AlbumFragment;
 import com.example.minhnhan.music.Fragment.CategoryFragment;
 import com.example.minhnhan.music.Fragment.HomeFragment;
 import com.example.minhnhan.music.Fragment.SingerFragment;
+import com.example.minhnhan.music.Model.Async.AsyncListener;
+import com.example.minhnhan.music.Model.Async.AsyncSearchPage;
 import com.example.minhnhan.music.Model.Async.Data.MediaManager;
 import com.example.minhnhan.music.R;
+import com.example.minhnhan.music.Utils.Constants;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
+import static com.example.minhnhan.music.Utils.Constants.GET_SEARCH_ALL;
 import static com.example.minhnhan.music.Utils.Utils.hideSoftKeyboard;
 
 public class HomeActivity extends AppCompatActivity
@@ -54,6 +62,8 @@ public class HomeActivity extends AppCompatActivity
     private DisplayImageOptions options;
     private ImageLoader imageLoader;
 
+    private EditText searchTXT;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +75,8 @@ public class HomeActivity extends AppCompatActivity
         plSinger = (TextView) findViewById(R.id.pl_singer_name);
         playButton = (ImageView) findViewById(R.id.pl_play_pause);
         plFrame = (RelativeLayout) findViewById(R.id.pl_frame);
+        searchTXT = (EditText) findViewById(R.id.search_txt);
+
         options = new DisplayImageOptions.Builder()
                 .showImageOnLoading(R.drawable.ic_stub)
                 .showImageForEmptyUri(R.drawable.ic_empty)
@@ -138,11 +150,26 @@ public class HomeActivity extends AppCompatActivity
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (isSearch == true) {
+                if (searchTXT.getText().equals("") && isSearch == true) {
                     isSearch = false;
                     searchTXT.setVisibility(View.INVISIBLE);
                     HomeActivity.this.setTitle(titleNow);
                     hideSoftKeyboard(HomeActivity.this);
+                } else if (!searchTXT.getText().equals("") && isSearch) {
+                    String query = searchTXT.getText().toString();
+                    try {
+                        query = URLEncoder.encode(query, "utf-8");
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
+                    AsyncSearchPage asyncSearchPage = new AsyncSearchPage(new AsyncListener() {
+                        @Override
+                        public void onAsyncComplete() {
+                            Intent i = new Intent(HomeActivity.this, SearchActivity.class);
+                            HomeActivity.this.startActivityForResult(i, 11);
+                        }
+                    });
+                    asyncSearchPage.execute(String.format(GET_SEARCH_ALL, query, "all", 0));
                 } else {
                     isSearch = true;
                     searchTXT.setVisibility(View.VISIBLE);

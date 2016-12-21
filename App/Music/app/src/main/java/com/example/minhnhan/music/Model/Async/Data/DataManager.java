@@ -2,6 +2,7 @@ package com.example.minhnhan.music.Model.Async.Data;
 
 
 import com.example.minhnhan.music.Model.Album;
+import com.example.minhnhan.music.Model.Category;
 import com.example.minhnhan.music.Model.Page.AlbumPage;
 import com.example.minhnhan.music.Model.Page.CategoryPage;
 import com.example.minhnhan.music.Model.Page.HomePage;
@@ -27,6 +28,12 @@ public class DataManager {
     private AlbumPage albumPage;
     private ArrayList<Album> moreAlbum;
     private ArrayList<Singer> moreSinger;
+
+    /*-------- for search--------*/
+    private ArrayList<Song> song;
+    private ArrayList<Singer> singer;
+    private ArrayList<Album> album;
+    private ArrayList<Category> category;
 
     public static DataManager getInstance() {
         if (instance == null)
@@ -95,5 +102,37 @@ public class DataManager {
 
     public void setMoreSinger(ArrayList<Singer> moreSinger) {
         this.moreSinger = moreSinger;
+    }
+
+    public ArrayList<Song> getSong() {
+        return song;
+    }
+
+    public void setSong(ArrayList<Song> song) {
+        this.song = song;
+    }
+
+    public ArrayList<Singer> getSinger() {
+        return singer;
+    }
+
+    public void setSinger(ArrayList<Singer> singer) {
+        this.singer = singer;
+    }
+
+    public ArrayList<Album> getAlbum() {
+        return album;
+    }
+
+    public void setAlbum(ArrayList<Album> album) {
+        this.album = album;
+    }
+
+    public ArrayList<Category> getCategory() {
+        return category;
+    }
+
+    public void setCategory(ArrayList<Category> category) {
+        this.category = category;
     }
 }

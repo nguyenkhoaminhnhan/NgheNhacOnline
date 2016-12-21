@@ -23,4 +23,5 @@ public class Constants {
     public static final String GET_SONG_BY_CAT = DOMAIN + "Song/GetSongByCat?catid=%d&page=%d";
     public static final String GET_SONG_BY_SINGER = DOMAIN + "song/GetSongBySinger?singerid=%d&page=%d";
     public static final String GET_ALBUM_BY_SINGER = DOMAIN + "album/getAlbumBySinger?sName=%s&page=%d";
+    public static final String GET_SEARCH_ALL = DOMAIN + "home/search?search=%s&type=%s&page=%d";
 }
