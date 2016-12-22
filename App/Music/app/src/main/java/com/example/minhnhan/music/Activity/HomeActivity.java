@@ -29,6 +29,7 @@ import com.example.minhnhan.music.Fragment.HomeFragment;
 import com.example.minhnhan.music.Fragment.SingerFragment;
 import com.example.minhnhan.music.Model.Async.AsyncListener;
 import com.example.minhnhan.music.Model.Async.AsyncSearchPage;
+import com.example.minhnhan.music.Model.Async.Data.DataManager;
 import com.example.minhnhan.music.Model.Async.Data.MediaManager;
 import com.example.minhnhan.music.R;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -172,7 +173,6 @@ public class HomeActivity extends AppCompatActivity
                                     @Override
                                     public void onAsyncComplete() {
                                         Intent i = new Intent(HomeActivity.this, SearchActivity.class);
-                                        isSearch = false;
                                         searchTXT.setText("");
                                         searchTXT.setVisibility(View.INVISIBLE);
                                         HomeActivity.this.setTitle(titleNow);
@@ -180,6 +180,7 @@ public class HomeActivity extends AppCompatActivity
                                         progress.dismiss();
                                     }
                                 });
+                                DataManager.getInstance().setSearchTXT(query);
                                 asyncSearchPage.execute(String.format(GET_SEARCH_ALL, query, "all", 0));
                             }
                             return true;
@@ -212,6 +213,9 @@ public class HomeActivity extends AppCompatActivity
                             public void onAsyncComplete() {
                                 Intent i = new Intent(HomeActivity.this, SearchActivity.class);
                                 isSearch = false;
+                                Bundle b = new Bundle();
+                                b.putString("search", searchTXT.getText().toString());
+                                i.putExtras(b);
                                 searchTXT.setText("");
                                 searchTXT.setVisibility(View.INVISIBLE);
                                 HomeActivity.this.setTitle(titleNow);
@@ -219,6 +223,7 @@ public class HomeActivity extends AppCompatActivity
                                 progress.dismiss();
                             }
                         });
+                        DataManager.getInstance().setSearchTXT(query);
                         asyncSearchPage.execute(String.format(GET_SEARCH_ALL, query, "all", 0));
                     }
                 } else {

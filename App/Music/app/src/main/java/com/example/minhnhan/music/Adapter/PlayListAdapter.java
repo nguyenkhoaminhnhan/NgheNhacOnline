@@ -37,6 +37,8 @@ public class PlayListAdapter extends BaseAdapter {
     private int oldPlayPositon;
     private ArrayList<ViewHolder> listHolder;
 
+    public ImageView currentImageSong;
+
     public PlayListAdapter(FullScreenPlayActivity activity, ArrayList<Song> data) {
         mInflater = (LayoutInflater) activity
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -137,6 +139,11 @@ public class PlayListAdapter extends BaseAdapter {
     }
 
     public void updatePlaying(int position) {
+        Song sData = MediaManager.getInstance().getPlayingSong();
+        ImageLoader imageLoader = ImageLoader.getInstance();
+        imageLoader.init(ImageLoaderConfiguration.createDefault(activity));
+        imageLoader.displayImage(sData.getImagePath(), MediaManager.getInstance().getCurentPlayImage(), options, null);
+
         listHolder.get(oldPlayPositon).animation.setImageResource(R.drawable.uamp_ic_play_arrow_white_48dp);
 
         AnimationDrawable animation = (AnimationDrawable)

@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import com.example.minhnhan.music.Fragment.ImagePlayFragment;
 import com.example.minhnhan.music.Fragment.PlayListFragment;
+import com.example.minhnhan.music.Model.Async.Data.MediaManager;
 import com.example.minhnhan.music.Model.Song;
 
 import java.util.ArrayList;
@@ -53,7 +54,6 @@ public class MyPlayListSlideAdapter extends FragmentPagerAdapter {
     }
 
     public void update() {
-        imagePlayFragment.update();
         playListFragment.update();
     }
 }

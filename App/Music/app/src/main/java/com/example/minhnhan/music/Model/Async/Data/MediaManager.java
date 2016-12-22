@@ -2,6 +2,7 @@ package com.example.minhnhan.music.Model.Async.Data;
 
 
 import android.media.MediaPlayer;
+import android.widget.ImageView;
 
 import com.example.minhnhan.music.Model.Album;
 import com.example.minhnhan.music.Model.Async.AsyncSongListen;
@@ -17,9 +18,18 @@ import static com.example.minhnhan.music.Utils.Constants.UPDATE_LISTEN;
  * Restore all data off program from server
  */
 public class MediaManager {
+    private ImageView curentPlayImage;
 
     public boolean isPlayed;
     public boolean isContinue;
+
+    public ImageView getCurentPlayImage() {
+        return curentPlayImage;
+    }
+
+    public void setCurentPlayImage(ImageView curentPlayImage) {
+        this.curentPlayImage = curentPlayImage;
+    }
 
     public interface IPlayListener {
         void onPlay(int currentPlayID);

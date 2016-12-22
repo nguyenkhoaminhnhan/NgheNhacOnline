@@ -34,6 +34,7 @@ public class DataManager {
     private ArrayList<Singer> singer;
     private ArrayList<Album> album;
     private ArrayList<Category> category;
+    private String searchTXT;
 
     public static DataManager getInstance() {
         if (instance == null)
@@ -134,5 +135,13 @@ public class DataManager {
 
     public void setCategory(ArrayList<Category> category) {
         this.category = category;
+    }
+
+    public String getSearchTXT() {
+        return searchTXT;
+    }
+
+    public void setSearchTXT(String searchTXT) {
+        this.searchTXT = searchTXT;
     }
 }

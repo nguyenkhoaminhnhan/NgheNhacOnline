@@ -45,13 +45,14 @@ public class ImagePlayFragment extends Fragment {
         ImageLoader imageLoader = ImageLoader.getInstance();
         imageLoader.init(ImageLoaderConfiguration.createDefault(this.getContext()));
         imageLoader.displayImage(data.getImagePath(), songImage, options, null);
+        MediaManager.getInstance().setCurentPlayImage(songImage);
         return rootView;
     }
 
-    public void update() {
+    /*public void update() {
         data = MediaManager.getInstance().getPlayingSong();
         ImageLoader imageLoader = ImageLoader.getInstance();
         imageLoader.init(ImageLoaderConfiguration.createDefault(this.getContext()));
         imageLoader.displayImage(data.getImagePath(), songImage, options, null);
-    }
+    }*/
 }

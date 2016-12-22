@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.minhnhan.music.Activity.CategoryDetailActivity;
+import com.example.minhnhan.music.Model.Album;
 import com.example.minhnhan.music.Model.Category;
 import com.example.minhnhan.music.R;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -87,5 +88,14 @@ public class CategoryApdater extends RecyclerView.Adapter<CategoryApdater.ViewHo
                 }
             });
         }
+    }
+
+    public void addMore(ArrayList<Category> data) {
+        if (this.data == null)
+            this.data = data;
+        else
+            this.data.addAll(data);
+        // yeu cau adapter refresh lai view
+        notifyDataSetChanged();
     }
 }
