@@ -188,7 +188,7 @@ public class AlbumDetailActivity extends AppCompatActivity {
                 updatePlayBack();
                 MediaManager.getInstance().setPlayListener(listener);
                 MediaManager.getInstance().setPlayCompleteListener(playCompleteListener);
-                LinearLayout plInfo = (LinearLayout) findViewById(R.id.pl_info);
+                LinearLayout plInfo = (LinearLayout) findViewById(R.id.detail_album_pl_info);
                 plInfo.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
