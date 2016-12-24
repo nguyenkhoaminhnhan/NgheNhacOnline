@@ -174,6 +174,7 @@ public class HomeActivity extends AppCompatActivity
                                     public void onAsyncComplete() {
                                         Intent i = new Intent(HomeActivity.this, SearchActivity.class);
                                         searchTXT.setText("");
+                                        isSearch = false;
                                         searchTXT.setVisibility(View.INVISIBLE);
                                         HomeActivity.this.setTitle(titleNow);
                                         HomeActivity.this.startActivityForResult(i, 11);
